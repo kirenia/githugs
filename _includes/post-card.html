@@ -1,15 +1,28 @@
+{%- comment -%}
+  one row in the post list: title, blurb, date and tags on the left, the
+  post's picture on the right. the name says card because these were cards
+  once. `index` picks which of the six accents a post gets; the accent tints
+  the picture and, in the terminal, colours the prompt.
+{%- endcomment -%}
 {%- assign color_index = include.index | default: 0 | modulo: 6 | plus: 1 -%}
-<li class="card c{{ color_index }}">
-  <h2 class="card__title"><a href="{{ include.post.url | relative_url }}">{{ include.post.title | escape }}</a></h2>
+<li class="post-row c{{ color_index }}">
+  <div class="post-row__text">
+    <h3 class="post-row__title"><a href="{{ include.post.url | relative_url }}">{{ include.post.title | escape }}</a></h3>
 
-  {%- assign blurb = include.post.description | default: include.post.excerpt -%}
-  {%- if blurb %}<div class="card__excerpt">{{ blurb | strip_html | normalize_whitespace | truncatewords: 26 }}</div>{% endif -%}
+    {%- assign blurb = include.post.description | default: include.post.excerpt -%}
+    {%- if blurb %}<div class="post-row__excerpt">{{ blurb | strip_html | normalize_whitespace | truncatewords: 26 }}</div>{% endif -%}
 
-  <div class="card__meta">
-    <time datetime="{{ include.post.date | date_to_xmlschema }}">{{ include.post.date | date: "%-d %b %Y" }}</time>
+    <p class="post-row__meta"><time datetime="{{ include.post.date | date_to_xmlschema }}">{{ include.post.date | date: "%-d %b %Y" }}</time></p>
+
     {%- assign topics = include.post.tags | concat: include.post.categories -%}
-    {%- for t in topics -%}
-      <a class="tag" href="{{ '/tags/' | relative_url }}#{{ t | slugify }}">{{ t }}</a>
-    {%- endfor -%}
+    {%- if topics.size > 0 %}
+    <p class="post-row__tags">
+      {%- for t in topics -%}
+        <a class="tag" href="{{ '/tags/' | relative_url }}#{{ t | slugify }}">{{ t }}</a>
+      {%- endfor -%}
+    </p>
+    {%- endif %}
   </div>
+
+  {% include post-thumb.html post=include.post %}
 </li>

@@ -1,0 +1,30 @@
+---
+layout: page
+title: archive
+permalink: /archive/
+---
+{%- comment -%}
+  every post, newest first, grouped by year. the home page only shows the
+  latest few and links here for the rest.
+{%- endcomment -%}
+
+{%- assign years = site.posts | group_by_exp: "post", "post.date | date: '%Y'" -%}
+{%- for year in years %}
+<section class="archive-year">
+  <h2 class="section-title">{{ year.name }}</h2>
+  <ul class="archive-list">
+    {%- for post in year.items %}
+    <li>
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %b" }}</time>
+      <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+    </li>
+    {%- endfor %}
+  </ul>
+</section>
+{%- endfor %}
+
+{%- if site.posts.size == 0 %}
+<p>no posts yet.</p>
+{%- endif %}
+
+<p><a href="{{ '/tags/' | relative_url }}">browse by tag</a></p>

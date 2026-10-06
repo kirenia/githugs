@@ -1,0 +1,20 @@
+{%- comment -%}
+  the picture beside a post on the home page: a block in the post's colour
+  with one thing in it. in order of preference:
+    image:   the post's featured image, path from the site root. it fills
+             the block (cropped to fit) and also heads the post itself.
+    thumb:   a sticker name, for a post that wants a different one here
+    sticker: the sticker the post already uses
+  and the star if a post has none of them. decorative, so hidden from
+  screen readers; the title next to it is the link.
+
+  usage: {% include post-thumb.html post=post %}
+{%- endcomment -%}
+{%- assign _thumb = include.post.thumb | default: include.post.sticker | default: "star" -%}
+<span class="post-thumb{% if include.post.image %} post-thumb--image{% endif %}" aria-hidden="true">
+  {%- if include.post.image -%}
+  <img class="post-thumb__img" src="{{ include.post.image | relative_url }}" alt="" loading="lazy">
+  {%- else -%}
+  {% include sticker.html name=_thumb %}
+  {%- endif -%}
+</span>

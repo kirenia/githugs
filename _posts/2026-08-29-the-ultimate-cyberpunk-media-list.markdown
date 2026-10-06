@@ -4,6 +4,7 @@ title: "The Ultimate Cyberpunk Media List"
 date: 2026-08-29 18:40:00 -0600
 description: "A running list of the cyberpunk books, films, shows and games worth knowing, sortable by year, author, universe or media type."
 tags: [books, cyberpunk]
+thumb: dune
 ---
 
 <p class="subtitle">everything people have told me to read, watch and play</p>
@@ -36,7 +37,7 @@ Most cyberpunk stories were written before the world they describe existed, and 
 
 <div class="reclist" id="reclist">
 <section class="rec-group">
-  <h3 class="rec-group__title">Books</h3>
+  <h2 class="rec-group__title">Books</h2>
   <dl class="recs">
     <div class="rec" data-title="time machine" data-type="book" data-year="1895" data-author="Wells, H.G." data-universe="">
       <dt><i class="fa-solid fa-book" aria-hidden="true"></i> Wells, H.G. <cite>The Time Machine</cite>. 1895.</dt>
@@ -206,7 +207,7 @@ Most cyberpunk stories were written before the world they describe existed, and 
 </section>
 
 <section class="rec-group">
-  <h3 class="rec-group__title">Essays and Manifestos</h3>
+  <h2 class="rec-group__title">Essays and Manifestos</h2>
   <dl class="recs">
     <div class="rec" data-title="cypherpunk’s manifesto" data-type="essay" data-year="1993" data-author="Hughes, Eric" data-universe="">
       <dt><i class="fa-solid fa-file-lines" aria-hidden="true"></i> Hughes, Eric. <cite><a href="https://www.activism.net/cypherpunk/manifesto.html">A Cypherpunk&#8217;s Manifesto</a></cite>. 1993.</dt>
@@ -224,7 +225,7 @@ Most cyberpunk stories were written before the world they describe existed, and 
 </section>
 
 <section class="rec-group">
-  <h3 class="rec-group__title">Films</h3>
+  <h2 class="rec-group__title">Films</h2>
   <dl class="recs">
     <div class="rec" data-title="world on a wire" data-type="film" data-year="1973" data-author="" data-universe="">
       <dt><i class="fa-solid fa-film" aria-hidden="true"></i> <cite>World on a Wire</cite>. 1973.</dt>
@@ -301,7 +302,7 @@ Most cyberpunk stories were written before the world they describe existed, and 
 </section>
 
 <section class="rec-group">
-  <h3 class="rec-group__title">TV and Anime</h3>
+  <h2 class="rec-group__title">TV and Anime</h2>
   <dl class="recs">
     <div class="rec" data-title="cowboy bebop" data-type="tv" data-year="1998" data-author="" data-universe="">
       <dt><i class="fa-solid fa-tv" aria-hidden="true"></i> <cite>Cowboy Bebop</cite>. 1998.</dt>
@@ -347,7 +348,7 @@ Most cyberpunk stories were written before the world they describe existed, and 
 </section>
 
 <section class="rec-group">
-  <h3 class="rec-group__title">Games</h3>
+  <h2 class="rec-group__title">Games</h2>
   <dl class="recs">
     <div class="rec" data-title="warhammer 40,000" data-type="game" data-year="1987" data-author="" data-universe="warhammer 40,000">
       <dt><i class="fa-solid fa-gamepad" aria-hidden="true"></i> <cite>Warhammer 40,000</cite>. 1987.</dt>
@@ -379,7 +380,7 @@ Most cyberpunk stories were written before the world they describe existed, and 
 </section>
 
 <section class="rec-group">
-  <h3 class="rec-group__title">Audio</h3>
+  <h2 class="rec-group__title">Audio</h2>
   <dl class="recs">
     <div class="rec" data-title="bricky" data-type="audio" data-year="2015" data-author="" data-universe="warhammer 40,000">
       <dt><i class="fa-solid fa-music" aria-hidden="true"></i> <cite>Bricky</cite>. 2015.</dt>

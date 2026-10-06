@@ -1,12 +1,24 @@
-<header class="site-header wrap">
-  <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title | escape }}<span class="cursor" aria-hidden="true">_</span></a>
+{%- comment -%}
+  two rows. the bar carries the site's name and is the way home; under it,
+  one quiet row with the nav on the left and the theme toggle on the right.
+  edit _data/nav.yml to change the links. a full https:// url there is
+  used as is, so a link can point off the site.
+{%- endcomment -%}
+<header class="site-header">
+  <p class="top-bar"><a class="site-title" href="{{ '/' | relative_url }}">{{ site.title | escape }}<span class="cursor" aria-hidden="true">_</span></a></p>
 
-  <nav class="site-nav" aria-label="main">
-    {%- for item in site.data.nav -%}
-      {%- assign href = item.url | relative_url -%}
-      <a href="{{ href }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.title }}</a>
-    {%- endfor -%}
-  </nav>
+  <div class="wrap site-bar">
+    <nav class="site-nav" aria-label="main">
+      {%- for item in site.data.nav -%}
+        {%- if item.url contains '://' -%}
+          {%- assign href = item.url -%}
+        {%- else -%}
+          {%- assign href = item.url | relative_url -%}
+        {%- endif -%}
+        <a href="{{ href }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.title }}</a>
+      {%- endfor -%}
+    </nav>
 
-  <button class="theme-toggle" type="button" data-theme-toggle>jack-in</button>
+    <button class="theme-toggle" type="button" data-theme-toggle>jack-in</button>
+  </div>
 </header>

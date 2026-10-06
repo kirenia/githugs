@@ -1,7 +1,9 @@
 /* ==========================================================================
-   kire.css — simple in the light, terminal in the dark.
-   light: Fira Sans, paper, soft colour blocks.
+   kire.css: quiet in the light, terminal in the dark.
+   light: Fira Sans on lavender paper. one column, ruled rows, small labels.
    dark:  Fira Code, Dracula, everything is a terminal.
+   colour is the Dracula palette throughout: the purple bar up top, links,
+   tags, and one accent per post.
    ========================================================================== */
 
 /* tokens --------------------------------------------------------------
@@ -15,7 +17,7 @@
   --drac-bg:      light-dark(#f9f5ff, #282a36);
   --drac-fg:      light-dark(#282a36, #f8f8f2);
   --drac-comment: light-dark(#6070a1, #6272a4);
-  /* dracula's comment blue is only 3.03:1 on the dark bg — fine for the card
+  /* dracula's comment blue is only 3.03:1 on the dark bg: fine for the
      edge it draws, short of WCAG AA (4.5:1) for text. text uses a lifted one. */
   --drac-comment-text: light-dark(#6070a1, #8995bb);
   --drac-orange:  light-dark(#a06315, #ffb86c);
@@ -40,90 +42,76 @@
   --card-bg: light-dark(#ffffff, #21222c);
   --card-fg: var(--drac-fg);
   --card-edge: light-dark(var(--ink), var(--drac-comment));
-  --shadow: 5px 5px 0 var(--card-edge);
-  --shadow-sm: 4px 4px 0 var(--card-edge);
 
   --code-bg: light-dark(#efe7fb, #44475a);
-  --code-fg: var(--drac-cyan);
+  /* a shade deeper than the palette cyan in the light, so inline code
+     clears 4.5:1 on its own tinted background */
+  --code-fg: light-dark(#0f6b7e, var(--drac-cyan));
   --pre-bg: light-dark(#efe7fb, #21222c);
   --pre-fg: light-dark(var(--drac-fg), var(--drac-yellow));
 
   --sticker-shadow: light-dark(rgba(0, 0, 0, 0.25), #191a21);
 
+  /* the bar across the top: dracula purple with ink on it, the same in both
+     themes (5.9:1), so it is the one fixed point when you jack in or out */
+  --bar-bg: #bd93f9;
+  --bar-fg: #282a36;
+
+  /* the outline of a control. hairlines (--line) are decoration and can be
+     faint; a button's edge is how you find the button, so it clears 3:1 on
+     the ground (WCAG 1.4.11) in both themes. */
+  --edge: light-dark(#7d7a99, #7b81a0);
+
+  /* corners. nearly square everywhere, no pills */
+  --radius: 3px;
+
   --sans: "Fira Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   /* light: plain and papery */
-  --card-tint: 28%;
+  --card-tint: 14%;
   --body-font: var(--sans);
   --head-font: var(--sans);
-  --head-weight: 700;
+  --head-weight: 600;
   --prompt: "";
   --cursor: none;
 
-  /* type scale — 16px base, 1.25 ratio. WCAG sets no minimum font size; what
+  /* type scale: small and close together, so hierarchy comes from weight,
+     case and space more than from size. WCAG sets no minimum font size; what
      it constrains is contrast at a given size (1.4.3), resize to 200% (1.4.4)
-     and spacing overrides (1.4.12) — so every step is rem and the root below
+     and spacing overrides (1.4.12), so every step is rem and the root below
      stays at the reader's own browser default. */
-  --fs-micro: 0.6875rem;   /* 11px — uppercase micro-labels: card meta, nav, toggle */
-  --fs-caption: 0.875rem;  /* 14px — meta, nav, footer, captions */
-  --fs-body: 1rem;         /* 16px — body copy and notes */
-  --fs-lead: 1.125rem;     /* 18px — subtitles, lead-ins */
-  --fs-h3: 1.25rem;        /* 20px */
-  --fs-h2: 1.5rem;         /* 24px — WCAG's "large text" threshold */
-  --fs-h1: 2rem;           /* 32px */
+  --fs-micro: 0.75rem;     /* 12px: uppercase labels in the header */
+  --fs-caption: 0.8125rem; /* 13px: meta, tags, footer, captions */
+  --fs-body: 0.9375rem;    /* 15px: body copy and notes */
+  --fs-lead: 1.0625rem;    /* 17px: subtitles, lead-ins */
+  --fs-h3: 0.9375rem;      /* 15px: body size, bold */
+  --fs-h2: 1.125rem;       /* 18px */
+  --fs-h1: 1.5rem;         /* 24px: a page's title, and nothing else */
 
-  /* one width for the whole site — .wrap derives from this, so header,
-     content and footer all share the same two edges */
-  --measure: 44rem;
+  /* one column for everything: header, lists, running text and footer all
+     share the same two edges, centred on the page. 48rem is 768px. */
+  --measure: 48rem;
 }
 
-/* dark = terminal: monospace everything, a prompt on every heading */
+/* dark keeps the terminal touches (a prompt on every heading, the blinking
+   cursor) but reads in the same Fira Sans, at the same sizes, as light */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --card-tint: 18%;
-    --body-font: var(--mono);
-    --head-font: var(--mono);
     --prompt: "> ";
     --cursor: inline;
-    /* mono light-on-dark blooms, so the terminal side runs a lighter cut,
-       looser leading and a softer white than #f8f8f2 (11.3:1, still way
-       past AA) instead of shouting */
-    --body-weight: 300;
-    --body-tracking: 0.005em;
-    --body-leading: 1.75;
+    /* a softer white than #f8f8f2 (11.3:1, still way past AA) */
     --drac-fg: #e6e4ee;
-    /* Fira Code runs optically larger than Fira Sans, so the terminal side
-       takes body copy — and the headings above it — down a step to match the
-       light side's weight */
-    --fs-body: 0.875rem;     /* 14px */
-    --fs-lead: 1.0625rem;    /* 17px */
-    --fs-h3: 1.1875rem;      /* 19px */
-    --fs-h2: 1.375rem;       /* 22px — still over WCAG's large-text threshold */
-    --fs-h1: 1.75rem;        /* 28px */
-    /* mono bold sits heavier than sans bold; 600 is a weight head.html
-       actually loads, so the browser never has to fake the slimmer cut */
-    --head-weight: 600;
   }
 }
 
 :root[data-theme="dark"] {
   color-scheme: dark;
   --card-tint: 18%;
-  --body-font: var(--mono);
-  --head-font: var(--mono);
   --prompt: "> ";
   --cursor: inline;
-  --body-weight: 300;
-  --body-tracking: 0.005em;
-  --body-leading: 1.75;
   --drac-fg: #e6e4ee;
-  --fs-body: 0.875rem;
-  --fs-lead: 1.0625rem;
-  --fs-h3: 1.1875rem;
-  --fs-h2: 1.375rem;
-  --fs-h1: 1.75rem;
-  --head-weight: 600;
 }
 
 /* a picked theme beats the system one */
@@ -154,16 +142,8 @@
     --pre-bg: #efe7fb;
     --pre-fg: #282a36;
     --sticker-shadow: rgba(0, 0, 0, 0.25);
+    --edge: #7d7a99;
   }
-
-  .card,
-  .note {
-    border-color: var(--ink);
-    box-shadow: var(--shadow);
-  }
-
-  .card:hover,
-  .card:focus-within { box-shadow: 7px 7px 0 var(--ink); }
 }
 
 /* base ---------------------------------------------------------------- */
@@ -187,7 +167,15 @@ body {
   font-size: var(--fs-body);
   font-weight: var(--body-weight, 400);
   letter-spacing: var(--body-tracking, normal);
-  line-height: var(--body-leading, 1.65);
+  line-height: var(--body-leading, 1.6);
+  /* Fira Sans has no cut between 300 and 400. greyscale smoothing draws the
+     400 a touch thinner on macOS and iOS, which lands about halfway */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* on a short page the footer still sits at the bottom of the viewport */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 ::selection { background: var(--accent); color: var(--bg); }
@@ -195,7 +183,7 @@ body {
 /* headings are written in normal casing and lowercased here, so the markup
    stays readable to screen readers, search and anyone copying text */
 h1, h2, h3, h4,
-.card__title,
+.post-row__title,
 .reclist__group,
 .rec-group__title {
   text-transform: lowercase;
@@ -206,9 +194,8 @@ h1, h2, h3, h4 {
   clear: both;
   font-family: var(--head-font);
   font-weight: var(--head-weight);
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  margin: 2rem 0 0.75rem;
+  line-height: 1.3;
+  margin: 2rem 0 0.6rem;
 }
 
 h1 { font-size: var(--fs-h1); }
@@ -217,12 +204,19 @@ h3 { font-size: var(--fs-h3); }
 
 a {
   color: var(--link);
-  text-decoration: underline dotted;
+  text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
 
-a:hover { color: var(--link-hover); }
+a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+
+/* one visible focus indicator for everything focusable. :focus-visible so
+   it shows for keyboard users without ringing every mouse click. */
+:where(a, button, input, [tabindex], summary):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
 
 img { max-width: 100%; height: auto; }
 
@@ -238,6 +232,7 @@ code {
   background: var(--code-bg);
   color: var(--code-fg);
   padding: 0.1em 0.3em;
+  border-radius: var(--radius);
   font-size: 0.9em;
 }
 
@@ -247,14 +242,15 @@ pre {
   padding: 0.85rem 1rem;
   overflow-x: auto;
   border-left: 2px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
 }
 
-pre code { background: none; color: inherit; padding: 0; font-size: var(--fs-caption); }
+pre code { background: none; color: inherit; padding: 0; border-radius: 0; font-size: var(--fs-caption); }
 
 blockquote {
   margin: 2rem 0;
-  padding-left: 1.25rem;
-  border-left: 3px solid var(--accent);
+  padding-left: 1rem;
+  border-left: 2px solid var(--accent);
   color: var(--dim);
 }
 
@@ -270,6 +266,10 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
   margin-inline: auto;
 }
 
+main.wrap { padding-top: clamp(1.5rem, 4vw, 2.5rem); flex: 1 0 auto; }
+
+.site-header, .site-footer { flex: none; }
+
 .skip-link { position: absolute; left: -9999px; }
 
 .skip-link:focus {
@@ -281,117 +281,129 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
   padding: 0.5rem 0.75rem;
 }
 
+/* a small uppercase label: the nav, the toggle, section headings and meta
+   lines all share it */
+.site-nav a,
+.theme-toggle,
+.section-title,
+.post-meta,
+.post-row__meta,
+.post-nav__dir,
+.sorter__label,
+.toc__label {
+  font-family: var(--body-font);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
 /* header -------------------------------------------------------------- */
 
-.site-header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.75rem 1.25rem;
-  padding: 1.25rem 0 0.9rem;
-  border-bottom: 1px solid var(--line);
-  margin-bottom: 1.75rem;
+.site-header { border-bottom: 1px solid var(--line); }
+
+/* the bar: the site's name on dracula purple, full width, and the way home */
+.top-bar {
+  margin: 0;
+  padding: 0.4rem 1.25rem;
+  background: var(--bar-bg);
+  text-align: center;
 }
 
 .site-title {
+  display: inline-block;
+  padding: 0.1rem 0.25rem;
   font-family: var(--head-font);
-  font-size: var(--fs-lead);
+  font-size: var(--fs-caption);
   font-weight: 600;
-  letter-spacing: -0.02em;
-  color: var(--fg);
+  color: var(--bar-fg);
   text-decoration: none;
-  margin-right: auto;
 }
 
-.site-title:hover { color: var(--accent); }
+.site-title:hover { color: var(--bar-fg); text-decoration: underline; }
+.site-title:focus-visible { outline-color: var(--bar-fg); }
 
 /* the cursor only exists in terminal mode, so a token drives it */
 .site-title .cursor {
   display: var(--cursor);
-  color: var(--accent);
   animation: blink 1.1s steps(1) infinite;
 }
 
 @keyframes blink { 50% { opacity: 0; } }
 
+/* one quiet row under the bar: the links centred under the name, the
+   toggle at the far right. three columns with equal outer ones, so the nav
+   is centred on the page and not on whatever space the toggle leaves. */
+.site-bar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.25rem 1.1rem;
+  padding: 0.4rem 0;
+}
+
+/* links start on the column's left edge, the toggle sits on its right */
+.site-nav { grid-column: 1; }
+
 .site-nav {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
-  gap: 1rem;
-  font-family: var(--body-font);
-  font-size: var(--fs-micro);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  gap: 0.25rem 1.1rem;
 }
 
 .site-nav a {
-  color: var(--dim);
-  padding-bottom: 2px;
+  display: inline-block;
+  /* inline-block, so no inline exemption from 2.5.8: pad it past 24px */
+  padding: 0.4rem 0;
+  min-width: 24px;
+  font-size: var(--fs-micro);
+  color: var(--fg);
+  text-decoration: none;
 }
 
+/* the current page is marked with an underline, not colour alone (1.4.1) */
 .site-nav a:hover,
 .site-nav a[aria-current="page"] {
   color: var(--fg);
+  text-decoration: underline;
   text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
 }
 
 .theme-toggle {
+  /* the far right of the row */
+  justify-self: end;
   font: inherit;
   font-family: var(--body-font);
   font-size: var(--fs-micro);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  line-height: 1.5;
   background: none;
-  color: var(--dim);
-  border: 1px solid var(--line);
-  padding: 0.15rem 0.5rem;
+  color: var(--fg);
+  border: 0;
+  /* 2.5.8 wants a 24px minimum target */
+  min-height: 28px;
+  padding: 0.3rem 0;
   cursor: pointer;
 }
 
-.theme-toggle:hover { color: var(--fg); border-color: var(--accent); }
-
-/* cards --------------------------------------------------------------- */
-
-.post-list {
-  clear: both;
-  list-style: none;
-  margin: 0 0 3rem;
-  padding: 0;
-  display: grid;
-  gap: 1.1rem;
+.theme-toggle:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
 }
 
-/* on the home page the intro sits right on top of the cards, so it drops
-   the 4rem tail every other page wants */
-.page:has(+ .post-list) { margin-bottom: 1.5rem; }
-
-.card {
-  position: relative;
-  display: block;
-  padding: 1.05rem 1.25rem;
-  background: color-mix(in srgb, var(--c) var(--card-tint), var(--card-bg));
-  color: var(--card-fg);
-  text-decoration: none;
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
+/* a section label, ruled off underneath */
+.section-title {
+  margin: 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--fg);
+  font-size: var(--fs-caption);
+  font-weight: 400;
 }
 
-/* in dark mode a card wears its own colour on the border and the shadow;
-   in light mode every card keeps the same ink edge */
-.card,
-.note {
-  border: 1px solid light-dark(var(--ink), var(--c));
-  box-shadow: 4px 4px 0 light-dark(var(--ink), color-mix(in srgb, var(--c) 68%, #191a21));
-}
+/* the home page --------------------------------------------------------
+   the newest post big across the top, then two columns: the next few
+   posts on the left and a small panel about the site on the right. */
 
-.card:hover,
-.card:focus-within {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0 light-dark(var(--ink), color-mix(in srgb, var(--c) 68%, #191a21));
-}
-
-/* the colour block per post — the six dracula accents, cycled */
+/* the colour per post: the six dracula accents, cycled */
 .c1 { --c: var(--drac-purple); }
 .c2 { --c: var(--drac-pink); }
 .c3 { --c: var(--drac-cyan); }
@@ -399,80 +411,360 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
 .c5 { --c: var(--drac-orange); }
 .c6 { --c: var(--drac-yellow); }
 
-.card__title {
-  margin: 0 0 0.25rem;
-  font-size: var(--fs-h3);
-  line-height: 1.3;
-  /* titles are Title Case in the front matter; the cards wear them lowercase */
-  text-transform: lowercase;
+/* a post's picture: a block tinted with the post's colour, with its sticker
+   sitting on it. the transparent border becomes a visible outline in
+   forced-colour modes, where the background is thrown away. */
+.post-thumb {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--c, var(--accent)) 24%, var(--card-bg));
+  border: 1px solid transparent;
+  border-radius: var(--radius);
 }
 
-.card__title a { color: inherit; }
+/* the sticker include sizes itself for a page; here the block decides.
+   pinned to all four edges with auto margins, which centres it and gives
+   the percentage caps a definite box to measure against, so a tall sticker
+   shrinks to fit instead of being cropped. */
+.post-thumb .sticker {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: auto;
+  height: auto;
+  max-width: 66%;
+  max-height: 76%;
+}
 
-/* the whole card is clickable; the link keeps the semantics */
-.card__title a::after { content: ""; position: absolute; inset: 0; }
+/* a featured image fills the block instead, cropped to its shape */
+.post-thumb__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-.card:hover .card__title { color: var(--accent); }
+/* hovering a post with a photo nudges the photo, the way a sticker
+   straightens up */
+.feature:hover .post-thumb__img,
+.post-row:hover .post-thumb__img { transform: scale(1.03); }
 
-.card__excerpt {
+.post-thumb__img { transition: transform 0.15s ease; }
+
+/* the featured post ---------------------------------------------------- */
+
+.feature {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.25rem, 4vw, 2.5rem);
+  align-items: center;
+  padding-bottom: clamp(1.5rem, 4vw, 2.25rem);
+  margin-bottom: clamp(1.5rem, 4vw, 2.25rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.feature .post-thumb { aspect-ratio: 3 / 2; }
+
+.feature__title {
+  margin: 0 0 0.5rem;
+  font-size: var(--fs-h1);
+  line-height: 1.2;
+}
+
+.feature__title::before {
+  content: var(--prompt);
+  color: var(--c);
+}
+
+.feature__title a { color: var(--fg); text-decoration: none; }
+
+/* the whole block is clickable; the link keeps the semantics */
+.feature__title a::after { content: ""; position: absolute; inset: 0; }
+
+.feature:hover .feature__title a,
+.post-row:hover .post-row__title a {
+  text-decoration: underline;
+  text-decoration-color: var(--c);
+  text-decoration-thickness: 2px;
+}
+
+.feature__excerpt {
   margin: 0 0 0.6rem;
-  color: var(--card-fg);
-  font-size: var(--fs-caption);
-  line-height: 1.55;
-  opacity: 0.85;
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  color: var(--dim);
 }
 
-.card__excerpt p { margin: 0; }
+/* hovering a post straightens its sticker and brings it forward a touch */
+.feature:hover .sticker,
+.post-row:hover .sticker { transform: rotate(0deg) scale(1.08); }
 
-.card__meta {
+/* the block's link is a bare inline anchor stretched over the whole block,
+   so focusing it would ring a sliver of text. ring the block instead. */
+.feature:focus-within,
+.post-row:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.feature__title a:focus-visible,
+.post-row__title a:focus-visible { outline: none; }
+
+@media (max-width: 40rem) {
+  .feature { grid-template-columns: 1fr; }
+}
+
+/* the two columns ------------------------------------------------------ */
+
+.home-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 14rem;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+/* narrow: one column, the panel after the posts */
+@media (max-width: 46rem) {
+  .home-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+}
+
+.home-side {
+  font-size: var(--fs-caption);
+  color: var(--dim);
+}
+
+/* the logo is a sticker, sized here instead of by its data */
+.home-side .home-side__logo { width: 3rem; }
+
+/* the profile photo: the one circle on the site, linked to the about page */
+.home-side__avatar {
+  display: inline-block;
+  border-radius: 50%;
+  line-height: 0;
+}
+
+.home-side__avatar img {
+  width: 4.5rem;
+  height: 4.5rem;
+  border: 1px solid var(--edge);
+  border-radius: 50%;
+  background: var(--code-bg);
+  object-fit: cover;
+  transition: transform 0.15s ease;
+}
+
+.home-side__avatar:hover img { transform: scale(1.05) rotate(-3deg); }
+
+.home-side__name {
+  margin: 0.4rem 0 0.25rem;
+  font-family: var(--head-font);
+  font-size: var(--fs-body);
+  font-weight: var(--head-weight);
+  color: var(--fg);
+}
+
+.home-side__blurb p { margin: 0 0 0.35rem; }
+
+.home-side__about { margin: 0 0 0.9rem; }
+
+.home-side__actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.4rem 0.7rem;
-  font-family: var(--body-font);
-  font-size: var(--fs-micro);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--card-fg);
-  opacity: 0.7;
+  gap: 0.5rem 1rem;
+  margin: 0;
 }
 
+/* a button: the bar's purple with ink on it in both themes (5.9:1). on
+   hover it lifts onto a tiny hard shadow, like the tags do. */
+.button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid var(--bar-fg);
+  border-radius: var(--radius);
+  background: var(--bar-bg);
+  color: var(--bar-fg);
+  font-family: var(--body-font);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.button:hover {
+  color: var(--bar-fg);
+  transform: translate(-2px, -2px);
+  box-shadow: 2px 2px 0 var(--fg);
+}
+
+/* the quieter one: an outline, for second choices like "see all" */
+.button--quiet {
+  border-color: var(--edge);
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.button--quiet:hover { color: var(--fg); border-color: var(--fg); box-shadow: 2px 2px 0 var(--accent); }
+
+.home-more { margin: 1.5rem 0 0; }
+
+/* the post list ------------------------------------------------------
+   plain ruled rows: title, blurb, date and tags on the left, the post's
+   picture on the right. they were tinted cards with hard shadows once. */
+
+.post-list {
+  clear: both;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-row {
+  --c: var(--drac-purple);
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 6.5rem;
+  gap: 1.25rem;
+  align-items: start;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+/* the accent classes again, after .post-row on purpose: same specificity,
+   so the later rule has to be the one that overrides the default above */
+.post-row.c1 { --c: var(--drac-purple); }
+.post-row.c2 { --c: var(--drac-pink); }
+.post-row.c3 { --c: var(--drac-cyan); }
+.post-row.c4 { --c: var(--drac-green); }
+.post-row.c5 { --c: var(--drac-orange); }
+.post-row.c6 { --c: var(--drac-yellow); }
+
+.post-row .post-thumb { aspect-ratio: 3 / 2; }
+
+.post-row__title {
+  margin: 0;
+  font-size: var(--fs-lead);
+  font-weight: var(--head-weight);
+  line-height: 1.35;
+}
+
+/* dark mode gives every title a prompt, in the post's colour */
+.post-row__title::before {
+  content: var(--prompt);
+  color: var(--c);
+}
+
+.post-row__title a { color: var(--fg); text-decoration: none; }
+
+/* the whole row is clickable; the link keeps the semantics */
+.post-row__title a::after { content: ""; position: absolute; inset: 0; }
+
+.post-row__excerpt {
+  margin: 0.2rem 0 0;
+  color: var(--dim);
+}
+
+.post-row__excerpt p { margin: 0; }
+
+.post-row__meta {
+  margin: 0.35rem 0 0;
+  font-size: var(--fs-caption);
+  color: var(--dim);
+}
+
+.post-row__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0.5rem 0 0;
+}
+
+@media (max-width: 30rem) {
+  .post-row { grid-template-columns: minmax(0, 1fr) 4.75rem; gap: 0.9rem; }
+}
+
+/* the archive: every post, a date and a title per row */
+.archive-year { margin-bottom: 2.5rem; }
+
+.archive-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.archive-list li {
+  display: grid;
+  /* a fixed date column, so every title starts at the same x */
+  grid-template-columns: 4.5rem 1fr;
+  align-items: baseline;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.archive-list time {
+  font-size: var(--fs-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--dim);
+}
+
+.archive-list a { color: var(--fg); font-weight: var(--head-weight); text-transform: lowercase; text-decoration: none; }
+.archive-list a:hover { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; }
+
+/* a tag: a small square chip. on hover it lifts onto a tiny hard shadow,
+   which is the only flourish a control gets. */
 .tag {
   position: relative;
   z-index: 1;
-  color: inherit;
+  display: inline-block;
+  padding: 0.05rem 0.45rem;
+  border: 1px solid var(--edge);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body-font);
+  font-size: var(--fs-caption);
   text-decoration: none;
-  border: 1px solid currentColor;
-  padding: 0 0.28rem;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
-.tag:hover { color: var(--accent); }
+.tag:hover {
+  color: var(--fg);
+  border-color: var(--fg);
+  transform: translate(-2px, -2px);
+  box-shadow: 2px 2px 0 var(--accent);
+}
 
-/* dark mode gives every heading a prompt */
-.card__title::before,
+/* dark mode gives a page title a prompt */
 .page-title::before {
   content: var(--prompt);
-  color: var(--c, var(--accent));
+  color: var(--accent);
 }
 
 @media (max-width: 34rem) {
-  .card { padding: 0.95rem 1.1rem; box-shadow: var(--shadow-sm); }
-  .card__title { font-size: var(--fs-lead); }
-  /* the excerpt is body-sized elsewhere; on a narrow card it steps down */
-  .card__excerpt { font-size: var(--fs-caption); }
   /* the #tag headings run long; one step down keeps them off two lines */
   .tag-group h2 { font-size: var(--fs-h3); }
 }
 
-/* note / callout box -------------------------------------------------- */
+/* note / callout box --------------------------------------------------
+   a soft tinted panel. the transparent border costs nothing here and
+   becomes a visible outline in forced-colour modes, where the background
+   is thrown away. */
 
 .note {
   --c: var(--drac-purple);
   clear: both;
   font-size: var(--fs-body);
   margin: 2rem 0;
-  padding: 1rem 1.15rem;
+  padding: 0.9rem 1.1rem;
   background: color-mix(in srgb, var(--c) var(--card-tint), var(--card-bg));
+  border: 1px solid transparent;
+  border-radius: var(--radius);
 }
 
 .note :first-child { margin-top: 0; }
@@ -486,9 +778,8 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
   margin-bottom: 4rem;
 }
 
-.page-title { margin-top: 0; }
+.page-title { margin-top: 0; margin-bottom: 0.75rem; }
 
-/* script pages carry long shell lines — give the code the full column */
 .subtitle {
   margin-top: -0.5rem;
   font-size: var(--fs-lead);
@@ -499,28 +790,25 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.6rem 0.9rem;
+  gap: 0.4rem 0.5rem;
   margin-bottom: 2rem;
-  font-family: var(--body-font);
   font-size: var(--fs-caption);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
   color: var(--dim);
 }
 
-.post-meta .tag {
-  display: inline-block;
-  padding: 0.15rem 0.5rem;
-  border: 1px solid var(--card-edge);
-  box-shadow: 3px 3px 0 var(--card-edge);
-  background: var(--card-bg);
-  color: var(--fg);
-  text-transform: none;
-  letter-spacing: 0.02em;
-  transition: transform 0.15s ease, color 0.15s ease;
-}
+.post-meta time { margin-right: 0.4rem; }
 
-.post-meta .tag:hover { color: var(--accent); transform: translate(-1px, -1px); }
+/* tags keep their own casing; only the date wears the label style */
+.post-meta .tag { text-transform: none; letter-spacing: 0; }
+
+/* the featured image at the top of a post: the full column, its own shape */
+.post-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 0 2rem;
+  border-radius: var(--radius);
+}
 
 .post-content > :first-child { margin-top: 0; }
 
@@ -530,12 +818,12 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
   margin-top: 1.5rem;
   font-family: var(--body-font);
   font-style: italic;
-  font-size: var(--fs-h3);
+  font-size: var(--fs-lead);
   line-height: 1.3;
   color: var(--accent);
 }
 
-/* the small print under the note — what the site is made of */
+/* the small print under the note: what the site is made of */
 .colophon {
   max-width: var(--measure);
   margin-top: 0.9rem;
@@ -549,6 +837,7 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
   margin-top: 3rem;
   padding: 1rem 1.25rem;
   border: 1px dashed var(--line);
+  border-radius: var(--radius);
   font-family: var(--body-font);
   font-size: var(--fs-caption);
   color: var(--dim);
@@ -566,7 +855,7 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
 .rec-group__title {
   margin: 0 0 0.85rem;
   font-family: var(--head-font);
-  font-size: var(--fs-h3);
+  font-size: var(--fs-h2);
 }
 
 .rec-intro {
@@ -617,21 +906,7 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
 
 .reclist a { color: var(--link); }
 
-/* unicode arrow, not an icon font, so it works before font awesome does */
-.reclist a[href^="http"]::after {
-  content: "\2197";
-  display: inline-block;
-  margin-left: 0.15em;
-  font-size: 0.85em;
-  line-height: 1;
-  color: var(--dim);
-}
 .reclist a:hover { color: var(--link-hover); }
-
-.reclist a:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-}
 
 /* the sorter --------------------------------------------------------- */
 
@@ -647,9 +922,7 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
 .sorter + .sorter { margin-bottom: 2.5rem; }
 
 .sorter__label {
-  font-size: var(--fs-micro);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-size: var(--fs-caption);
   color: var(--dim);
 }
 
@@ -657,7 +930,8 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
   flex: 1 1 14rem;
   max-width: 22rem;
   padding: 0.4rem 0.55rem;
-  border: 1px solid var(--line);
+  border: 1px solid var(--edge);
+  border-radius: var(--radius);
   background: var(--card-bg);
   color: var(--fg);
   font: inherit;
@@ -683,14 +957,15 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
   gap: 0.4rem 0.75rem;
 }
 
-/* cyan so they read as controls, not tags. the pressed one sits in its shadow */
+/* cyan so they read as controls, not tags. flat chips: hover lifts one
+   onto a tiny hard shadow, and the pressed one is filled in. */
 .sorter button {
   --ctl: var(--drac-cyan);
 
-  padding: 0.3rem 0.6rem;
+  padding: 0.25rem 0.65rem;
   border: 1px solid var(--ctl);
-  box-shadow: 3px 3px 0 var(--ctl);
-  background: color-mix(in srgb, var(--ctl) 10%, var(--card-bg));
+  border-radius: var(--radius);
+  background: var(--bg);
   color: var(--fg);
   font: inherit;
   font-size: var(--fs-caption);
@@ -699,15 +974,16 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
 }
 
 .sorter button:hover {
-  background: color-mix(in srgb, var(--ctl) 22%, var(--card-bg));
-  transform: translate(-1px, -1px);
-  box-shadow: 4px 4px 0 var(--ctl);
+  transform: translate(-2px, -2px);
+  box-shadow: 2px 2px 0 var(--ctl);
 }
 
+/* pressed is carried by the fill and by the bold weight, not colour alone */
 .sorter button[aria-pressed="true"] {
-  background: color-mix(in srgb, var(--ctl) 32%, var(--card-bg));
+  background: color-mix(in srgb, var(--ctl) 28%, var(--card-bg));
+  font-weight: 600;
+  transform: none;
   box-shadow: none;
-  transform: translate(3px, 3px);
 }
 
 .sorter button:focus-visible {
@@ -723,8 +999,23 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
 .js .sorter { display: flex; }
 
 @media (prefers-reduced-motion: reduce) {
-  .sorter button { transition: none; }
-  .src-list a { transition: none; }
+  .sorter button,
+  .tag,
+  .tag-cloud a,
+  .book__links a,
+  .button { transition: none; }
+  .sorter button:hover,
+  .tag:hover,
+  .tag-cloud a:hover,
+  .book__links a:hover,
+  .button:hover,
+  .feature:hover .sticker,
+  .post-row:hover .sticker,
+  .feature:hover .post-thumb__img,
+  .post-row:hover .post-thumb__img { transform: none; }
+  .post-thumb__img,
+  .home-side__avatar img { transition: none; }
+  .home-side__avatar:hover img { transform: none; }
 }
 
 /* on a phone the controls go full width so they're easy to hit */
@@ -770,7 +1061,7 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
   width: 1px;
   height: 1px;
   overflow: hidden;
-  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
   white-space: nowrap;
 }
 
@@ -791,9 +1082,7 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
 }
 
 .toc__label {
-  font-size: var(--fs-micro);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-size: var(--fs-caption);
   color: var(--dim);
 }
 
@@ -820,11 +1109,6 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
 
 .toc a:hover { color: var(--accent); }
 
-.toc a:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
 /* an anchor should not land with its heading jammed against the viewport top */
 .post-content :is(h2, h3) { scroll-margin-top: 1.5rem; }
 
@@ -832,15 +1116,35 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
   html { scroll-behavior: smooth; }
 }
 
+/* older, newer: the way onward from the bottom of a post. two ruled rows,
+   label then title, the same shape as the post list. */
 .post-nav {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
   margin-top: 3rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--line);
-  font-family: var(--body-font);
+  border-top: 1px solid var(--fg);
+}
+
+.post-nav a {
+  display: block;
+  /* a hanging indent: the label sits in a fixed 4.5rem column and the
+     title, wrapped lines included, starts at the same x on both rows */
+  padding: 0.75rem 0 0.75rem 4.5rem;
+  text-indent: -4.5rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--fg);
+  font-weight: var(--head-weight);
+  text-decoration: none;
+  text-transform: lowercase;
+}
+
+.post-nav a:hover { text-decoration: underline; text-decoration-color: var(--accent); }
+
+.post-nav__dir {
+  display: inline-block;
+  width: 4.5rem;
+  text-indent: 0;
   font-size: var(--fs-caption);
+  font-weight: 400;
+  color: var(--dim);
 }
 
 /* tag index ----------------------------------------------------------- */
@@ -858,22 +1162,26 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
 
 .tag-cloud a {
   display: inline-block;
-  padding: 0.15rem 0.5rem;
-  border: 1px solid var(--card-edge);
-  box-shadow: 3px 3px 0 var(--card-edge);
-  background: var(--card-bg);
+  padding: 0.15rem 0.55rem;
+  border: 1px solid var(--edge);
+  border-radius: var(--radius);
+  background: var(--bg);
   color: var(--fg);
   text-decoration: none;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
-.tag-cloud a:hover { color: var(--accent); transform: translate(-1px, -1px); }
+.tag-cloud a:hover {
+  border-color: var(--fg);
+  transform: translate(-2px, -2px);
+  box-shadow: 2px 2px 0 var(--accent);
+}
 
 .tag-group { margin-bottom: 2.5rem; }
 
 .tag-group h2 {
   font-family: var(--head-font);
   font-size: var(--fs-h2);
-  letter-spacing: 0.04em;
 }
 
 .tag-group h2::before { content: "#"; color: var(--accent); }
@@ -943,24 +1251,26 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sticker, .card { transition: none; }
+  .sticker { transition: none; }
   .site-title .cursor { animation: none; }
 }
 
-/* footer — the three-column minima shape, in this theme's clothes ------ */
+/* footer ---------------------------------------------------------------
+   one column, like everything else: the status line, the row of icons,
+   then the quote. */
 
 .site-footer {
   border-top: 1px solid var(--line);
   margin-top: 4rem;
-  padding: 2rem 0 3rem;
+  padding: 1.5rem 0 2.5rem;
   font-family: var(--body-font);
   font-size: var(--fs-caption);
   color: var(--dim);
 }
 
-/* the omg.lol status line — one ambient line above the footer proper */
+/* the omg.lol status line: one ambient line above the footer proper */
 .footer-status {
-  margin: 0 auto 1.5rem;
+  margin: 0 auto 1rem;
   font-family: var(--body-font);
   font-size: var(--fs-caption);
   line-height: 1.6;
@@ -971,20 +1281,10 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
 
 .footer-status[hidden] { display: none; }
 
-.footer-inner {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 1.5rem 2rem;
-}
-
 .footer-quote {
   position: relative;
-  /* two shares of the row to the socials' one */
-  flex: 2 1 0;
-  margin: 0;
-  padding-left: 1.6rem;
+  margin: 0.75rem 0 0;
+  padding-left: 1.4rem;
   border: 0;
 }
 
@@ -993,67 +1293,56 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
   content: "\201C";
   position: absolute;
   left: 0;
-  top: 0.3rem;
+  top: 0.2rem;
   font-family: var(--body-font);
-  font-size: 2rem;
+  font-size: 1.75rem;
   line-height: 1;
   color: var(--accent);
-  opacity: 0.3;
+  opacity: 0.4;
 }
 
 .footer-quote p {
   margin: 0;
-  /* follows the theme; inter's real italic comes from the ital axis
-     requested in head.html, without which the browser would fake the slant */
   font-family: var(--body-font);
-  /* same size as body copy */
   font-size: var(--fs-body);
   font-style: italic;
-  font-weight: 300;
   line-height: 1.5;
   color: var(--dim);
 }
 
-.footer-quote footer {
-  margin-top: 0.45rem;
-  /* the credit line runs in inter; only the quote itself is serif */
+.footer-quote .footer-quote__by {
+  margin-top: 0.4rem;
   font-family: var(--body-font);
   font-size: var(--fs-caption);
   font-style: normal;
   line-height: 1.4;
   color: var(--dim);
-  opacity: 0.8;
 }
 
-.footer-quote footer::before { content: "\2014\00a0"; }
 .footer-quote cite { font-style: italic; }
 
-/* socials, tucked to the right */
-.footer-social {
-  display: flex;
-  flex: 1 1 0;
-  align-items: center;
-  /* the icons only need ~180px, so keep them tucked to the far edge of the third */
-  justify-content: flex-end;
-  gap: 1.25rem;
-}
-
 .site-footer p { margin: 0; }
-.site-footer a { color: var(--dim); }
+.site-footer a { color: var(--fg); }
 .site-footer a:hover { color: var(--accent); }
 
+/* the icon row. each link is a 44px square so it is easy to hit with a
+   thumb; the row is pulled left so the first glyph, not its padding, lines
+   up with the text edge. */
 .social-media-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.25rem;
   list-style: none;
-  margin: 0;
+  margin: 0 0 0 -12px;
   padding: 0;
 }
 
 .social-media-list a {
-  display: block;
-  color: var(--dim);
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  color: var(--fg);
   text-decoration: none;
 }
 
@@ -1077,15 +1366,7 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
   text-align: center;
 }
 
-@media (max-width: 40rem) {
-  .footer-inner { flex-direction: column; align-items: flex-start; }
-  /* flex-basis means height once the row turns into a column */
-  .footer-quote,
-  .footer-social { flex: 0 1 auto; }
-  .footer-social { justify-content: flex-start; }
-}
-
-/* syntax highlighting (rouge) — dracula tokens, both themes ------------ */
+/* syntax highlighting (rouge): dracula tokens, both themes ------------- */
 
 .highlight { background: transparent; }
 .highlight pre { margin: 0; }
@@ -1094,6 +1375,7 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
 .highlighter-rouge > .highlight {
   background: var(--pre-bg);
   border-left: 2px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
 }
 
 .highlighter-rouge > .highlight > pre { border-left: 0; }
@@ -1139,15 +1421,22 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
 }
 
 .book__links a {
-  font-size: var(--fs-micro);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  display: inline-block;
+  padding: 0.05rem 0.45rem;
+  border: 1px solid var(--edge);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--fg);
+  font-size: var(--fs-caption);
   text-decoration: none;
-  border: 1px solid currentColor;
-  padding: 0.1rem 0.35rem;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
-.book__links a:hover { color: var(--link-hover); }
+.book__links a:hover {
+  border-color: var(--fg);
+  transform: translate(-2px, -2px);
+  box-shadow: 2px 2px 0 var(--accent);
+}
 
 @media (max-width: 40rem) {
   /* thumb-sized, on their own line under the title */
@@ -1159,3 +1448,7 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
 
   .book__links a { padding: 0.25rem 0.5rem; }
 }
+
+/* main is focusable only so the skip link can land on it; it should not
+   draw a ring when it receives focus that way */
+main:focus { outline: none; }

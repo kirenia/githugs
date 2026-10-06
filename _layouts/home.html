@@ -1,24 +1,74 @@
 ---
 layout: default
 ---
-{%- if page.title or content != "" -%}
-<div class="page">
-  {%- comment -%}
-    the site name is already the header link, so on the home page the h1 is
-    there for the outline only. a different title still prints.
-  {%- endcomment -%}
-  {%- if page.title == site.title %}<h1 class="visually-hidden">{{ page.title }}</h1>
-  {%- elsif page.title %}<h1 class="page-title">{{ page.title }}</h1>{% endif -%}
-  {{ content }}
+{%- comment -%}
+  the home page, top to bottom:
+    1. the newest post, big, with its picture
+    2. two columns: the next few posts on the left, and on the right a small
+       panel that says what this site is and how to follow it
+  whatever is written in index.markdown is the panel's blurb, and its
+  `avatar:` front matter is the panel's photo.
+{%- endcomment -%}
+
+{%- comment -%}
+  the site name is already the header link, so on the home page the h1 is
+  there for the outline only. a different title still prints.
+{%- endcomment -%}
+{%- if page.title == site.title %}<h1 class="visually-hidden">{{ page.title }}</h1>
+{%- elsif page.title %}<h1 class="page-title">{{ page.title }}</h1>{% endif -%}
+
+{%- assign featured = site.posts.first -%}
+{%- comment -%} how many posts the list shows under the featured one {%- endcomment -%}
+{%- assign latest_count = 6 -%}
+
+{%- if featured %}
+<article class="feature c1">
+  {% include post-thumb.html post=featured %}
+  <div class="feature__text">
+    <h2 class="feature__title"><a href="{{ featured.url | relative_url }}">{{ featured.title | escape }}</a></h2>
+    {%- assign blurb = featured.description | default: featured.excerpt -%}
+    {%- if blurb %}<p class="feature__excerpt">{{ blurb | strip_html | normalize_whitespace | truncatewords: 30 }}</p>{% endif -%}
+    <p class="post-row__meta"><time datetime="{{ featured.date | date_to_xmlschema }}">{{ featured.date | date: "%-d %b %Y" }}</time></p>
+  </div>
+</article>
+{%- endif %}
+
+<div class="home-grid">
+  <section class="home-main" aria-labelledby="latest-title">
+    <h2 class="section-title" id="latest-title">latest</h2>
+
+    {%- if site.posts.size > 1 %}
+    <ul class="post-list">
+      {%- comment -%} index starts at 1 so the list carries on from the featured post's colour {%- endcomment -%}
+      {%- for post in site.posts offset: 1 limit: latest_count -%}
+        {% include post-card.html post=post index=forloop.index %}
+      {%- endfor -%}
+    </ul>
+    <p class="home-more"><a class="button button--quiet" href="{{ '/archive/' | relative_url }}">see all posts</a></p>
+    {%- elsif site.posts.size == 0 -%}
+    <p>no posts yet. drop a markdown file in <code>_posts/</code>.</p>
+    {%- endif %}
+  </section>
+
+  <aside class="home-side" aria-label="about this site">
+    {%- comment -%}
+      the picture, the blurb and the link under it all come from
+      index.markdown: `avatar:` in its front matter is a path to a square
+      photo (shown as a circle, linked to the about page), and the text of
+      the file is the blurb. with no avatar set, the star stands in.
+    {%- endcomment -%}
+    {%- if page.avatar %}
+    <a class="home-side__avatar" href="{{ '/about/' | relative_url }}"><img src="{{ page.avatar | relative_url }}" alt="{{ page.avatar_alt | default: 'about me' | escape }}" width="72" height="72"></a>
+    {%- else %}
+    {% include sticker.html name="star" class="home-side__logo" %}
+    {%- endif %}
+    <p class="home-side__name">{{ site.title | escape }}</p>
+    {%- if content != "" %}
+    <div class="home-side__blurb">{{ content }}</div>
+    {%- endif %}
+    <p class="home-side__about"><a href="{{ '/about/' | relative_url }}">more about me</a></p>
+    <p class="home-side__actions">
+      <a class="button" href="{{ '/feed.xml' | relative_url }}">subscribe by rss</a>
+    </p>
+  </aside>
 </div>
-{%- endif -%}
-
-<ul class="post-list">
-  {%- for post in site.posts -%}
-    {% include post-card.html post=post index=forloop.index0 %}
-  {%- endfor -%}
-</ul>
-
-{%- if site.posts.size == 0 -%}
-  <p>no posts yet. drop a markdown file in <code>_posts/</code>.</p>
-{%- endif -%}

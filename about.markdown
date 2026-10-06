@@ -7,11 +7,11 @@ sticker: overalls
 
 <p class="subtitle">software engineer, solo mom, and lover of oatmilk lattes</p>
 
-This is where I keep code, notes, and whatever I'm building right now. The recurring bit is something I coined as "cyberpunkology" where a novel from the 1960s says something uncomfortably true about right now, I go find the receipt, take notes and talk about it.
+Welcome to my dev site. This is where I keep code and notes and whatever else I'm working on at the moment.
 
-The name comes from [Kevin Kelly's protopia](https://kk.org/thetechnium/protopia/): not a perfect world but one that's a little better today than it was yesterday. That idea is what got me asking these questions of the people in my life and beyond.
+I've been building for the web for over ten years and I'm a forever student. The field never stops moving, so there's always something new to break or fix or figure out. I like cyberdecks and the indie web, which is why this site runs on Jekyll.
 
-I also write about the dev side of things. It's a field that never stops moving, and I'm a forever student, so there's always something new to break, fix, or figure out. I like tech you can actually own (cyberdecks, indie web, etc.). This site runs on Ruby (Jekyll) because that's the same idea in practice.
+I also love old sci-fi and how it predicted futures that are more probable by the day. Away from the keyboard I host [A (slightly) Better Tomorrow](https://aslightlybetterpod.com), a podcast about futures. The name comes from [Kevin Kelly's protopia](https://kk.org/thetechnium/protopia/), a world that's a little better today than it was yesterday. I ask the people in my life and beyond what that looks like to them.
 
 {% include sticker.html name="jimothy" class="sticker--left" %}
 

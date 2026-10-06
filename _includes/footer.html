@@ -24,18 +24,17 @@
   </script>
   {%- endif -%}
 
-  <div class="wrap footer-inner">
+  <div class="wrap">
+    {% include social.html %}
+
     {%- if site.footer_quote -%}
     <blockquote class="footer-quote">
       <p>{{ site.footer_quote | escape }}</p>
-      <footer>{{ site.footer_quote_by | escape }}{% if site.footer_quote_cite %}, <cite>{{ site.footer_quote_cite | escape }}</cite>{% endif %}{% if site.footer_quote_year %} ({{ site.footer_quote_year }}){% endif %}</footer>
+      {%- comment -%} a <p>, not a nested <footer>: a second footer here reads as a second page footer to assistive tech {%- endcomment %}
+      <p class="footer-quote__by">{{ site.footer_quote_by | escape }}{% if site.footer_quote_cite %}, <cite>{{ site.footer_quote_cite | escape }}</cite>{% endif %}{% if site.footer_quote_year %} ({{ site.footer_quote_year }}){% endif %}</p>
     </blockquote>
     {%- else -%}
     <p>{{ site.description | escape }}</p>
     {%- endif -%}
-
-    <div class="footer-social">
-      {% include social.html %}
-    </div>
   </div>
 </footer>

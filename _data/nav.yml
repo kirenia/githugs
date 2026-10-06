@@ -4,4 +4,6 @@
 - title: about
   url: /about/
 - title: books
-  url: /books/
+  url: https://bookshop.org/shop/githugs
+- title: archive
+  url: /archive/

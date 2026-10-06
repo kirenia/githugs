@@ -12,6 +12,15 @@ layout: default
     {%- endfor -%}
   </div>
 
+  {%- comment -%}
+    the featured image: `image:` in the post's front matter, a path from the
+    site root. `image_alt:` describes it for people who can't see it; leave
+    it out only when the picture is pure decoration.
+  {%- endcomment -%}
+  {%- if page.image %}
+  <img class="post-image" src="{{ page.image | relative_url }}" alt="{{ page.image_alt | default: '' | escape }}">
+  {%- endif %}
+
   <div class="post-content">
     {%- if page.sticker -%}
       {% include sticker.html name=page.sticker class="sticker--right" tilt=page.sticker_tilt %}
@@ -30,8 +39,14 @@ layout: default
   </aside>
   {%- endif -%}
 
-  <nav class="post-nav">
-    {%- if page.previous %}<a href="{{ page.previous.url | relative_url }}">&larr; {{ page.previous.title | escape | truncate: 34 }}</a>{% else %}<span></span>{% endif -%}
-    {%- if page.next %}<a href="{{ page.next.url | relative_url }}">{{ page.next.title | escape | truncate: 34 }} &rarr;</a>{% else %}<span></span>{% endif -%}
+  {%- if page.previous or page.next %}
+  <nav class="post-nav" aria-label="more posts">
+    {%- if page.previous %}
+    <a href="{{ page.previous.url | relative_url }}"><span class="post-nav__dir">older</span> {{ page.previous.title | escape }}</a>
+    {%- endif %}
+    {%- if page.next %}
+    <a href="{{ page.next.url | relative_url }}"><span class="post-nav__dir">newer</span> {{ page.next.title | escape }}</a>
+    {%- endif %}
   </nav>
+  {%- endif %}
 </article>

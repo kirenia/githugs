@@ -7,7 +7,7 @@
   <a class="skip-link" href="#content">skip to content</a>
   {% include header.html %}
 
-  <main class="wrap" id="content">
+  <main class="wrap" id="content" tabindex="-1">
     {{ content }}
   </main>
 
@@ -22,6 +22,11 @@
         if (a.hostname === window.location.hostname || a.target) continue;
         a.target = "_blank";
         a.rel = (a.rel ? a.rel + " " : "") + "noopener noreferrer";
+        // say so, rather than silently changing where the link goes
+        var note = document.createElement("span");
+        note.className = "visually-hidden";
+        note.textContent = " (opens in a new tab)";
+        a.appendChild(note);
       }
     })();
   </script>
@@ -68,7 +73,8 @@
         var sec = document.createElement("section");
         sec.className = "rec-group";
         if (label) {
-          var h = document.createElement("h3");
+          // h2: these sit directly under the post's h1
+          var h = document.createElement("h2");
           h.className = "rec-group__title";
           h.textContent = label;
           sec.appendChild(h);

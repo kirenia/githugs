@@ -1,0 +1,3 @@
+# bookshop.org affiliate id. it lives in _data/ rather than _config.yml so a
+# change shows up on a running server without restarting jekyll.
+bookshop_id: "128823"
