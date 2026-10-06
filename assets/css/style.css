@@ -184,11 +184,6 @@ body {
    stays readable to screen readers, search and anyone copying text */
 h1, h2, h3, h4,
 .post-row__title,
-.reclist__group,
-.rec-group__title {
-  text-transform: lowercase;
-}
-
 h1, h2, h3, h4 {
   /* a heading always starts on a clean line, never beside a sticker */
   clear: both;
@@ -290,12 +285,6 @@ main.wrap { padding-top: clamp(1.5rem, 4vw, 2.5rem); flex: 1 0 auto; }
 .post-row__meta,
 .post-nav__dir,
 .sorter__label,
-.toc__label {
-  font-family: var(--body-font);
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-}
-
 /* header -------------------------------------------------------------- */
 
 .site-header { border-bottom: 1px solid var(--line); }
@@ -857,13 +846,6 @@ main.wrap { padding-top: clamp(1.5rem, 4vw, 2.5rem); flex: 1 0 auto; }
   font-family: var(--head-font);
   font-size: var(--fs-h2);
 }
-
-.rec-intro {
-  margin: -0.4rem 0 0.9rem;
-  font-size: var(--fs-caption);
-  color: var(--dim);
-}
-
 /* gap, not margins, so nothing collapses */
 .recs {
   display: grid;
@@ -1064,14 +1046,6 @@ main.wrap { padding-top: clamp(1.5rem, 4vw, 2.5rem); flex: 1 0 auto; }
   clip-path: inset(50%);
   white-space: nowrap;
 }
-
-.item-note {
-  display: block;
-  font-size: var(--fs-caption);
-  color: var(--dim);
-  line-height: 1.45;
-}
-
 .toc {
   display: flex;
   flex-wrap: wrap;
@@ -1080,12 +1054,6 @@ main.wrap { padding-top: clamp(1.5rem, 4vw, 2.5rem); flex: 1 0 auto; }
   margin: 0 0 2.5rem;
   font-family: var(--body-font);
 }
-
-.toc__label {
-  font-size: var(--fs-caption);
-  color: var(--dim);
-}
-
 .toc ul {
   display: flex;
   flex-wrap: wrap;
@@ -1358,6 +1326,26 @@ main.wrap { padding-top: clamp(1.5rem, 4vw, 2.5rem); flex: 1 0 auto; }
   clip-path: inset(50%);
   white-space: nowrap;
 }
+
+/* omg.lol's own icon font, loaded for one glyph: prami, their heart */
+@font-face {
+  font-family: "omg.lol Icons";
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url("https://cdn.cache.lol/profiles/icons/omg.lol-icons.woff2") format("woff2");
+}
+
+.omg-icon {
+  font-family: "omg.lol Icons";
+  font-weight: 900;
+  font-style: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-rendering: auto;
+}
+
+.omg-prami::before { content: "\e042"; }
 
 .social-media-list i {
   display: block;
