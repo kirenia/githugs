@@ -1,6 +1,6 @@
 ---
 layout: page
-title: the list
+title: The List
 sticker: neuromancer
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "why I built my site with Jekyll instead of a fancy framework"
+title: "Why I Built My Site With Jekyll Instead of a Fancy Framework"
 date: 2026-08-20 12:33:00 -0600
 description: "I can do frameworks, but I want my personal site to be low maintenance."
 tags: [jekyll, indieweb]

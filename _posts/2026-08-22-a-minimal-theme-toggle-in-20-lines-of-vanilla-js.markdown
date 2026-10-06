@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "simple theme toggle with vanilla JS"
+title: "Simple Theme Toggle With Vanilla JS"
 date: 2026-08-22 14:00:00 -0600
 description: "My simple light/dark switch that survives with JavaScript turned off. It's less than 30 lines of vanilla JS. CSS is where the magic happens."
 tags: [javascript, css, indieweb]

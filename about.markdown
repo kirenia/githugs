@@ -1,6 +1,6 @@
 ---
 layout: page
-title: hi, i'm kire
+title: Hi, I'm Kire
 permalink: /about/
 sticker: overalls
 ---
