@@ -5,6 +5,7 @@ date: 2026-08-29 18:40:00 -0600
 description: "A running list of the cyberpunk books, films, shows and games worth knowing, sortable by year, author, universe or media type."
 tags: [books, cyberpunk]
 thumb: dune
+scripts: [reclist]
 ---
 
 <p class="subtitle">everything people have told me to read, watch and play</p>
