@@ -3,7 +3,12 @@ layout: default
 ---
 {%- if page.title or content != "" -%}
 <div class="page">
-  {%- if page.title %}<h1 class="page-title">{{ page.title }}</h1>{% endif -%}
+  {%- comment -%}
+    the site name is already the header link, so on the home page the h1 is
+    there for the outline only. a different title still prints.
+  {%- endcomment -%}
+  {%- if page.title == site.title %}<h1 class="visually-hidden">{{ page.title }}</h1>
+  {%- elsif page.title %}<h1 class="page-title">{{ page.title }}</h1>{% endif -%}
   {{ content }}
 </div>
 {%- endif -%}

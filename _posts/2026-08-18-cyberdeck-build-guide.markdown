@@ -7,6 +7,9 @@ tags: [cyberdecks, guides]
 sticker: lucky
 redirect_from:
   - /cyberdecks/guide.html
+  # the old /scripts/ pages are gone, so their links land here
+  - /scripts/
+  - /scripts/writerdeck/
 ---
 
 Free guide (woohoo). Takes about an hour if nothing fights you.
@@ -106,10 +109,10 @@ The deck is the hardware, but the soul lives on the SD card. Everything above is
 **You're not done yet - this is the fun part.** Pick one below and follow its instructions; that's where your deck actually comes to life.
 
 <div class="note" markdown="1">
-Each one is its own repo with a step-by-step readme. Read the install script before you run it - that's the whole point of it not being a mystery binary.
+These are other people's projects, and their own sites have the install steps and the source. Read what you're about to run before you run it - that's the whole point of it not being a mystery binary.
 </div>
 
-- [writerdeck]({% link _scripts/writerdeck.md %}) - focused writing app, no cloud
+- [FocusWriter](https://gottcode.org/focuswriter/) by Graeme Gott - focused writing app, no cloud
 - **focusdeck** - coming soon
 - **stellardeck** - coming soon
 

@@ -35,9 +35,9 @@ So there's one hardware build for all of it - [the build guide]({% post_url 2026
 
 ## My Decks
 
-Each deck flavor is its own code repository with documentation and an install script.
+Same hardware every time, different software on the card. These links go to the people who actually make that software, which is where the docs and the downloads live.
 
-- [writerdeck]({% link _scripts/writerdeck.md %}) - focused writing app, no cloud
+- [FocusWriter](https://gottcode.org/focuswriter/) by Graeme Gott - focused writing app, no cloud
 - **focusdeck** - coming soon
 - **stellardeck** - coming soon
 

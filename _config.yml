@@ -40,24 +40,13 @@ plugins:
 
 permalink: /:year/:month/:day/:title/
 
-# install scripts live in _scripts/ and get their own pages
-collections:
-  scripts:
-    output: true
-    permalink: /scripts/:name/
-
 # the first blank line ends the blurb shown on the home page cards
 excerpt_separator: "\n\n"
 
-# so posts and scripts don't have to name their layout in front matter
+# so posts don't have to name their layout in front matter
 defaults:
   - scope:
       path: ""
       type: posts
     values:
       layout: post
-  - scope:
-      path: ""
-      type: scripts
-    values:
-      layout: script

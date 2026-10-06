@@ -86,6 +86,13 @@
     --head-font: var(--mono);
     --prompt: "> ";
     --cursor: inline;
+    /* mono light-on-dark blooms, so the terminal side runs a lighter cut,
+       looser leading and a softer white than #f8f8f2 (11.3:1, still way
+       past AA) instead of shouting */
+    --body-weight: 300;
+    --body-tracking: 0.005em;
+    --body-leading: 1.75;
+    --drac-fg: #e6e4ee;
     /* Fira Code runs optically larger than Fira Sans, so the terminal side
        takes body copy — and the headings above it — down a step to match the
        light side's weight */
@@ -107,6 +114,10 @@
   --head-font: var(--mono);
   --prompt: "> ";
   --cursor: inline;
+  --body-weight: 300;
+  --body-tracking: 0.005em;
+  --body-leading: 1.75;
+  --drac-fg: #e6e4ee;
   --fs-body: 0.875rem;
   --fs-lead: 1.0625rem;
   --fs-h3: 1.1875rem;
@@ -174,7 +185,9 @@ body {
   color: var(--fg);
   font-family: var(--body-font);
   font-size: var(--fs-body);
-  line-height: 1.65;
+  font-weight: var(--body-weight, 400);
+  letter-spacing: var(--body-tracking, normal);
+  line-height: var(--body-leading, 1.65);
 }
 
 ::selection { background: var(--accent); color: var(--bg); }
@@ -275,14 +288,14 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
   flex-wrap: wrap;
   align-items: baseline;
   gap: 0.75rem 1.25rem;
-  padding: 1.75rem 0 1.25rem;
+  padding: 1.25rem 0 0.9rem;
   border-bottom: 1px solid var(--line);
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.75rem;
 }
 
 .site-title {
   font-family: var(--head-font);
-  font-size: var(--fs-h3);
+  font-size: var(--fs-lead);
   font-weight: 600;
   letter-spacing: -0.02em;
   color: var(--fg);
@@ -347,13 +360,17 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
   margin: 0 0 3rem;
   padding: 0;
   display: grid;
-  gap: 2rem;
+  gap: 1.1rem;
 }
+
+/* on the home page the intro sits right on top of the cards, so it drops
+   the 4rem tail every other page wants */
+.page:has(+ .post-list) { margin-bottom: 1.5rem; }
 
 .card {
   position: relative;
   display: block;
-  padding: 1.5rem 1.75rem;
+  padding: 1.05rem 1.25rem;
   background: color-mix(in srgb, var(--c) var(--card-tint), var(--card-bg));
   color: var(--card-fg);
   text-decoration: none;
@@ -365,13 +382,13 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
 .card,
 .note {
   border: 1px solid light-dark(var(--ink), var(--c));
-  box-shadow: 5px 5px 0 light-dark(var(--ink), color-mix(in srgb, var(--c) 68%, #191a21));
+  box-shadow: 4px 4px 0 light-dark(var(--ink), color-mix(in srgb, var(--c) 68%, #191a21));
 }
 
 .card:hover,
 .card:focus-within {
   transform: translate(-2px, -2px);
-  box-shadow: 7px 7px 0 light-dark(var(--ink), color-mix(in srgb, var(--c) 68%, #191a21));
+  box-shadow: 6px 6px 0 light-dark(var(--ink), color-mix(in srgb, var(--c) 68%, #191a21));
 }
 
 /* the colour block per post — the six dracula accents, cycled */
@@ -383,7 +400,7 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
 .c6 { --c: var(--drac-yellow); }
 
 .card__title {
-  margin: 0 0 0.4rem;
+  margin: 0 0 0.25rem;
   font-size: var(--fs-h3);
   line-height: 1.3;
   /* titles are Title Case in the front matter; the cards wear them lowercase */
@@ -398,8 +415,10 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
 .card:hover .card__title { color: var(--accent); }
 
 .card__excerpt {
-  margin: 0 0 0.9rem;
+  margin: 0 0 0.6rem;
   color: var(--card-fg);
+  font-size: var(--fs-caption);
+  line-height: 1.55;
   opacity: 0.85;
 }
 
@@ -409,7 +428,7 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.5rem 0.85rem;
+  gap: 0.4rem 0.7rem;
   font-family: var(--body-font);
   font-size: var(--fs-micro);
   letter-spacing: 0.05em;
@@ -437,7 +456,7 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
 }
 
 @media (max-width: 34rem) {
-  .card { padding: 1.15rem 1.25rem; box-shadow: var(--shadow-sm); }
+  .card { padding: 0.95rem 1.1rem; box-shadow: var(--shadow-sm); }
   .card__title { font-size: var(--fs-lead); }
   /* the excerpt is body-sized elsewhere; on a narrow card it steps down */
   .card__excerpt { font-size: var(--fs-caption); }
@@ -470,12 +489,6 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
 .page-title { margin-top: 0; }
 
 /* script pages carry long shell lines — give the code the full column */
-.script { max-width: none; }
-
-.script .post-content > p,
-.script .post-content > ul,
-.script .post-content > .note { max-width: var(--measure); }
-
 .subtitle {
   margin-top: -0.5rem;
   font-size: var(--fs-lead);
@@ -711,6 +724,7 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
 
 @media (prefers-reduced-motion: reduce) {
   .sorter button { transition: none; }
+  .src-list a { transition: none; }
 }
 
 /* on a phone the controls go full width so they're easy to hit */
@@ -1096,3 +1110,52 @@ th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-alig
 .highlight .gd, .highlight .err { color: var(--drac-red); background: none; }
 .highlight .gi { color: var(--drac-green); }
 .highlight .p, .highlight .nx { color: var(--pre-fg); }
+
+/* /books/ ---------------------------------------------------------------
+   a plain list. no widgets, no third-party script, works with js off. */
+
+.book-list {
+  margin: 1.5rem 0 2.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.book-list li {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.book-list cite { font-style: normal; font-weight: 600; }
+
+.book-list li[hidden] { display: none; }
+
+.book-empty { color: var(--dim); }
+
+.book__links {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.4rem;
+  margin-left: 0.35rem;
+}
+
+.book__links a {
+  font-size: var(--fs-micro);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid currentColor;
+  padding: 0.1rem 0.35rem;
+}
+
+.book__links a:hover { color: var(--link-hover); }
+
+@media (max-width: 40rem) {
+  /* thumb-sized, on their own line under the title */
+  .book__links {
+    display: flex;
+    margin: 0.4rem 0 0;
+    gap: 0.4rem;
+  }
+
+  .book__links a { padding: 0.25rem 0.5rem; }
+}
