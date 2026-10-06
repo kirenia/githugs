@@ -1,4 +1,4 @@
-{%- comment -%} one tag and its posts. usage: {% include tag-section.html name=tag[0] posts=tag[1] %} {%- endcomment -%}
+{%- comment -%} one tag and its posts. takes name and posts. {%- endcomment -%}
 <section class="tag-group" id="{{ include.name | slugify }}">
   <h2>{{ include.name }}</h2>
   <ul>

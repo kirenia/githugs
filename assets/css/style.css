@@ -184,6 +184,11 @@ body {
    stays readable to screen readers, search and anyone copying text */
 h1, h2, h3, h4,
 .post-row__title,
+.feature__title,
+.rec-group__title {
+  text-transform: lowercase;
+}
+
 h1, h2, h3, h4 {
   /* a heading always starts on a clean line, never beside a sticker */
   clear: both;
@@ -284,7 +289,12 @@ main.wrap { padding-top: clamp(1.5rem, 4vw, 2.5rem); flex: 1 0 auto; }
 .post-meta,
 .post-row__meta,
 .post-nav__dir,
-.sorter__label,
+.sorter__label {
+  font-family: var(--body-font);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
 /* header -------------------------------------------------------------- */
 
 .site-header { border-bottom: 1px solid var(--line); }
