@@ -1,25 +1,15 @@
+{%- comment -%} built from _data/social.yml; handles come from _config.yml {%- endcomment -%}
 <ul class="social-media-list">
-  {%- if site.instagram_username -%}
+  {%- for item in site.data.social -%}
+    {%- assign handle = site[item.field] -%}
+    {%- if item.field and handle == nil -%}{%- continue -%}{%- endif -%}
+    {%- if item.href -%}
+      {%- assign href = item.href | relative_url -%}
+    {%- else -%}
+      {%- capture href -%}{{ item.url }}{{ handle | cgi_escape }}{{ item.suffix }}{%- endcapture -%}
+    {%- endif -%}
   <li>
-    <a href="https://instagram.com/{{ site.instagram_username | cgi_escape | escape }}" rel="me noopener noreferrer" title="instagram" target="_blank"><i class="fa-brands fa-instagram" aria-hidden="true"></i><span class="username">{{ site.instagram_username | escape }}</span></a>
+    <a{% if item.class %} class="{{ item.class }}"{% endif %} href="{{ href | escape }}" title="{{ item.title }}"{% unless item.same_tab %} rel="me noopener noreferrer" target="_blank"{% endunless %}><i class="{{ item.icon }}" aria-hidden="true"></i><span class="username">{{ item.label | default: handle | escape }}</span></a>
   </li>
-  {%- endif -%}
-  {%- if site.bluesky_username -%}
-  <li>
-    <a href="https://bsky.app/profile/{{ site.bluesky_username | cgi_escape | escape }}" rel="me noopener noreferrer" title="bluesky" target="_blank"><i class="fa-brands fa-bluesky" aria-hidden="true"></i><span class="username">{{ site.bluesky_username | escape }}</span></a>
-  </li>
-  {%- endif -%}
-  {%- if site.patreon_username -%}
-  <li>
-    <a href="https://www.patreon.com/{{ site.patreon_username | cgi_escape | escape }}" rel="me noopener noreferrer" title="patreon" target="_blank"><i class="fa-brands fa-patreon" aria-hidden="true"></i><span class="username">{{ site.patreon_username | escape }}</span></a>
-  </li>
-  {%- endif -%}
-  {%- if site.email -%}
-  <li>
-    <a class="u-email" href="mailto:{{ site.email }}" title="email"><i class="fa-solid fa-envelope" aria-hidden="true"></i><span class="username">email</span></a>
-  </li>
-  {%- endif -%}
-  <li>
-    <a href="{{ '/feed.xml' | relative_url }}" title="rss" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-rss" aria-hidden="true"></i><span class="username">rss</span></a>
-  </li>
+  {%- endfor -%}
 </ul>

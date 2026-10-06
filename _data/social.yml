@@ -1,0 +1,40 @@
+# the footer row, in this order. `field` names the _config.yml key holding
+# the handle, so deleting the key here or there drops the link. font awesome
+# class in `icon`; omg.lol's prami heart comes from their own font.
+- field: instagram_username
+  title: instagram
+  icon: fa-brands fa-instagram
+  url: https://instagram.com/
+- field: bluesky_username
+  title: bluesky
+  icon: fa-brands fa-bluesky
+  url: https://bsky.app/profile/
+- field: github_username
+  title: github
+  icon: fa-brands fa-github
+  url: https://github.com/
+- field: patreon_username
+  title: patreon
+  icon: fa-brands fa-patreon
+  url: https://www.patreon.com/
+- title: bookshop
+  icon: fa-solid fa-book
+  href: https://bookshop.org/shop/githugs
+  label: bookshop
+- field: omg_address
+  title: omg.lol
+  icon: omg-icon omg-prami
+  url: https://
+  suffix: .omg.lol
+  label: omg.lol
+- field: email
+  title: email
+  icon: fa-solid fa-envelope
+  url: "mailto:"
+  label: email
+  class: u-email
+  same_tab: true
+- title: rss
+  icon: fa-solid fa-rss
+  href: /feed.xml
+  label: rss

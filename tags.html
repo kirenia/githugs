@@ -4,9 +4,9 @@ title: tags
 permalink: /tags/
 sticker: pikmin
 ---
-
 {%- comment -%}
-  posts can use `tags:` or `categories:` - both show up here.
+  posts can use `tags:` or `categories:`, so both show up here. a category
+  that shares a name with a tag is skipped, otherwise it lists twice.
 {%- endcomment -%}
 
 <ul class="tag-cloud">
@@ -20,27 +20,16 @@ sticker: pikmin
   {%- endfor -%}
 </ul>
 
+{%- comment -%} include params take a variable, not tag[0] {%- endcomment -%}
 {%- for tag in site.tags -%}
-<section class="tag-group" id="{{ tag[0] | slugify }}">
-  <h2>{{ tag[0] }}</h2>
-  <ul>
-    {%- for post in tag[1] -%}
-      <li><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a> <small>{{ post.date | date: "%-d %b %Y" }}</small></li>
-    {%- endfor -%}
-  </ul>
-</section>
+  {%- assign name = tag[0] -%}{%- assign posts = tag[1] -%}
+  {% include tag-section.html name=name posts=posts %}
 {%- endfor -%}
 
 {%- for cat in site.categories -%}
   {%- unless site.tags[cat[0]] -%}
-<section class="tag-group" id="{{ cat[0] | slugify }}">
-  <h2>{{ cat[0] }}</h2>
-  <ul>
-    {%- for post in cat[1] -%}
-      <li><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a> <small>{{ post.date | date: "%-d %b %Y" }}</small></li>
-    {%- endfor -%}
-  </ul>
-</section>
+    {%- assign name = cat[0] -%}{%- assign posts = cat[1] -%}
+    {% include tag-section.html name=name posts=posts %}
   {%- endunless -%}
 {%- endfor -%}
 
