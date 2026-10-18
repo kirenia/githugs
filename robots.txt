@@ -1,0 +1,13 @@
+# AI crawlers: no training or scraping
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: anthropic-ai
+User-agent: CCBot
+User-agent: Google-Extended
+User-agent: PerplexityBot
+User-agent: Bytespider
+Disallow: /
+
+# everyone else, including regular search engines
+User-agent: *
+Allow: /
