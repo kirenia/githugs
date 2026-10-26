@@ -4,6 +4,8 @@ title: "Why I Built My Site With Jekyll Instead of a Fancy Framework"
 date: 2026-08-20 12:33:00 -0600
 description: "I can do frameworks, but I want my personal site to be low maintenance."
 tags: [jekyll, indieweb]
+image: /assets/img/posts/how-i-built-githugs-lol.jpg
+image_alt: "A desk lit pink with a plant, a pen cup and a stack of books under a monitor playing a pixel art lo-fi radio stream."
 ---
 
 I've shipped MERN apps, iOS apps, WordPress rebuilds, and Docker setups that haunt my dreams (no joke). I can use frameworks, but I wanted something simpler for myself. This site is hand-written HTML, one CSS file, a little JavaScript, and Jekyll to stitch the pages together. Even the newest dev can understand every line in the source code.

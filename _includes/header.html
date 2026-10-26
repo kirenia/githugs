@@ -1,13 +1,11 @@
 {%- comment -%}
-  two rows. the bar carries the site's name and is the way home; under it,
-  one quiet row with the nav on the left and the theme toggle on the right.
-  edit _data/nav.yml to change the links. a full https:// url there is
-  used as is, so a link can point off the site.
+  one flat band: the name, the links, then the feeds and the light switch.
+  links come from _data/nav.yml. a full https:// url there points off the site.
 {%- endcomment -%}
 <header class="site-header">
-  <p class="top-bar"><a class="site-title" href="{{ '/' | relative_url }}">{{ site.title | escape }}<span class="cursor" aria-hidden="true">_</span></a></p>
-
   <div class="wrap site-bar">
+    <a class="site-title site-title--brand" href="{{ '/' | relative_url }}"><span aria-hidden="true">🌸</span> githugs <span aria-hidden="true">🌸</span></a>
+
     <nav class="site-nav" aria-label="main">
       {%- for item in site.data.nav -%}
         {%- if item.url contains '://' -%}
@@ -19,6 +17,9 @@
       {%- endfor -%}
     </nav>
 
-    <button class="theme-toggle" type="button" data-theme-toggle>jack-in</button>
+    <div class="site-actions">
+      <a class="site-title" href="{{ '/feed.xml' | relative_url }}">rss</a>
+      <button class="theme-toggle" type="button" data-theme-toggle>jack-in</button>
+    </div>
   </div>
 </header>

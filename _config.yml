@@ -1,9 +1,12 @@
-# site settings.
-# jekyll does not reload this file while it's serving,
-# restart after touching anything in here.
+# site settings. jekyll reads this once at startup, so restart the server
+# after touching anything in here.
 
 title: githugs(lol)
 email: githugs@proton.me
+
+# the line under the name on the home page, and the name in the copyright
+author: Kire Góngora
+masthead_by: Kire Góngora · Software Engineer
 description: >-
   Code, notes, and whatever else I'm building right now.
 
@@ -29,6 +32,12 @@ url: "https://githugs.lol" # the domain in CNAME, not the github.io one
 instagram_username: githugs_
 bluesky_username: githugs.lol
 patreon_username: githugs
+github_username: kirenia
+tiktok_username: githugs
+# snapchat_username: cyberpunkmami  # off the footer for now
+# full links, used as is
+discord_invite: https://discord.gg/xAbmz2pJt
+# upscrolled_url: https://upscrolled.com/@githugs  # off the footer for now
 
 # the footer status line is pulled live from this omg.lol address
 omg_address: kire
@@ -50,3 +59,9 @@ defaults:
       type: posts
     values:
       layout: post
+
+# short announcements. they stay out of the blog and out of feed.xml, and go
+# out /updates.xml instead, for bluesky, tumblr and whatever else is reading
+collections:
+  updates:
+    output: false

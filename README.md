@@ -14,6 +14,8 @@ It's a growing personal collection of things I am building and reading and learn
 ![Markdown](https://img.shields.io/badge/Markdown-bd93f9?style=flat&logo=markdown&logoColor=282a36)
 ![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-50fa7b?style=flat&logo=githubpages&logoColor=282a36)
 
+Built by hand. No framework, no build step I'd resent, no razzle-dazzle.
+
 ## running it
 
 ```bash
@@ -21,7 +23,9 @@ bundle install
 bundle exec jekyll serve
 ```
 
-localhost:4000. Add `--drafts` to see what's in `_drafts/`. Restart it after touching `_config.yml`, Jekyll only reads that file once. Everything in `_data/` reloads on save.
+localhost:4000. Add `--drafts` to see the unfinished stuff.
+
+Jekyll reads `_config.yml` once at startup, so changes there need a restart. `_data/` reloads on save. That's why the fiddly bits live in `_data/`.
 
 ## writing a post
 
@@ -31,7 +35,7 @@ A file in `_posts/`, named `YYYY-MM-DD-some-title.markdown`.
 ---
 title: "Title In Normal Casing"
 date: 2026-10-06 18:40:00 -0600
-description: "One sentence. This shows on the home page and in link previews."
+description: "One sentence. Shows on the home page and in link previews."
 tags: [cyberdecks, guides]
 image: /assets/img/posts/my-photo.jpg
 image_alt: "what the picture shows"
@@ -41,69 +45,68 @@ sticker: dune
 
 Only `title` and `date` are required.
 
-Titles and headings get written properly cased and the CSS lowercases them, so the markup stays readable to screen readers, search, and anyone copying text out of it.
+Titles and headings get typed properly cased. The CSS lowercases them. That way the page looks the way I want and screen readers, search and anyone copying text still get real sentences.
 
 ## pictures
 
-Post photos live in `assets/img/posts/`. Make them **1600x1067** (3:2), JPEG, under about 300KB.
+Post photos go in `assets/img/posts/`. 1600x1067 (3:2), JPEG, under about 300KB.
 
-`image:` does three jobs with one line: the big photo at the top of the post, the thumbnail beside it on the home page, and the preview card when someone shares the link. Both thumbnails crop 3:2 from the center, so shoot 3:2 and you pick the crop instead of the CSS picking it. Social cards crop a little tighter, so keep faces and text off the top and bottom edges.
+One `image:` line covers three spots: the photo at the top of the post, the small one on the home page, and the link preview. Both thumbnails crop 3:2 from the middle, so hand it a 3:2 photo and I pick the crop instead of the CSS. Link previews crop tighter, so keep anything important away from the top and bottom.
 
-`image_alt` describes the picture for people who can't see it. Leave it out when the picture is pure decoration.
+`image_alt` is for people who can't see the picture. Decoration gets no alt text, on purpose.
 
-No `image:` and the post gets a block in its own color with a sticker on it. `thumb: dune` picks which sticker.
+No `image:` and the post gets a colored block with a sticker on it. `thumb: dune` picks the sticker.
 
 ## stickers
 
-Real things from my life, cut out and tilted. They live in `assets/img/stickers/` and every one is listed in `_data/stickers.yml` with its real size, so the browser holds the space while it loads.
+Real things from my life, cut out and tilted. They live in `assets/img/stickers/` and each one is listed in `_data/stickers.yml` with its real pixel size, so the browser holds the space while it loads.
 
 ```yaml
 sticker: dune          # floats right, next to the first paragraph
-sticker_tilt: 5deg     # optional, overrides the angle in the data file
+sticker_tilt: 5deg     # optional, overrides the data file
 ```
 
-A name that isn't in the data file draws nothing, instead of a broken image.
+Ask for a sticker that isn't in the data file and nothing draws. Better than a broken image.
 
 ## the nav and the socials
 
-`_data/nav.yml` is the top nav, in order. A full `https://` url points off the site, anything else is relative.
+`_data/nav.yml` is the top nav, in order. A full `https://` url goes off site, anything else is relative.
 
-`_data/social.yml` is the footer row. Each entry names the `_config.yml` key that holds the handle, so deleting the key here or there drops the link. The icon is a Font Awesome class.
-
-## books
-
-`/books/` reads `_data/books.yml`. Three lines per book:
+`_data/social.yml` is the footer row. Two kinds of entry:
 
 ```yaml
-- title: "Neuromancer"
-  author: "William Gibson"
-  isbn: "9780441007462"
-  amazon: ""
+- field: instagram_username    # handle comes from _config.yml
+  title: instagram
+  icon: fa-brands fa-instagram
+  url: https://instagram.com/
+
+- title: rss                   # or just point it somewhere
+  icon: fa-solid fa-rss
+  href: /feed.xml
+  label: rss
 ```
 
-The Bookshop link is built from the ISBN plus my affiliate id in `_data/shop.yml`. `amazon` takes a full url, pasted in as is. Leave either one empty and that link just doesn't show. The search box filters on title and author, and the whole list still renders with JavaScript off.
+A `field` entry drops out if that key isn't in `_config.yml`. `icon` is a Font Awesome class.
 
 ## javascript
 
-There is barely any, and nothing breaks without it.
+Barely any, and nothing breaks without it.
 
-- `site.js`: off-site links open in a new tab, plus a hello in the console
-- `jack.js`: the light/dark toggle. Its pre-paint half is inline in `_includes/head.html`, because it has to run before the browser paints
-- `booksearch.js`: the filter on `/books/`
-- `reclist.js`: the sorter on the cyberpunk media list
+- `site.js` sends off-site links to a new tab and says hi in the console
+- `jack.js` is the light/dark toggle. Half of it is inline in `_includes/head.html` because it has to run before the browser paints, or you get a white flash on the way into dark
 
-The last two only load where they're used. A page asks for one in its front matter:
+A script that only one page needs lives in `assets/js/` and that page asks for it in front matter, so it loads there and nowhere else:
 
 ```yaml
-scripts: [reclist]
+scripts: [whatever]
 ```
 
 ## theme
 
-Dracula, two ways. Light is paper. Dark is a terminal: monospace everything, a `>` before the headings, a blinking cursor after my name. The whole palette is custom properties at the top of `style.css`, and `light-dark()` does the switching.
+Dracula, two ways. Light is an old science page: Georgia on off-white, justified copy, hard square edges, a flat band across the top. Dark is a terminal: Fira Sans, a `>` in front of the headings, a cursor blinking after my name. Monospace carries the small stuff in both, the nav and the dates and the tags. The palette is custom properties at the top of `style.css` and `light-dark()` picks the side, so every color is written once. Georgia ships on every machine, so light mode loads no font at all. There's a post about it.
 
 ## deploying
 
-Push to `main`. GitHub Pages builds it. `CNAME` points githugs.lol at it, which is also why `baseurl` stays empty even though this is a project page now.
+Push to `main`, GitHub Pages builds it. `CNAME` points githugs.lol here, which is why `baseurl` stays empty even though this is a project page now.
 
 xo kire

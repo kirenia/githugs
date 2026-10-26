@@ -10,6 +10,8 @@ redirect_from:
   # the old /scripts/ pages are gone, so their links land here
   - /scripts/
   - /scripts/writerdeck/
+image: /assets/img/posts/cyberdeck-build-guide.jpg
+image_alt: "A small Raspberry Pi screen full of red error messages and scrolling terminal text in the middle of a reboot."
 ---
 
 Free guide (woohoo). Takes about an hour if nothing fights you.

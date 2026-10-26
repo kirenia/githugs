@@ -92,7 +92,7 @@
     const section = document.createElement("section");
     section.className = "rec-group";
     if (label) {
-      // h2: these sit directly under the post's h1
+      // h2, since these sit under the post's h1
       const h = document.createElement("h2");
       h.className = "rec-group__title";
       h.textContent = label;

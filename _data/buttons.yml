@@ -1,0 +1,8 @@
+# the 88x31 buttons under take a button on the home page, in order.
+# each one is a .png with this name in assets/img/buttons.
+- file: githugs-88x31
+  alt: githugs
+- file: read-more-sci-fi-88x31
+  alt: Read more sci-fi
+- file: cyberpunk-88x31
+  alt: cyberpunk

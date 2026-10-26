@@ -1,4 +1,4 @@
-// two small things every page wants.
+// two small things every page wants
 (function () {
   // off-site links open in their own tab, and say so
   document.querySelectorAll('a[href^="http"]').forEach((a) => {

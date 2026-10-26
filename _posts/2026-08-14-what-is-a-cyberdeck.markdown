@@ -7,6 +7,8 @@ tags: [cyberdecks, sci-fi, books]
 sticker: neuromancer
 redirect_from:
   - /cyberdecks/
+image: /assets/img/posts/what-is-a-cyberdeck.jpg
+image_alt: "A hand holds a small Raspberry Pi touchscreen showing a terminal menu called deck, with options for notes, music, radio, clock, pomodoro, theme and shell, lit pink in a dim room."
 ---
 
 A cyberdeck is a small computer you build yourself, so you know exactly what is inside it and exactly what it does. The word comes straight out of cyberpunk fiction. In [Neuromancer](https://en.wikipedia.org/wiki/Neuromancer), console cowboys jack into the matrix on decks they trust with their lives, hardware they know down to the last chip. That is the whole appeal.

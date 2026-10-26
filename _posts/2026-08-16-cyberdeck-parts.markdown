@@ -7,6 +7,8 @@ tags: [cyberdecks, parts]
 sticker: pi
 redirect_from:
   - /cyberdecks/parts.html
+image: /assets/img/posts/cyberdeck-parts.jpg
+image_alt: "A small Raspberry Pi screen on a wooden desk shows a pixel art Nyan Cat flying over a rainbow, with cables running out of the case."
 ---
 
 Everything that goes into a deck and where to buy it, globally.

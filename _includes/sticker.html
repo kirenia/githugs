@@ -1,9 +1,10 @@
 {%- comment -%}
   usage: {% include sticker.html name="cat" class="sticker--right" %}
-  everything but `name` is optional and falls back to _data/stickers.yml.
-  a name that isn't in that file draws nothing rather than a broken image.
-  keep the img on one line: kramdown only treats it as html if the tag is
-  unbroken, otherwise it escapes it and prints the markup as text.
+  everything but `name` falls back to _data/stickers.yml. a name that isn't
+  in there draws nothing instead of a broken image.
+
+  keep the img on one line. kramdown only reads a tag as html if it's
+  unbroken, otherwise it escapes it and prints the markup.
 {%- endcomment -%}
 {%- assign meta = site.data.stickers | where: "name", include.name | first -%}
 {%- if meta -%}

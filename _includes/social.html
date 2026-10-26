@@ -5,6 +5,8 @@
     {%- if item.field and handle == nil -%}{%- continue -%}{%- endif -%}
     {%- if item.href -%}
       {%- assign href = item.href | relative_url -%}
+    {%- elsif item.full -%}
+      {%- assign href = handle -%}
     {%- else -%}
       {%- capture href -%}{{ item.url }}{{ handle | cgi_escape }}{{ item.suffix }}{%- endcapture -%}
     {%- endif -%}

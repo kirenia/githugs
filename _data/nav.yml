@@ -1,9 +1,5 @@
 # edit this list to change the top nav. `url` is relative to the site root.
 - title: home
   url: /
-- title: about
-  url: /about/
 - title: archive
   url: /archive/
-- title: omg
-  url: https://kire.omg.lol

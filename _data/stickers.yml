@@ -1,8 +1,7 @@
-# every sticker in assets/img/stickers/. `name` is what you write in front
-# matter (sticker: cat); `file` is the real filename, `nw`/`nh` its natural
-# pixel size so the browser reserves the right box while it loads, and `w` is an
-# optional display width. (do not name that key `size`: liquid reads .size on a
-# hash as its number of keys, so an entry without one would report a number.)
+# every sticker in assets/img/stickers/. `name` is what goes in front matter
+# (sticker: cat), `file` is the real filename, `nw`/`nh` its real pixel size so
+# the browser holds the space while it loads, `w` an optional display width.
+# do not rename `w` to `size`: liquid reads .size on a hash as a key count.
 - name: star
   file: star.png
   alt: a smiling star

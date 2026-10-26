@@ -4,8 +4,8 @@ title: Archive
 permalink: /archive/
 ---
 {%- comment -%}
-  every post, newest first, grouped by year. the home page only shows the
-  latest few and links here for the rest.
+  every post, newest first, by year. the home page shows the latest few
+  and links here.
 {%- endcomment -%}
 
 {%- assign years = site.posts | group_by_exp: "post", "post.date | date: '%Y'" -%}

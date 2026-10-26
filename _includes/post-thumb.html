@@ -1,12 +1,7 @@
 {%- comment -%}
-  the picture beside a post on the home page: a block in the post's colour
-  with one thing in it. in order of preference:
-    image:   the post's featured image, path from the site root. it fills
-             the block (cropped to fit) and also heads the post itself.
-    thumb:   a sticker name, for a post that wants a different one here
-    sticker: the sticker the post already uses
-  and the star if a post has none of them. decorative, so hidden from
-  screen readers; the title next to it is the link.
+  the picture beside a post on the home page. takes `image:` if the post
+  has one (cropped to fit), then `thumb:`, then `sticker:`, then the star.
+  decorative, so it's hidden from screen readers. the title is the link.
 
   usage: {% include post-thumb.html post=post %}
 {%- endcomment -%}

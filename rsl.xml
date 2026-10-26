@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- the licence robots.txt points at. no ai use of anything on this site,
+     regular search engines are fine -->
+<rsl xmlns="https://rslstandard.org/rsl">
+  <content url="https://githugs.lol/">
+    <license>
+      <permits type="usage">search</permits>
+      <prohibits type="usage">ai-all</prohibits>
+    </license>
+  </content>
+</rsl>

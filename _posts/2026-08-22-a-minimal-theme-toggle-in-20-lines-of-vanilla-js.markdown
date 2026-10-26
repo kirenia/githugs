@@ -5,6 +5,8 @@ date: 2026-08-22 14:00:00 -0600
 description: "My simple light/dark switch that survives with JavaScript turned off. It's less than 30 lines of vanilla JS. CSS is where the magic happens."
 tags: [javascript, css, indieweb]
 sticker: hollywood
+image: /assets/img/posts/theme-toggle.jpg
+image_alt: "A night vision camera shot of a cat glowing bright white against a dark grey room, staring wide eyed at the lens."
 ---
 
 When you **jack-in** this site goes from paper to terminal (monospace everything, Dracula colors, etc). **Jack-out** and you're in light mode. There's no library behind it's less than 30 lines of vanilla JavaScript and most of the work isn't in the JavaScript at all.
