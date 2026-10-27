@@ -1,0 +1,40 @@
+# posts anything new in _updates/ to bluesky. the work happens in
+# scripts/post-to-bluesky.mjs, which is plain node and knows nothing about
+# github, so this file is the only part that would need rewriting to run the
+# same thing on codeberg, tangled or a cron job somewhere else.
+
+name: post updates to bluesky
+
+on:
+  push:
+    branches: [main]
+    paths: ["_updates/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - name: post
+        env:
+          BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE }}
+          BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+        run: node scripts/post-to-bluesky.mjs
+
+      # so a re-run can never post the same thing twice
+      - name: remember what went out
+        run: |
+          git config user.name "githugs"
+          git config user.email "githugs@proton.me"
+          git add .bluesky-posted.json
+          git diff --staged --quiet || git commit -m "posted to bluesky [skip ci]"
+          git push

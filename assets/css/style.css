@@ -762,6 +762,9 @@ hr.rule { border: 0; border-top: 1px solid var(--line); }
 
 .tag::before { content: "#"; opacity: 0.55; }
 
+/* a status flag is a label, not a topic, so it loses the hash */
+.update__flag .tag::before { content: none; }
+
 /* hover inverts, so it never leans on colour alone (1.4.1) */
 .tag:hover {
   background: light-dark(var(--ink), var(--drac-fg));
@@ -821,6 +824,12 @@ hr.rule { border: 0; border-top: 1px solid var(--line); }
 }
 
 .update__image { display: block; width: 100%; height: auto; margin-top: 0.8rem; border-radius: 6px; }
+/* an update that already happened: still here to read, dimmed, and the tag
+   says so. the feed skips these. */
+.update--past { opacity: 0.72; }
+
+.update__flag { margin: 0 0 0.5rem; }
+
 .update__body { margin-top: 0.6rem; }
 .update__body > :first-child { margin-top: 0; }
 .update__body > :last-child { margin-bottom: 0; }

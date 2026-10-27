@@ -4,7 +4,7 @@ permalink: /updates.xml
 <?xml version="1.0" encoding="UTF-8"?>
 {%- comment -%}
   the announcement feed, the one the bridges read. feed.xml is still the blog.
-  newest first, drafts skipped, 25 at most. the filename is the guid, so
+  newest first, drafts and past ones skipped, 25 at most. the filename is the guid, so
   renaming a file posts it again and editing the title does not.
 {%- endcomment -%}
 {%- assign items = site.updates | sort: "date" | reverse -%}
@@ -17,7 +17,8 @@ permalink: /updates.xml
     <language>en-us</language>
     <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
     {%- for u in items limit: 25 -%}
-    {%- unless u.draft -%}
+    {%- comment -%} past ones stay on the page but never go back out the feed {%- endcomment -%}
+    {%- unless u.draft or u.past -%}
     {%- assign slug = u.path | split: "/" | last | split: "." | first -%}
     {%- if u.link -%}
       {%- assign target = u.link -%}

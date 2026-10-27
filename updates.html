@@ -4,8 +4,9 @@ title: Updates
 permalink: /updates/
 ---
 {%- comment -%}
-  every update, newest first. drafts stay off the page. each box carries the
-  filename as its id, so the feed can link straight to one.
+  every update, newest first. drafts stay off the page. an update marked
+  `past: true` still shows, wearing a past tag, and stops going out the feed.
+  each box carries the filename as its id, so the feed can link straight to one.
 {%- endcomment -%}
 {%- assign items = site.updates | sort: "date" | reverse -%}
 
@@ -21,7 +22,8 @@ permalink: /updates/
   {%- unless u.draft -%}
   {%- assign n = n | plus: 1 -%}
   {%- assign slug = u.path | split: "/" | last | split: "." | first -%}
-  <li class="update c{{ n | modulo: 6 | plus: 1 }}" id="{{ slug }}">
+  <li class="update c{{ n | modulo: 6 | plus: 1 }}{% if u.past %} update--past{% endif %}" id="{{ slug }}">
+    {%- if u.past %}<p class="update__flag"><span class="tag">past</span></p>{% endif %}
     <h2 class="update__title">
       {%- if u.link -%}<a href="{{ u.link }}">{{ u.title | escape }}</a>{%- else -%}{{ u.title | escape }}{%- endif -%}
     </h2>
