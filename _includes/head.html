@@ -10,6 +10,15 @@
 <link rel="canonical" href="{{ page.url | absolute_url }}">
 
 {%- comment -%}
+  mastodon checks this page for a rel=me pointing back at the profile. the
+  footer square does it too but a link up here survives any markup change
+  down there
+{%- endcomment %}
+{%- if site.mastodon_username %}
+<link rel="me" href="https://mastodon.social/@{{ site.mastodon_username }}">
+{%- endif %}
+
+{%- comment -%}
   what this page looks like when someone shares it. a post with `image:`
   in its front matter gets the big preview card.
 {%- endcomment %}

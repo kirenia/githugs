@@ -1,29 +1,6 @@
 <footer class="site-footer h-card">
   <data class="u-url" href="{{ '/' | relative_url }}"></data>
 
-  {%- if site.omg_address -%}
-  <p class="footer-status wrap" hidden data-omg-status></p>
-  <script>
-    // the status comes from omg.lol at page load, so posting a new one there
-    // updates the site without a rebuild. stays hidden if anything goes wrong.
-    (function () {
-      var el = document.querySelector("[data-omg-status]");
-      if (!el || !window.fetch) return;
-      fetch("https://api.omg.lol/address/{{ site.omg_address }}/statuses/")
-        .then(function (r) { return r.json(); })
-        .then(function (d) {
-          var list = d && d.response && d.response.statuses;
-          if (!list || !list.length) return;
-          var s = list[0];
-          // textContent, not innerHTML. this is text off the network
-          el.textContent = (s.emoji ? s.emoji + " " : "") + s.content;
-          el.hidden = false;
-        })
-        .catch(function () {});
-    })();
-  </script>
-  {%- endif -%}
-
   <div class="wrap">
     {%- if site.footer_quote -%}
     <blockquote class="footer-quote">

@@ -30,6 +30,7 @@ url: "https://githugs.lol" # the domain in CNAME, not the github.io one
 
 instagram_username: githugs_
 bluesky_username: githugs.lol
+mastodon_username: githugs
 patreon_username: githugs
 github_username: kirenia
 tiktok_username: githugs
@@ -39,7 +40,7 @@ discord_invite: https://discord.gg/NtZcphhA3
 discord_guild_id: 1562965460541112380
 # upscrolled_url: https://upscrolled.com/@githugs  # off the footer for now
 
-# the footer status line is pulled live from this omg.lol address
+# the omg.lol square in the footer links to this address
 omg_address: kire
 
 # no theme gem: the layouts includes and CSS in this repo are the theme.

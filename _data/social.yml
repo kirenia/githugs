@@ -2,14 +2,19 @@
 # so dropping the key either place drops the link. `icon` is a font awesome
 # class. omg.lol's prami heart comes from their own font. `full: true` means
 # the config value is a whole link used as is.
-# the dev site shows only these five. email and rss are left off on purpose.
-# email is in the hello and rss is in the bar. tiktok youtube and omg.lol are
-# parked at the bottom of this file ready to switch on
+# seven live now. email and rss are left off on purpose. email is in the hello
+# and rss is in the bar. tiktok and youtube are parked at the bottom of this
+# file ready to switch on
 - field: bluesky_username
   title: bluesky
   class: soc soc--bs
   icon: fa-brands fa-bluesky
   url: https://bsky.app/profile/
+- field: mastodon_username
+  title: mastodon
+  class: soc soc--mast
+  icon: fa-brands fa-mastodon
+  url: https://mastodon.social/@
 - field: github_username
   title: github
   class: soc soc--gh
@@ -31,6 +36,12 @@
   class: soc soc--ig
   icon: fa-brands fa-instagram
   url: https://instagram.com/
+- field: omg_address
+  title: omg.lol
+  class: soc soc--omg
+  icon: fa-solid fa-heart
+  url: https://
+  suffix: .omg.lol
 
 # ---------------------------------------------------------------------
 # parked. uncomment a block to put it back in the footer row. tiktok needs
@@ -47,13 +58,6 @@
 #   class: soc soc--yt
 #   icon: fa-brands fa-youtube
 #   url: https://youtube.com/@
-#
-# - field: omg_address
-#   title: omg.lol
-#   class: soc soc--omg
-#   icon: fa-solid fa-heart
-#   url: https://
-#   suffix: .omg.lol
 #
 # - title: rss
 #   class: soc soc--rss

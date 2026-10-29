@@ -1325,18 +1325,6 @@ hr.rule { border: 0; border-top: 1px solid var(--line); }
 }
 
 /* the omg.lol status line: one ambient line above the footer proper */
-.footer-status {
-  margin: 0 auto 1rem;
-  font-family: var(--body-font);
-  font-size: var(--fs-caption);
-  line-height: 1.6;
-  color: var(--dim);
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-}
-
-.footer-status[hidden] { display: none; }
-
 .site-footer p { margin: 0; }
 .site-footer a { color: var(--fg); }
 .site-footer a:hover { color: var(--accent); }
@@ -1536,7 +1524,9 @@ main:focus { outline: none; }
 
 /* the socials: each one in its own brand colour flooding on hover.
    square tiles with a hard edge like the connect row on the links page. */
-.social-media-list { gap: 0.6rem; margin-left: 0; flex-wrap: nowrap; }
+/* seven tiles now. nowrap used to be safe at five but 7x38 plus the gaps
+   runs past a 320px screen so they wrap instead */
+.social-media-list { gap: 0.6rem; margin-left: 0; flex-wrap: wrap; }
 
 .social-media-list a.soc {
   width: 38px;
@@ -1560,6 +1550,7 @@ main:focus { outline: none; }
 .social-media-list a.soc--tt { color: var(--fg); }
 .social-media-list a.soc--yt { color: #ff0033; }
 .social-media-list a.soc--dc { color: #5865f2; }
+.social-media-list a.soc--mast { color: #6364ff; }
 .social-media-list a.soc--gh { color: var(--fg); }
 .social-media-list a.soc--pat { color: var(--fg); }
 .social-media-list a.soc--sc { color: #b9a800; }
@@ -1574,6 +1565,7 @@ main:focus { outline: none; }
 .social-media-list a.soc--tt:hover, .social-media-list a.soc--tt:focus-visible { background: #000000; }
 .social-media-list a.soc--yt:hover, .social-media-list a.soc--yt:focus-visible { background: #ff0033; }
 .social-media-list a.soc--dc:hover, .social-media-list a.soc--dc:focus-visible { background: #5865f2; }
+.social-media-list a.soc--mast:hover, .social-media-list a.soc--mast:focus-visible { background: #6364ff; }
 .social-media-list a.soc--gh:hover, .social-media-list a.soc--gh:focus-visible { background: #0c0612; }
 .social-media-list a.soc--pat:hover, .social-media-list a.soc--pat:focus-visible { background: #0c0612; }
 .social-media-list a.soc--sc:hover, .social-media-list a.soc--sc:focus-visible { background: #fffc00; color: #0c0612; }
