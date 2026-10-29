@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Dune's AI Lore, and Where to Read It Yourself"
-description: "Every line I quoted in the Dune video, what page it lives on, and the one thing I left out on purpose."
+description: "Every line I quoted in the Dune video, what page it's on, and the one thing I left out on purpose."
 tags: [dune, cyberpunk]
 sticker: dune
 ---

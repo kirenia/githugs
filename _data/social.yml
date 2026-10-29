@@ -1,27 +1,63 @@
-# the footer row, in order. `field` names the _config.yml key with the handle,
+# the footer row in order. `field` names the _config.yml key with the handle 
 # so dropping the key either place drops the link. `icon` is a font awesome
 # class. omg.lol's prami heart comes from their own font. `full: true` means
-# the config value is a whole link, used as is.
-# the dev site shows only these five. tiktok, omg.lol, email and rss were
-# taken off here on purpose: email is in the hello, rss is in the header.
+# the config value is a whole link used as is.
+# the dev site shows only these five. email and rss are left off on purpose.
+# email is in the hello and rss is in the bar. tiktok youtube and omg.lol are
+# parked at the bottom of this file ready to switch on
 - field: bluesky_username
   title: bluesky
+  class: soc soc--bs
   icon: fa-brands fa-bluesky
   url: https://bsky.app/profile/
 - field: github_username
   title: github
+  class: soc soc--gh
   icon: fa-brands fa-github
   url: https://github.com/
 - field: patreon_username
   title: patreon
+  class: soc soc--pat
   icon: fa-brands fa-patreon
   url: https://www.patreon.com/
 - field: discord_invite
   title: discord
+  class: soc soc--dc
   icon: fa-brands fa-discord
   full: true
   label: discord
 - field: instagram_username
   title: instagram
+  class: soc soc--ig
   icon: fa-brands fa-instagram
   url: https://instagram.com/
+
+# ---------------------------------------------------------------------
+# parked. uncomment a block to put it back in the footer row. tiktok needs
+# tiktok_username in _config.yml and youtube needs youtube_handle
+#
+# - field: tiktok_username
+#   title: tiktok
+#   class: soc soc--tt
+#   icon: fa-brands fa-tiktok
+#   url: https://tiktok.com/@
+#
+# - field: youtube_handle
+#   title: youtube
+#   class: soc soc--yt
+#   icon: fa-brands fa-youtube
+#   url: https://youtube.com/@
+#
+# - field: omg_address
+#   title: omg.lol
+#   class: soc soc--omg
+#   icon: fa-solid fa-heart
+#   url: https://
+#   suffix: .omg.lol
+#
+# - title: rss
+#   class: soc soc--rss
+#   icon: fa-solid fa-square-rss
+#   href: /feed.xml
+#   same_tab: true
+#   label: rss

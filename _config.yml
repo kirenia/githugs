@@ -1,12 +1,11 @@
-# site settings. jekyll reads this once at startup, so restart the server
+# site settings. jekyll reads this once at startup so restart the server
 # after touching anything in here.
 
 title: githugs(lol)
 email: githugs@proton.me
 
-# the line under the name on the home page, and the name in the copyright
+# the name in the copyright line
 author: Kire Góngora
-masthead_by: Kire Góngora · Software Engineer
 description: >-
   Code, notes, and whatever else I'm building right now.
 
@@ -18,8 +17,8 @@ footer_quote_by: Tim Berners-Lee
 footer_quote_cite: "This Is for Everyone: The Unfinished Story of the World Wide Web"
 footer_quote_year: 2025
 
-# without this, dates render in the build machine's timezone: mountain on
-# my laptop, UTC on github pages, so an evening post shows the wrong day
+# without this dates render in the build machine's timezone: mountain on
+# my laptop UTC on github pages so an evening post shows the wrong day
 timezone: America/Boise
 
 baseurl: "" # user pages (kirenia.github.io) are served from the root
@@ -35,17 +34,19 @@ patreon_username: githugs
 github_username: kirenia
 tiktok_username: githugs
 # snapchat_username: cyberpunkmami  # off the footer for now
-# full links, used as is
-discord_invite: https://discord.gg/xAbmz2pJt
+# full links used as is
+discord_invite: https://discord.gg/NtZcphhA3
+discord_guild_id: 1562965460541112380
 # upscrolled_url: https://upscrolled.com/@githugs  # off the footer for now
 
 # the footer status line is pulled live from this omg.lol address
 omg_address: kire
 
-# no theme gem: the layouts, includes and CSS in this repo are the theme.
+# no theme gem: the layouts includes and CSS in this repo are the theme.
 plugins:
   - jekyll-feed
   - jekyll-redirect-from
+  - jekyll-sitemap
 
 permalink: /:year/:month/:day/:title/
 
@@ -60,8 +61,8 @@ defaults:
     values:
       layout: post
 
-# short announcements. they stay out of the blog and out of feed.xml, and go
-# out /updates.xml instead, for bluesky, tumblr and whatever else is reading
+# short announcements. they stay out of the blog and out of feed.xml and go
+# out /updates.xml instead for bluesky mastodon and whatever else is reading
 collections:
   updates:
     output: false

@@ -1,5 +1,5 @@
-// jack in to the terminal, jack out to daylight
-// the pre-paint half of this is inline in _includes/head.html, because it has to run before the browser paints anything.
+// jack in to the terminal jack out to daylight
+// the pre-paint half of this is inline in _includes/head.html because it has to run before the browser paints anything.
 (function () {
   const btn = document.querySelector("[data-theme-toggle]");
   if (!btn) return;

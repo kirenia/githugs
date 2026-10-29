@@ -3,7 +3,7 @@
 <meta name="theme-color" content="#bd93f9">
 <title>{% if page.title and page.title != site.title %}{{ page.title | escape }} · {{ site.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
 <!-- ask ai tools not to train on or reuse this site. robots.txt and rsl.xml
-     do the main work, these cover tools that read the page instead -->
+     do the main work these cover tools that read the page instead -->
 <meta name="robots" content="noai, noimageai, noarchive">
 <meta name="tdm-reservation" content="1">
 <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
@@ -29,13 +29,14 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600;700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,600;0,14..32,700;1,14..32,400&family=Fira+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
-<link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Fira+Sans:ital,wght@0,400;0,500;0,700;1,400&family=JetBrains+Mono:ital,wght@0,400;0,600;0,800;1,400&family=Fira+Code:wght@400;500;700&display=swap">
+<link rel="stylesheet" id="icon-css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+<link rel="stylesheet" id="theme-css" href="{{ '/assets/css/style.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/zen.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 <link rel="icon" type="image/png" href="{{ '/assets/img/stickers/star.png' | relative_url }}">
 <link rel="apple-touch-icon" href="{{ '/assets/img/stickers/star.png' | relative_url }}">
 {% feed_meta %}
-<!-- the announcement feed, separate from the blog's -->
+<!-- the announcement feed separate from the blog's -->
 <link rel="alternate" type="application/rss+xml" title="{{ site.title | escape }} updates" href="{{ '/updates.xml' | absolute_url }}">
 
 <script>
@@ -44,6 +45,22 @@
     try {
       var t = localStorage.getItem("theme");
       if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+    } catch (e) {}
+
+    // zen mode: switch the whole theme off and leave plain html behind.
+    // done here, before paint, so the styled page never flashes first.
+    try {
+      if (localStorage.getItem("zen") !== "on") return;
+      document.documentElement.dataset.zen = "on";
+      document.write(
+        '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap">'
+      );
+      document.addEventListener("DOMContentLoaded", function () {
+        var theme = document.getElementById("theme-css");
+        var icons = document.getElementById("icon-css");
+        if (theme) theme.disabled = true;
+        if (icons) icons.disabled = true;
+      });
     } catch (e) {}
   })();
 </script>

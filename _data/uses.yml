@@ -1,0 +1,101 @@
+# the "what i use" list on /about. each group is a block on the page in the
+# order listed here. an item needs name. url and note are both optional
+
+- title: Desk
+  items:
+    - name: SHW 55 x 28 electric standing desk, maple
+      url: https://www.amazon.com/dp/B0C4KJ16DM
+    - name: SIHOO ergonomic chair
+      url: https://www.amazon.com/dp/B07Q3TGL7M
+    - name: Two Pixio Wave 27 inch 4K 160Hz monitors, mint green
+    - name: Pixio PS1D Wave dual monitor stand, mint green
+    - name: CalDigit TS5 Thunderbolt 5 dock
+    - name: Logitech Lift
+    - name: Apple Magic Keyboard
+    - name: Hollow Knight mouse pad
+      url: https://www.amazon.com/dp/B0CDVMCG62
+
+- title: Coding
+  items:
+    - name: VS Code
+      url: https://code.visualstudio.com/
+      note: bongo cat sits in the status bar and that is not optional
+    - name: Zed
+      url: https://zed.dev/
+      note: "the closest thing to [Atom](https://github.com/atom/atom) (rip old friend)"
+    - name: Dracula Pro
+      url: https://draculatheme.com/pro
+      note: my theme in everything that will take it
+    - name: Fira Code
+      url: https://github.com/tonsky/FiraCode
+    - name: Prettier
+      url: https://prettier.io/
+
+- title: Apps
+  items:
+    - name: Proton Mail
+      url: https://proton.me/mail
+    - name: Proton Pass
+      url: https://proton.me/pass
+    - name: Proton Authenticator
+      url: https://proton.me/authenticator
+    - name: Proton VPN
+      url: https://proton.me/vpn
+    - name: Firefox
+      url: https://www.mozilla.org/firefox/
+    - name: Tor Browser
+      url: https://www.torproject.org/
+    - name: Brave
+      url: https://brave.com/
+    - name: Terminal
+    - name: Notion
+      url: https://www.notion.so/
+    - name: Postman
+      url: https://www.postman.com/
+    - name: MongoDB Compass
+    - name: Raspberry Pi Imager
+      url: https://www.raspberrypi.com/software/
+    - name: Discord
+      url: https://discord.com/
+    - name: Slack
+      url: https://slack.com/
+
+- title: Services
+  items:
+    - name: GitHub
+      url: https://github.com/kirenia
+    - name: Jekyll
+      url: https://jekyllrb.com/
+    - name: GitHub Actions
+      url: https://github.com/features/actions
+    - name: Cloudflare Pages
+      url: https://pages.cloudflare.com/
+    - name: Bluesky
+      url: https://bsky.app/profile/githugs.lol
+    - name: Patreon
+      url: https://www.patreon.com/githugs
+      note: how the book club runs
+    - name: omg.lol
+      url: https://omg.lol/
+      note: the best thing on the indie web right now
+    - name: Neocities
+      url: https://kire.neocities.org
+    - name: Bookshop.org
+      url: https://bookshop.org/shop/githugs
+      note: books from a shop that is not amazon
+
+- title: Podcast
+  items:
+    - name: DJI Mic Mini
+    - name: Apple EarPods
+    - name: iPhone 17 Pro
+    - name: Riverside
+      url: https://riverside.fm/
+
+- title: Reading
+  items:
+    - name: Libby
+      url: https://libbyapp.com/
+      note: free library books on my phone
+    - name: My actual library
+      note: i love my library and you should love yours

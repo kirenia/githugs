@@ -28,17 +28,40 @@
     {%- if site.footer_quote -%}
     <blockquote class="footer-quote">
       <p>{{ site.footer_quote | escape }}</p>
-      {%- comment -%} a <p>, not a <footer>. a second footer reads as a second page footer to assistive tech {%- endcomment %}
+      {%- comment -%} a <p> not a <footer>. a second footer reads as a second page footer to assistive tech {%- endcomment %}
       <p class="footer-quote__by">{{ site.footer_quote_by | escape }}{% if site.footer_quote_cite %}, <cite>{{ site.footer_quote_cite | escape }}</cite>{% endif %}{% if site.footer_quote_year %} ({{ site.footer_quote_year }}){% endif %}</p>
     </blockquote>
     {%- else -%}
     <p>{{ site.description | escape }}</p>
     {%- endif -%}
 
+    {%- if site.data.pay -%}
+    <div class="footer-pay">
+      {%- for jar in site.data.pay %}
+      <a class="pay-button {{ jar.class }}" href="{{ jar.url }}"{% if jar.aria %} aria-label="{{ jar.aria | escape }}"{% endif %} rel="noopener noreferrer" target="_blank">
+        {%- if jar.svg %}{% include {{ jar.svg | append: '.svg' }} %}{% else %}<i class="{{ jar.icon }}" aria-hidden="true"></i>{% endif %}
+        {%- if jar.label != "" %}<span>{{ jar.label | escape }}</span>{% endif %}
+      </a>
+      {%- endfor %}
+    </div>
+    {%- endif -%}
+
     <div class="footer-cols">
-      {%- comment -%} no visible heading, the icons say it. the label is for screen readers {%- endcomment %}
+      {%- comment -%} no visible heading the icons say it. the label is for screen readers {%- endcomment %}
       <nav aria-label="githugs on other sites">
         {% include social.html %}
+      </nav>
+
+      {%- comment -%} the pages the four chips in the bar have no room for {%- endcomment %}
+      <nav class="footer-nav" aria-label="more pages">
+        <ul>
+          <li><a href="{{ '/' | relative_url }}">home</a></li>
+          <li><a href="{{ '/about/' | relative_url }}">about</a></li>
+          <li><a href="{{ '/archive/' | relative_url }}">archive</a></li>
+          <li><a href="{{ '/updates/' | relative_url }}">updates</a></li>
+          <li><a href="{{ '/tags/' | relative_url }}">tags</a></li>
+          <li><a href="{{ '/feed.xml' | relative_url }}">rss</a></li>
+        </ul>
       </nav>
     </div>
 

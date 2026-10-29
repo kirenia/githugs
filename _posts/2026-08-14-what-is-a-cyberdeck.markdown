@@ -43,4 +43,4 @@ Same hardware every time, different software on the card. These links go to the 
 - **focusdeck** - coming soon
 - **stellardeck** - coming soon
 
-If this helped, consider [buying me a coffee](https://ko-fi.com/githugs). It keeps me going <3
+If this helped, consider [buying me a coffee](https://buy.stripe.com/cNi6oHbql47h95Wb16efC00). It keeps me going <3

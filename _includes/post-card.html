@@ -1,6 +1,6 @@
 {%- comment -%}
-  one row in the post list. no picture here: only the featured post gets one.
-  `index` picks one of the six accents, which colours the box and its tags.
+  one box in the post list. no picture here: only the featured post gets one.
+  `index` picks one of the six accents which colours the box and its tags.
 {%- endcomment -%}
 {%- assign color_index = include.index | default: 0 | modulo: 6 | plus: 1 -%}
 <li class="post-row c{{ color_index }}">

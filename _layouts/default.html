@@ -5,7 +5,7 @@
 </head>
 <body>
   <a class="skip-link" href="#content">skip to content</a>
-  {% include header.html %}
+  {% include bar.html %}
 
   <main class="wrap" id="content" tabindex="-1">
     {{ content }}
@@ -19,7 +19,7 @@
 
   {%- comment -%}
     a page that needs its own script names it in front matter:
-    scripts: [whatever]  loads /assets/js/whatever.js, that page only.
+    scripts: [whatever]  loads /assets/js/whatever.js that page only.
   {%- endcomment -%}
   {%- for name in page.scripts %}
   <script src="{{ '/assets/js/' | append: name | append: '.js' | relative_url }}" defer></script>

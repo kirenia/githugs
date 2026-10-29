@@ -4,7 +4,7 @@
   in there draws nothing instead of a broken image.
 
   keep the img on one line. kramdown only reads a tag as html if it's
-  unbroken, otherwise it escapes it and prints the markup.
+  unbroken otherwise it escapes it and prints the markup.
 {%- endcomment -%}
 {%- assign meta = site.data.stickers | where: "name", include.name | first -%}
 {%- if meta -%}

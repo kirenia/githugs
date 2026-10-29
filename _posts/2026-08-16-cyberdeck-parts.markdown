@@ -63,8 +63,6 @@ Wall power to start with, a battery when you want to cut the cord.
 
 ## Where to Buy
 
-{: #where-to-buy}
-
 Search the same part names at whichever of these ships to you. Local first, always.
 
 ### United States

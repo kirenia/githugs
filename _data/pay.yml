@@ -1,0 +1,9 @@
+# the tip jars in the footer. in _data rather than _config.yml so jekyll
+# picks up an edit without a server restart. drop an entry to drop a button
+- label: buy me a coffee
+  url: https://buy.stripe.com/cNi6oHbql47h95Wb16efC00
+  class: pay-button--coffee
+
+- label: venmo me
+  url: https://account.venmo.com/u/githugs
+  class: pay-button--venmo

@@ -14,7 +14,7 @@ image: /assets/img/posts/cyberdeck-build-guide.jpg
 image_alt: "A small Raspberry Pi screen full of red error messages and scrolling terminal text in the middle of a reboot."
 ---
 
-Free guide (woohoo). Takes about an hour if nothing fights you.
+Free guide (woohoo). This gets you from a blank memory card to a Pi you can talk to, in about half an hour if nothing fights you. Everything after that is linked out to the people who actually maintain it.
 
 <div class="note" markdown="1">
 You'll need the hardware from the [parts list]({% post_url 2026-08-16-cyberdeck-parts %}) and a laptop on the same wifi. This page is the hardware; the software that makes it a *deck* is the last step. No coding experience needed - you'll be copying and pasting.
@@ -22,9 +22,7 @@ You'll need the hardware from the [parts list]({% post_url 2026-08-16-cyberdeck-
 
 1. [Flash the OS](#flash)
 2. [First Boot](#first-boot)
-3. [The Screen](#screen)
-4. [Troubleshooting](#trouble)
-5. [Pick a Soul](#software)
+3. [Where to go next](#next)
 
 ## 1. Flash the OS
 
@@ -66,56 +64,26 @@ The first time, it'll ask if you're sure you want to connect - type `yes`. Then 
 **"Connection refused"?** Good news, weirdly. That means the Pi is on the network and just isn't done setting up. Wait another minute and try again. If the name won't resolve at all, find the Pi's IP address in your router's device list and use that instead: `ssh username@192.168.1.xxx`.
 </div>
 
-## 3. The Screen
+## 3. Where to go next
 
-{: #screen}
-
-Two kinds of small screen, two paths.
-
-**HDMI screens just work.** Plug it in before you power on and the Pi finds it - nothing to install or configure. This is the path I recommend for every new build.
-
-**SPI screens** (the ones that mount on the GPIO pins, like the Hosyond 3.5") are slower and need a driver installed once. Paste these lines one at a time:
-
-```
-git clone https://github.com/goodtft/LCD-show.git
-cd LCD-show
-chmod +x LCD35-show
-sudo ./LCD35-show
-```
-
-The Pi reboots and the little screen comes alive. Under the hood a helper called `fbcp` mirrors the main framebuffer (`fb0`) onto the SPI panel. You don't need to touch it, but knowing it exists saves you a confused hour later.
-
-<div class="note" markdown="1">
-SPI quirks, so you don't debug them for nothing: video playback needs `mplayer -vo fbdev2` (`mpv` can't render to the framebuffer, hard limit, not your config), and a faint blue tint is a known `fbcp` thing. Cosmetic, harmless, weirdly grows on you. Fast-redraw stuff like video is where SPI suffers; for text it's completely fine.
-</div>
-
-## 4. Troubleshooting
-
-{: #trouble}
+{: #next}
 
 {% include sticker.html name="duck" class="sticker--right" %}
 
-The stuff no tutorial warned me about.
+You have a working computer on your wifi. What it becomes next is up to the software and the hardware you bolt on, and all of that is better documented by the people who build it than it would be by me.
 
-- **Scary SSH warning after reflashing.** "REMOTE HOST IDENTIFICATION HAS CHANGED" in all-caps is your laptop remembering the old card's identity, not an attack. Run `ssh-keygen -R yourdeck.local`, reconnect, accept the new fingerprint. Only worry if you see this when you _haven't_ reflashed.
-- **404 Not Found during an install.** The package mirror moved things mid-sync. Run `sudo apt update` and re-run whatever failed. Fixes it basically every time.
-- **YouTube tools broken.** Install `yt-dlp` through pip, not apt. The apt version is ancient and YouTube breaks it monthly.
-- **Old tutorials disagree with what you see.** Pi OS moves fast: menus get reorganized, config files move. Trust the error message and the current docs over a 2022 blog post. This guide gets re-tested every time I build a new deck.
+**The screen.** HDMI screens need nothing, plug them in before you power on and the Pi finds them. SPI screens (the ones that sit on the GPIO pins) need a driver once: [goodtft/LCD-show](https://github.com/goodtft/LCD-show) covers the Hosyond and most clones, and [Waveshare's wiki](https://www.waveshare.com/wiki/Main_Page) covers theirs.
 
-## 5. Pick a Soul
+**The battery.** [PiSugar's docs](https://docs.pisugar.com/) walk through mounting it and the power management, which is fiddly enough that you want their version and not mine.
 
-{: #software}
+**The soul.** The deck is the hardware, but what it does comes from what you install last. These are other people's projects, with their own install steps and their own source. Read what you are about to run before you run it, that is the whole point of it not being a mystery binary.
 
-The deck is the hardware, but the soul lives on the SD card. Everything above is the same for every deck here; the software you install last is what decides what it becomes.
-
-**You're not done yet - this is the fun part.** Pick one below and follow its instructions; that's where your deck actually comes to life.
-
-<div class="note" markdown="1">
-These are other people's projects, and their own sites have the install steps and the source. Read what you're about to run before you run it - that's the whole point of it not being a mystery binary.
-</div>
-
-- [FocusWriter](https://gottcode.org/focuswriter/) by Graeme Gott - focused writing app, no cloud
+- [FocusWriter](https://gottcode.org/focuswriter/) by Graeme Gott, a focused writing app with no cloud in it
 - **focusdeck** - coming soon
 - **stellardeck** - coming soon
 
-Before the software goes on, set up the rest of the hardware: to start, plug in a normal USB keyboard (Bluetooth pairing comes later, on the deck's own page). [Add the PiSugar battery](https://docs.pisugar.com/docs/product-wiki/battery/pisugar3/pisugar-3-series) to cut the cord, swap in your own colors, put it in a cool case. It's your deck now. Share your build with me if you'd like!
+**The case.** Swap in your own colors, print or build something, make it ugly in a way you like. It's your deck now.
+
+<div class="note" markdown="1">
+Every deck I build throws something new at me, and I write all of it down: the troubleshooting I've collected, the stuff no tutorial warns you about, and the full build for each deck as I finish it. That goes to the [book club and the cyberdeck folks on Patreon](https://joy.githugs.lol), which is free to join. Come hang out, and show me what you built.
+</div>

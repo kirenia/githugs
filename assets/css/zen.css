@@ -1,0 +1,293 @@
+---
+# zen mode. everything here is scoped to html[data-zen="on"] and the main
+# stylesheet is switched off in the browser when zen is on. what is left is
+# close to plain html. inter for reading and a serif for headings
+---
+
+html[data-zen="on"] {
+  --zen-ink: #1b1b1f;
+  --zen-dim: #5b5b66;
+  --zen-rule: #dcdce3;
+  /* a control's edge is how you find it so it clears 3:1 (1.4.11) */
+  --zen-edge: #6e6e78;
+  --zen-link: #2f5ea8;
+  --zen-bg: #fdfdfb;
+
+  background: var(--zen-bg);
+  color: var(--zen-ink);
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  font-size: 18px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-color-scheme: dark) {
+  html[data-zen="on"]:not([data-theme="light"]) {
+    --zen-ink: #e8e8ea;
+    --zen-dim: #9a9aa6;
+    --zen-rule: #2e2e36;
+    --zen-edge: #8f8f9b;
+    --zen-link: #8ab4f8;
+    --zen-bg: #15151a;
+  }
+}
+
+html[data-zen="on"][data-theme="dark"] {
+  --zen-ink: #e8e8ea;
+  --zen-dim: #9a9aa6;
+  --zen-rule: #2e2e36;
+  --zen-edge: #8f8f9b;
+  --zen-link: #8ab4f8;
+  --zen-bg: #15151a;
+}
+
+html[data-zen="on"] body {
+  max-width: 38rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 5rem;
+  background: var(--zen-bg);
+  color: var(--zen-ink);
+  font: inherit;
+}
+
+html[data-zen="on"] h1,
+html[data-zen="on"] h2,
+html[data-zen="on"] h3,
+html[data-zen="on"] h4,
+html[data-zen="on"] .page-title,
+html[data-zen="on"] .section-title,
+html[data-zen="on"] .rec-group__title {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1.2;
+  color: var(--zen-ink);
+}
+
+html[data-zen="on"] h1,
+html[data-zen="on"] .page-title { font-size: 2rem; margin: 0 0 0.6rem; }
+html[data-zen="on"] h2 { font-size: 1.5rem; margin: 2.2rem 0 0.5rem; }
+html[data-zen="on"] h3 { font-size: 1.2rem; margin: 1.8rem 0 0.4rem; }
+
+html[data-zen="on"] p,
+html[data-zen="on"] li,
+html[data-zen="on"] dd,
+html[data-zen="on"] dt { font-family: inherit; }
+
+html[data-zen="on"] a { color: var(--zen-link); }
+
+html[data-zen="on"] pre,
+html[data-zen="on"] code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9em;
+}
+
+html[data-zen="on"] pre {
+  padding: 0.9rem 1rem;
+  overflow-x: auto;
+  background: color-mix(in srgb, var(--zen-ink) 6%, var(--zen-bg));
+  border-radius: 4px;
+}
+
+html[data-zen="on"] img { max-width: 100%; height: auto; }
+
+html[data-zen="on"] blockquote {
+  margin: 1.5rem 0;
+  padding-left: 1rem;
+  border-left: 3px solid var(--zen-rule);
+  color: var(--zen-dim);
+}
+
+html[data-zen="on"] hr { border: 0; border-top: 1px solid var(--zen-rule); }
+
+/* the furniture that only makes sense with the full theme on */
+html[data-zen="on"] .hq,
+html[data-zen="on"] .sticker,
+html[data-zen="on"] .sticker-stack,
+html[data-zen="on"] .post-thumb,
+html[data-zen="on"] .home__mark,
+html[data-zen="on"] .banner,
+html[data-zen="on"] .footer-quote,
+html[data-zen="on"] .take-a-button,
+html[data-zen="on"] .post-edit,
+html[data-zen="on"] .fa-solid,
+html[data-zen="on"] .fa-brands { display: none; }
+
+/* the nav and the lists as plain rows */
+/* the nav keeps its spot in the top right the way it sits in neon */
+html[data-zen="on"] .bar {
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+  justify-content: flex-end;
+  margin: 0 0 2.5rem;
+  padding: 0 0 0.75rem;
+  border-bottom: 1px solid var(--zen-rule);
+}
+
+html[data-zen="on"] .bar__right { display: flex; gap: 1rem; }
+
+html[data-zen="on"] .chip {
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: var(--zen-link);
+  font: inherit;
+  font-size: 0.95rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+html[data-zen="on"] .chip[aria-current="page"] { color: var(--zen-dim); text-decoration: none; }
+
+html[data-zen="on"] .post-list,
+html[data-zen="on"] .social-media-list,
+html[data-zen="on"] .recs,
+html[data-zen="on"] .sorter__buttons {
+  display: block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+html[data-zen="on"] .post-row,
+html[data-zen="on"] .feature {
+  display: block;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: inherit;
+  transform: none;
+}
+
+html[data-zen="on"] .post-row::after,
+html[data-zen="on"] .feature::after { content: none; }
+
+/* meta lines: a date and its tags spaced out as words */
+html[data-zen="on"] .post-meta,
+html[data-zen="on"] .post-row__meta,
+html[data-zen="on"] .post-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.75rem;
+  margin: 0 0 1.25rem;
+  color: var(--zen-dim);
+  font-size: 0.9rem;
+}
+
+html[data-zen="on"] .post-row__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.75rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+html[data-zen="on"] .tag,
+html[data-zen="on"] .button {
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  color: var(--zen-link);
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+html[data-zen="on"] .tag::before { content: "#"; }
+
+html[data-zen="on"] .sorter { display: block; margin: 0 0 1rem; }
+html[data-zen="on"] .sorter__label { font: inherit; font-size: 0.9rem; color: var(--zen-dim); text-transform: none; letter-spacing: 0; }
+
+html[data-zen="on"] .sorter__search,
+html[data-zen="on"] .sorter button {
+  min-height: 0;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid var(--zen-edge);
+  border-radius: 4px;
+  background: var(--zen-bg);
+  box-shadow: none;
+  color: var(--zen-ink);
+  font: inherit;
+  font-size: 0.9rem;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+html[data-zen="on"] .sorter button { margin: 0 0.4rem 0.4rem 0; }
+html[data-zen="on"] .sorter button[aria-pressed="true"] { background: color-mix(in srgb, var(--zen-ink) 10%, var(--zen-bg)); font-weight: 600; }
+
+html[data-zen="on"] .rec { margin: 0 0 0.6rem; padding: 0; }
+html[data-zen="on"] .rec dd { color: var(--zen-dim); font-size: 0.9rem; }
+
+html[data-zen="on"] .site-footer {
+  margin: 4rem 0 0;
+  padding: 1rem 0 0;
+  border-top: 1px solid var(--zen-rule);
+  color: var(--zen-dim);
+  font-size: 0.9rem;
+}
+
+html[data-zen="on"] .social-media-list li { display: inline; }
+html[data-zen="on"] .social-media-list a {
+  display: inline;
+  width: auto;
+  height: auto;
+  min-height: 0;
+  padding: 0;
+  margin: 0 0.75rem 0 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  color: var(--zen-link);
+}
+
+html[data-zen="on"] .username {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  clip-path: none;
+  white-space: normal;
+}
+
+html[data-zen="on"] .wrap { max-width: none; padding: 0; }
+
+/* the main sheet is off so zen has to carry these two itself */
+html[data-zen="on"] .visually-hidden,
+html[data-zen="on"] .skip-link:not(:focus) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+html[data-zen="on"] .skip-link:focus {
+  position: static;
+  display: inline-block;
+  margin: 0 0 1rem;
+  color: var(--zen-link);
+}
+
+/* the main sheet is off so zen needs its own focus ring rather than
+   whatever the browser happens to draw (2.4.7 1.4.11) */
+html[data-zen="on"] :where(a, button, input, [tabindex], summary):focus-visible {
+  outline: 2px solid var(--zen-link);
+  outline-offset: 3px;
+}

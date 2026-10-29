@@ -1,5 +1,5 @@
-// the media list sorts and filters itself. without this it still renders,
-// grouped by media type, and the controls stay hidden.
+// the media list sorts and filters itself. without this it still renders 
+// grouped by media type and the controls stay hidden.
 (function () {
   const list = document.getElementById("reclist");
   if (!list) return;
@@ -24,7 +24,7 @@
   const year = (r) => parseInt(attr(r, "data-year"), 10) || 9999;
   const byYear = (a, b) => year(a) - year(b);
 
-  // one lowercase haystack per entry, so "gibson" and "film" both hit
+  // one lowercase haystack per entry so "gibson" and "film" both hit
   recs.forEach((r) => {
     r.dataset.haystack = [
       r.textContent,
@@ -45,7 +45,7 @@
   const alphabetical = blanksLast((a, b) => a.localeCompare(b));
   const numeric = blanksLast((a, b) => parseInt(a, 10) - parseInt(b, 10));
 
-  // rows in, [{ label, rows }] out. one entry per way of sorting.
+  // rows in [{ label rows }] out. one entry per way of sorting.
   const GROUP_BY = {
     type: (rows) => bucket(rows, (r) => attr(r, "data-type"), {
       order: (a, b) => TYPE_ORDER.indexOf(a) - TYPE_ORDER.indexOf(b),
@@ -92,7 +92,7 @@
     const section = document.createElement("section");
     section.className = "rec-group";
     if (label) {
-      // h2, since these sit under the post's h1
+      // h2 since these sit under the post's h1
       const h = document.createElement("h2");
       h.className = "rec-group__title";
       h.textContent = label;

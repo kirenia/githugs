@@ -1,6 +1,6 @@
 # githugs
 
-## this website lives at githugs.lol
+## this website is githugs.lol
 
 It's a growing personal collection of things I am building and reading and learning.
 
@@ -95,7 +95,7 @@ Barely any, and nothing breaks without it.
 - `site.js` sends off-site links to a new tab and says hi in the console
 - `jack.js` is the light/dark toggle. Half of it is inline in `_includes/head.html` because it has to run before the browser paints, or you get a white flash on the way into dark
 
-A script that only one page needs lives in `assets/js/` and that page asks for it in front matter, so it loads there and nowhere else:
+A script that only one page needs goes in `assets/js/` and that page asks for it in front matter, so it loads there and nowhere else:
 
 ```yaml
 scripts: [whatever]

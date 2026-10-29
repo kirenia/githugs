@@ -1,0 +1,38 @@
+{
+  "update:2026-09-19-first-pick-neuromancer": [
+    "bluesky"
+  ],
+  "update:2026-10-25-november-pick": [
+    "bluesky"
+  ],
+  "post:2026-08-14-what-is-a-cyberdeck": [
+    "bluesky",
+    "mastodon",
+    "seeded-before-syndication"
+  ],
+  "post:2026-08-16-cyberdeck-parts": [
+    "bluesky",
+    "mastodon",
+    "seeded-before-syndication"
+  ],
+  "post:2026-08-18-cyberdeck-build-guide": [
+    "bluesky",
+    "mastodon",
+    "seeded-before-syndication"
+  ],
+  "post:2026-08-20-how-i-built-githugs-lol": [
+    "bluesky",
+    "mastodon",
+    "seeded-before-syndication"
+  ],
+  "post:2026-08-22-a-minimal-theme-toggle-in-20-lines-of-vanilla-js": [
+    "bluesky",
+    "mastodon",
+    "seeded-before-syndication"
+  ],
+  "post:2026-08-29-the-ultimate-cyberpunk-media-list": [
+    "bluesky",
+    "mastodon",
+    "seeded-before-syndication"
+  ]
+}

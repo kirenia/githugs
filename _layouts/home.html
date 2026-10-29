@@ -2,16 +2,22 @@
 layout: default
 ---
 {%- comment -%}
-  a short hello, the newest post, then the rest. the name lives in the
-  header, so the page opens straight on the words from index.markdown.
+  the about in plain words. the nav is in the bar now and the h1 is
+  here for the outline only.
 {%- endcomment -%}
+{%- comment -%}
+  the wordmark is the page's real h1 ghosted in behind the top of the
+  page so the heading is there without a hidden one.
+{%- endcomment -%}
+<div class="home">
+<h1 class="home__mark" aria-label="githugs.lol">githugs.lol</h1>
 
-<div class="hello">
-  <h1 class="hello__title">Hola, I'm Kire</h1>
-  {%- if content != "" %}
-  <div class="page">{{ content }}</div>
-  {%- endif %}
-</div>
+{%- comment -%} the redesign notice. a slim strip meant to come down in a few weeks {%- endcomment -%}
+<aside class="banner">
+  <p class="banner__news"><span class="banner__tag">new</span> we&rsquo;ve gone neon brutalist, but there&rsquo;s a zen mode button too</p>
+</aside>
+
+<div class="intro">{{ content }}</div>
 
 {%- assign featured = site.posts.first -%}
 {%- comment -%} how many posts the list shows under the featured one {%- endcomment -%}
@@ -43,8 +49,8 @@ layout: default
 <h2 class="section-title" id="more-title">More</h2>
 
 <ul class="post-list">
-  {%- comment -%} index starts at 1 so the list carries on from the featured post's colour {%- endcomment -%}
   {%- for post in site.posts offset: 1 limit: latest_count -%}
+    {%- comment -%} index starts at 1 so the list carries on from the featured post's colour {%- endcomment -%}
     {% include post-card.html post=post index=forloop.index %}
   {%- endfor -%}
 </ul>
@@ -53,9 +59,4 @@ layout: default
 {%- elsif site.posts.size == 0 -%}
 <p>no posts yet. drop a markdown file in <code>_posts/</code>.</p>
 {%- endif %}
-
-{%- comment -%}
-  buttons go here later:
-  <h2 class="section-title" id="buttons-title">Take a Button</h2>
-  {% include take-a-button.html %}
-{%- endcomment -%}
+</div>

@@ -1,0 +1,18 @@
+{%- comment -%}
+  the strip across the top: who is in the discord on the left then the three
+  buttons on the right. same shape and size one colour each.
+{%- endcomment -%}
+<div class="bar wrap">
+  {%- if site.discord_guild_id and site.discord_invite -%}
+  <p class="hq is-quiet" role="status" data-hq data-hq-guild="{{ site.discord_guild_id }}"><i class="fa-brands fa-discord" aria-hidden="true"></i><a href="{{ site.discord_invite }}" rel="noopener noreferrer" target="_blank" data-hq-text>githugs hq</a></p>
+  {%- else -%}
+  <span></span>
+  {%- endif %}
+
+  <nav class="bar__right" aria-label="main">
+    <a class="chip chip--home" href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>home</a>
+    <a class="chip chip--archive" href="{{ '/archive/' | relative_url }}"{% if page.url == '/archive/' %} aria-current="page"{% endif %}>archive</a>
+    <button class="chip chip--jack" type="button" data-theme-toggle>jack-in</button>
+    <button class="chip chip--zen" type="button" data-zen-toggle aria-pressed="false">zen</button>
+  </nav>
+</div>
