@@ -518,8 +518,7 @@ hr.rule { border: 0; border-top: 1px solid var(--line); }
 /* a tag inside a box rings in ink. the accent pink is 1.4:1 on these
    fills and ink clears 4.5:1 on all six */
 .feature :focus-visible,
-.post-row :focus-visible,
-.update :focus-visible {
+.post-row :focus-visible {
   outline: 3px solid #0c0612;
   outline-offset: 2px;
 }
@@ -527,8 +526,7 @@ hr.rule { border: 0; border-top: 1px solid var(--line); }
 /* the stretched title link is the exception. the block ring already
    traces it */
 .feature__title a:focus-visible,
-.post-row__title a:focus-visible,
-.update__title a:focus-visible { outline: none; }
+.post-row__title a:focus-visible { outline: none; }
 
 @media (max-width: 40rem) {
   .feature { grid-template-columns: 1fr; }
@@ -691,7 +689,6 @@ hr.rule { border: 0; border-top: 1px solid var(--line); }
 .tag::before { content: "#"; opacity: 0.55; }
 
 /* a status flag is a label not a topic so it loses the hash */
-.update__flag .tag::before { content: none; }
 
 /* hover inverts so it never leans on colour alone (1.4.1) */
 .tag:hover {
@@ -710,80 +707,10 @@ hr.rule { border: 0; border-top: 1px solid var(--line); }
   .tag-group h2 { font-size: var(--fs-h3); }
 }
 
-/* updates: the short announcements that go out /updates.xml. same boxes as
-   the posts cycling the same six colours. */
-
-/* two across on a wide screen one on a phone */
-.update-list {
-  list-style: none;
-  margin: 0 0 3rem;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.1rem;
-}
-
-@media (max-width: 40rem) {
-  .update-list { grid-template-columns: 1fr; }
-}
-
-.update {
-  --c: var(--drac-purple);
-  padding: 1.05rem 1.25rem;
-  background: color-mix(in srgb, var(--c) var(--card-tint), var(--card-bg));
-  color: var(--card-fg);
-  border: 2px solid var(--edge-strong);
-  box-shadow: 5px 5px 0 var(--edge-strong), 0 0 26px var(--glow);
-}
-
-.update__title {
-  margin: 0;
-  font-size: var(--fs-lead);
-  font-weight: var(--head-weight);
-  line-height: 1.35;
-}
-
-.update__meta {
-  margin: 0.3rem 0 0;
-  font-size: var(--fs-caption);
-  color: var(--dim);
-}
-
-.update__image {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin-top: 0.8rem;
-  border: 3px solid var(--edge-strong);
-}
 /* an update that already happened: still here to read dimmed and the tag
    says so. the feed skips these. */
-/* a past announcement goes grey. the fill is swapped rather than the box
-   faded so the ink on it still clears 4.5:1 */
-.update--past {
-  --fill: #c9c6d1;
-  box-shadow: 6px 6px 0 var(--edge-strong);
-}
-
-.update--past .update__image {
-  filter: grayscale(1);
-  opacity: 0.85;
-}
-
-.update--past .update__title a { color: #0c0612; }
 
 /* the past tag reads as a label not as another live thing to click */
-.update--past .update__flag .tag {
-  background: #0c0612;
-  color: #ffffff;
-  border-color: #0c0612;
-}
-
-.update__flag { margin: 0 0 0.5rem; }
-
-.update__body { margin-top: 0.6rem; }
-.update__body > :first-child { margin-top: 0; }
-.update__body > :last-child { margin-bottom: 0; }
 
 /* the list ------------------------------------------------------------
    one flat set of entries; the sorter restacks them in place */
@@ -1442,8 +1369,7 @@ main:focus { outline: none; }
 .post-row.c6 { --fill: #f1fa8c; }
 
 .feature,
-.post-row,
-.update {
+.post-row {
   background: var(--fill, #bd93f9);
   color: #0c0612;
   border: 3px solid var(--edge-strong);
@@ -1460,43 +1386,34 @@ main:focus { outline: none; }
 /* everything inside a row is ink whichever theme is on */
 .feature__title a,
 .post-row__title a,
-.update__title,
-.update__title a,
-.update__body,
-.update__body a,
 .feature a,
 .post-row a { color: #0c0612; }
 
 .feature__excerpt,
 .post-row__excerpt,
-.post-row__meta,
-.update__meta { color: rgba(12, 6, 18, 0.72); }
+.post-row__meta { color: rgba(12, 6, 18, 0.72); }
 
 .feature__title::before,
 .post-row__title::before { color: rgba(12, 6, 18, 0.72); }
 
 /* the tag sits on a bright fill now so it gets a pale plate under it */
 .post-row .tag,
-.feature .tag,
-.update .tag {
+.feature .tag {
   border-color: #0c0612;
   color: #0c0612;
   background: rgba(255, 255, 255, 0.6);
 }
 
 .post-row .tag:hover,
-.feature .tag:hover,
-.update .tag:hover {
+.feature .tag:hover {
   background: #0c0612;
   color: #ffffff;
 }
 
 /* the arrow every link row has pointing out */
-.post-row,
-.update { padding-right: 2.6rem; }
+.post-row { padding-right: 2.6rem; }
 
-.post-row::after,
-.update::after {
+.post-row::after {
   content: "\2197";
   position: absolute;
   top: 1rem;
@@ -1504,8 +1421,6 @@ main:focus { outline: none; }
   font-size: 1rem;
   color: rgba(12, 6, 18, 0.8);
 }
-
-.update { position: relative; }
 
 /* the picture keeps the heavy frame */
 .post-thumb { border-width: 3px; }
@@ -1630,8 +1545,7 @@ h1 {
 
 /* the rows become slabs: uppercase bold the sub-line underneath quiet */
 .post-row__title,
-.feature__title,
-.update__title {
+.feature__title {
   font-family: var(--mono);
   font-weight: 800;
   letter-spacing: 0.04em;
@@ -1640,8 +1554,7 @@ h1 {
 }
 
 .post-row__excerpt,
-.feature__excerpt,
-.update__body {
+.feature__excerpt {
   font-weight: 400;
   letter-spacing: 0.01em;
   text-transform: none;
@@ -2084,6 +1997,14 @@ pre code { border: 0; }
 
 /* the note rides on the same line quieter than the name */
 .uses-item__note { color: var(--dim); }
+
+/* the date line under the /now subtitle. quiet but still body size so it
+   stays over 4.5:1 */
+.now-updated {
+  margin: 0 0 1.5rem;
+  color: var(--dim);
+  font-size: var(--fs-caption);
+}
 
 .uses-item__note::before {
   content: "- ";

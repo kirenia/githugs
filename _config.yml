@@ -63,7 +63,3 @@ defaults:
       layout: post
 
 # short announcements. they stay out of the blog and out of feed.xml and go
-# out /updates.xml instead for bluesky mastodon and whatever else is reading
-collections:
-  updates:
-    output: false

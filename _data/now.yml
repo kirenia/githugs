@@ -1,0 +1,30 @@
+# what i'm doing now, the page at /now. each group is a block on the page in
+# the order listed here. an item needs name. url and note are both optional.
+# change the `updated` date in now.markdown when you change anything here
+
+- title: Reading
+  items:
+    - name: Do Androids Dream of Electric Sheep?
+      note: for our really cool [cyberpunk book club](https://www.patreon.com/githugs)
+    - name: Horus Heresy
+    - name: I Have No Mouth And I Must Scream
+
+- title: Building
+  items:
+    - name: A wholesome community on Discord
+      url: https://discord.gg/NtZcphhA3
+    - name: A free cyberpunk book club
+      url: https://www.patreon.com/githugs
+      note: come read with us
+    - name: A (slightly) Better Tomorrow
+      url: https://aslightlybetterpod.com/
+
+- title: Playing
+  items:
+    - name: Cyberpunk 2077
+      note: this time as a corpo
+    - name: Nivalis Nights
+
+- title: Enjoying
+  items:
+    - name: Counting down to Neuromancer on 22 January
