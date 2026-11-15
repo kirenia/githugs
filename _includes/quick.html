@@ -10,7 +10,7 @@
 <ul class="quick__list">
 {%- for row in start.doors %}
 {%- assign sub = row.text -%}
-{%- if row.kind == "read" and start.reading %}{% assign sub = "reading now · " | append: start.reading %}{% endif %}
+{%- if row.kind == "read" and start.reading %}{% assign sub = "READING NOW: " | append: start.reading %}{% endif %}
 <li class="quick__row quick__row--{{ row.kind }}">
 <a href="{% if row.discord %}{{ site.discord_invite }}{% else %}{{ row.url }}{% endif %}">
 <i class="quick__icon {{ row.icon }}" aria-hidden="true"></i>

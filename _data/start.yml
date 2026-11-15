@@ -38,7 +38,7 @@ quick_extra:
   - kind: shop
     icon: fa-solid fa-book
     label: My Bookshop.org
-    text: books i actually recommend
+    text: the books i talk about
     url: https://bookshop.org/shop/githugs
 
 # three videos for someone who has never seen one. `about` is the small
