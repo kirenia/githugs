@@ -10,13 +10,13 @@ image:
 image_alt: ""
 ---
 
-I deleted Spotify recently, and I want to share with you what app I replaced it with and other aopps I'ved switched to in the past two years.
+I deleted Spotify recently, and I want to share with you what app I replaced it with and other apps I've switched to in the past two years.
 
 It's important to note that I am not a purist. I'm a solo mom with two kids, a day job, school, a podcast, and did I mention being a solo mom with two kids? I don't have time to self-host my own email, but all the choices I make are downstream from knowing who owns every room I am in and always knowing where the nearest exit is.
 
 | Was                  | Now                           | Why                                                          |
 | -------------------- | ----------------------------- | ------------------------------------------------------------ |
-| Gmail                | Proton Mail                   | encxrypted, no ads, Tuta is my backup                        |
+| Gmail                | Proton Mail                   | encrypted, no ads, Tuta is my backup                        |
 | iCloud Keychain      | Proton Pass/Authenticator     | open source, works everywhere                                |
 | iCloud and Apple One | Proton Drive/physical storage | files go where I put them                                    |
 | Chrome               | Brave                         | ..it isn't Google                                            |
@@ -45,6 +45,6 @@ The podcast stays on Spotify, because the feed comes from my own site and my own
 
 **GitHub.** Microsoft owns it and my repos live there for now because that's where people look.
 
-**Apple hardware.** I love my MacBook Pro + iPhone 17 Pro. I locked both down instead of replacing them (especially since I Just purchased both at the beginning of this year and they were quite the investment).
+**Apple hardware.** I love my MacBook and iPhone. I locked both down instead of replacing them (especially since I just purchased both at the beginning of this year and they were quite the investment).
 
-**Discord and Patreon.** Theser are big companies but not exactly big tech. Discord will probably IPO and that's fine, because I could move the community in a weekend if I had to.
+**Discord and Patreon.** These are big companies but not exactly big tech. Discord will probably IPO and that's fine, because I could move the community in a weekend if I had to.
