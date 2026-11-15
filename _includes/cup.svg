@@ -1,0 +1,15 @@
+{%- comment -%}
+  the tip jar cup. drawn here as paths because the only mug font awesome
+  ships in this build is fa-mug-hot. currentColor so it takes the square's
+  colour like every other icon, and a saucer line so it reads as a cup
+  rather than a bucket at 16px.
+{%- endcomment -%}
+<svg class="cup" viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true" focusable="false"
+     fill="none" stroke="currentColor" stroke-width="2"
+     stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4 9h12v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/>
+  <path d="M16 11h1.5a2.75 2.75 0 0 1 0 5.5H16"/>
+  <path d="M3 22h14"/>
+  <path d="M8 2.5c-.9 1.1.9 1.9 0 3"/>
+  <path d="M12 2.5c-.9 1.1.9 1.9 0 3"/>
+</svg>

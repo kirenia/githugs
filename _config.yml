@@ -9,6 +9,11 @@ author: Kire Góngora
 description: >-
   Code, notes, and whatever else I'm building right now.
 
+# the picture a link to the site shows when someone shares it. a post with
+# its own `image:` uses that instead
+share_image: /assets/img/share.png
+share_image_alt: "githugs.lol. read. listen. hang out. repeat."
+
 # the line in the footer's third column
 footer_quote: >-
   We can restore the web as a tool for collaboration, creativity and

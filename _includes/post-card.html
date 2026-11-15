@@ -1,17 +1,19 @@
 {%- comment -%}
   one box in the post list. no picture here: only the featured post gets one.
   `index` picks one of the six accents which colours the box and its tags.
+  data-tags is the post's tags as slugs for the filter on the blog page.
 {%- endcomment -%}
 {%- assign color_index = include.index | default: 0 | modulo: 6 | plus: 1 -%}
-<li class="post-row c{{ color_index }}">
+{%- assign topics = include.post.tags | concat: include.post.categories -%}
+{%- capture slugs %}{% for t in topics %}{{ t | slugify }} {% endfor %}{% endcapture -%}
+<li class="post-row c{{ color_index }}" data-tags="{{ slugs | strip }}">
   <h3 class="post-row__title"><a href="{{ include.post.url | relative_url }}">{{ include.post.title | escape }}</a></h3>
 
   {%- assign blurb = include.post.description | default: include.post.excerpt -%}
   {%- if blurb %}<div class="post-row__excerpt">{{ blurb | strip_html | normalize_whitespace | truncatewords: 26 }}</div>{% endif -%}
 
-  <p class="post-row__meta"><time datetime="{{ include.post.date | date_to_xmlschema }}">{{ include.post.date | date: "%-d %b %Y" }}</time></p>
+  <p class="post-row__meta"><time datetime="{{ include.post.date | date_to_xmlschema }}">{{ include.post.date | date: "%-d %b %Y" }}</time> <span aria-hidden="true">·</span> {% include read-time.html content=include.post.content %}</p>
 
-  {%- assign topics = include.post.tags | concat: include.post.categories -%}
   {%- if topics.size > 0 %}
   <ul class="post-row__tags">
     {%- for t in topics -%}

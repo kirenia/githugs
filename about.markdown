@@ -2,10 +2,12 @@
 layout: page
 title: About
 permalink: /about/
-description: "Kire Góngora, software engineer, podcast host and book club runner. What I do, and what I use to do it."
+description: "Kire Góngora, software engineer, podcast host and book club runner. What I do, what I'm up to now, and what I use to do it."
 sticker: overalls
 redirect_from:
   - /uses/
+# the date on the now section. change it when _data/now.yml changes
+now_updated: 2026-10-29
 ---
 
 <p class="subtitle">build. break. fix. repeat.</p>
@@ -18,23 +20,63 @@ My full [work history is on LinkedIn](https://www.linkedin.com/in/kirenia/), if 
 
 Away from the keyboard I host [A (slightly) Better Tomorrow](https://aslightlybetterpod.com/), a podcast about futures worth wanting, and I run a free cyberpunk book club on Patreon. I have two kids, two cats, and a library card I use constantly.
 
-<h2 class="section-title" id="uses">What I use</h2>
+{% comment %}
+  my last post on bluesky, no heading, just the embed. js fills it at load
+  and it stays hidden if the call fails.
+{% endcomment %}
+{% if site.bluesky_username %}
 
-<p>all the things i use daily</p>
+<section class="skeet" hidden data-skeet data-skeet-actor="{{ site.bluesky_username }}" aria-label="My latest post on Bluesky"></section>
+
+{% endif %}
+
+{% comment %}
+  the now page moved in here. the groups are in _data/now.yml and /now/
+  still redirects to this heading.
+{% endcomment %}
+<h2 class="section-title" id="now">Now</h2>
+
+<p class="now-updated">what I'm up to lately. last updated <time datetime="{{ page.now_updated | date_to_xmlschema }}">{{ page.now_updated | date: "%-d %B %Y" }}</time></p>
+
+<ul class="now">
+  {%- for group in site.data.now %}
+  <li class="now__item">
+    <h3 class="now__label">{{ group.title }}</h3>
+    <ul class="now__list">
+      {%- for item in group.items %}
+      <li>{% if item.url %}<a href="{{ item.url }}">{{ item.name | escape }}</a>{% else %}{{ item.name | escape }}{% endif %}{% if item.note %} <span class="uses-item__note">{{ item.note | markdownify | remove: "<p>" | remove: "</p>" | strip }}</span>{% endif %}</li>
+      {%- endfor %}
+    </ul>
+  </li>
+  {%- endfor %}
+</ul>
+
+<h2 class="section-title" id="uses">What I use</h2>
 
 <div class="uses">
   {%- for group in site.data.uses %}
-  <section class="uses-group">
-    <h3 class="uses-group__title" id="{{ group.title | slugify }}">{{ group.title }}</h3>
+  {%- comment -%} each group folds. a plain details so it works with no js and a keyboard opens it {%- endcomment %}
+  <details class="uses-group">
+    <summary><h3 class="uses-group__title" id="{{ group.title | slugify }}">{{ group.title }}</h3></summary>
     <ul class="uses-list">
       {%- for item in group.items %}
       <li class="uses-item">{% if item.url %}<a href="{{ item.url }}">{{ item.name | escape }}</a>{% else %}{{ item.name | escape }}{% endif %}{% if item.note %} <span class="uses-item__note">{{ item.note | markdownify | remove: "<p>" | remove: "</p>" | strip }}</span>{% endif %}</li>
       {%- endfor %}
     </ul>
-  </section>
+  </details>
   {%- endfor %}
 </div>
 
 <div class="note" markdown="1">
 Nothing here is sponsored and none of the links pay me. Want to build something together, or just say hi? I'm [githugs@proton.me](mailto:githugs@proton.me), and I read everything.
 </div>
+
+<h2 class="section-title" id="sites">Sites I love</h2>
+
+<ul class="roll">
+  {%- for site_ in site.data.blogroll %}
+  <li><a href="{{ site_.url }}">{{ site_.name | escape }}</a>{% if site_.note %}<span class="roll__note">{{ site_.note | escape }}</span>{% endif %}</li>
+  {%- endfor %}
+</ul>
+
+Want to support what I make? [I'm on Patreon](https://www.patreon.com/githugs). The book club is free and it stays free.

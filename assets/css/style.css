@@ -1,6 +1,6 @@
 /* ==========================================================================
    kire.css: an old lab page in the light terminal in the dark.
-   light: Georgia on off-white paper. one column justified copy hard edges.
+   light: Georgia on off-white paper. one column ragged right hard edges.
    dark:  Fira Sans Dracula a prompt on every heading.
    colour is the Dracula palette throughout: the purple bar up top links 
    tags and one accent per post.
@@ -353,6 +353,52 @@ main.wrap { padding-top: clamp(1.5rem, 4vw, 2.5rem); flex: 1 0 auto; }
 }
 
 @keyframes blink { 50% { opacity: 0; } }
+
+/* ----------------------------------------------------------------------
+   two future bits. both are decoration: they sit behind the words, carry
+   no meaning, and switch themselves off when the machine asks for less
+   motion. nothing here changes a contrast ratio.
+   ---------------------------------------------------------------------- */
+
+/* 1. a scan line drifting down the graph paper, the way a screen that is
+      still warming up does. fixed so it keeps going as you scroll. */
+.scan {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.scan::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 28vh;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    light-dark(rgba(200, 0, 106, 0.05), rgba(0, 229, 255, 0.07)),
+    transparent
+  );
+  animation: scan-drift 9s linear infinite;
+}
+
+@keyframes scan-drift {
+  from { transform: translateY(-30vh); }
+  to   { transform: translateY(130vh); }
+}
+
+/* 2. the wordmark decodes on arrival. the glyphs it flickers through are
+      written into the element, so the aria-label is what gets announced
+      and a reader never hears the noise. */
+.home__mark[data-decoding] { opacity: 0.4; }
+
+@media (prefers-reduced-motion: reduce) {
+  .scan { display: none; }
+}
+
 
 .site-bar {
   display: flex;
@@ -958,12 +1004,6 @@ hr.rule { border: 0; border-top: 1px solid var(--line); }
   border-radius: var(--radius);
 }
 
-/* justified and hyphenated the single most old-school thing on the page.
-   delete these two rules to go back to a ragged right edge */
-.post-content p,
-.page p,
-.note p { text-align: justify; hyphens: auto; }
-
 .post-content > :first-child { margin-top: 0; }
 
 /* a hand-signed sign-off allowed to sit beside a sticker */
@@ -1065,33 +1105,15 @@ hr.rule { border: 0; border-top: 1px solid var(--line); }
 
 /* older newer: the way onward from the bottom of a post. two ruled rows 
    label then title the same shape as the post list. */
-.post-nav {
-  margin-top: 3rem;
-  border-top: 1px solid var(--fg);
-}
+/* read next: the next post as a whole card and a quiet line under it
+   for the newer one */
+.post-next { margin-top: 3rem; }
+.post-next .section-title { margin-top: 0; }
 
-.post-nav a {
-  display: block;
-  /* a hanging indent: the label sits in a fixed 4.5rem column and the
-     title wrapped lines included starts at the same x on both rows */
-  padding: 0.75rem 0 0.75rem 4.5rem;
-  text-indent: -4.5rem;
-  border-bottom: 1px solid var(--line);
-  color: var(--fg);
-  font-weight: var(--head-weight);
-  text-decoration: none;
-}
-
-.post-nav a:hover { text-decoration: underline; text-decoration-color: var(--accent); }
-
-.post-nav__dir {
-  display: inline-block;
-  width: 4.5rem;
-  text-indent: 0;
-  font-size: var(--fs-caption);
-  font-weight: 400;
-  color: var(--dim);
-}
+.post-next__newer { margin: 1.1rem 0 0; font-size: var(--fs-caption); }
+.post-next__newer a { color: var(--fg); font-weight: var(--head-weight); text-decoration: none; }
+.post-next__newer a:hover { text-decoration: underline; text-decoration-color: var(--accent); }
+.post-next__dir { margin-right: 0.6rem; font-weight: 400; color: var(--dim); }
 
 /* tag index ----------------------------------------------------------- */
 
@@ -1219,10 +1241,9 @@ hr.rule { border: 0; border-top: 1px solid var(--line); }
 
 .footer-cols {
   display: grid;
-  /* the icons take their natural width so the row never wraps. the links
-     fill what is left and sit right */
-  grid-template-columns: auto 1fr;
-  gap: 2rem;
+  /* stacked: the icons on their own row then the links under them */
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
   margin-top: 1.75rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--line);
@@ -1460,6 +1481,30 @@ main:focus { outline: none; }
   box-shadow: 5px 5px 0 var(--edge-strong);
 }
 
+/* the tip jar. a yellow heart with an ink outline. yellow alone is about
+   1.3:1 on the white card and an icon needs 3:1 (1.4.11), so the outline
+   is what carries the shape. on the dark card the yellow clears it with
+   room to spare. the square still floods yellow on hover and the heart
+   goes ink */
+.social-media-list a.soc--tip { color: var(--neon-yellow); }
+
+.social-media-list a.soc--tip i {
+  -webkit-text-stroke: 3px var(--ink);
+  paint-order: stroke fill;
+}
+
+.social-media-list a.soc--tip:hover,
+.social-media-list a.soc--tip:focus-visible {
+  background: var(--neon-yellow);
+  color: #0c0612 !important;
+}
+
+.social-media-list a.soc--tip:hover i,
+.social-media-list a.soc--tip:focus-visible i { -webkit-text-stroke: 0; }
+
+/* the drawn cup, sized to sit with the font icons beside it */
+.cup { width: 1.15em; height: 1.15em; display: block; }
+
 .social-media-list a.soc--ig { color: #e4405f; }
 .social-media-list a.soc--bs { color: #1185fe; }
 .social-media-list a.soc--tt { color: var(--fg); }
@@ -1489,29 +1534,108 @@ main:focus { outline: none; }
 .social-media-list a.soc--omg:hover, .social-media-list a.soc--omg:focus-visible { background: var(--neon-pink); }
 
 /* who is in the discord right now. the logo goes blurple when anyone is on. */
-.hq {
-  display: flex;
+/* my last post on bluesky on the about page, laid out like those old
+   cover pages put a tweet. three columns: face, words, butterfly off in
+   the corner. the date rides on the handle line. */
+.skeet {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  column-gap: 0.6rem;
   align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  margin: 0 0 1rem;
+  margin: 2rem 0;
+  min-width: 0;
+  /* the same hard box as everything else. it used to be a soft rounded
+     card like a real embed and it looked like it came from another site */
+  padding: 0.9rem 1.1rem;
+  background: var(--card-bg);
+  border: 3px solid var(--edge-strong);
+  box-shadow: 4px 4px 0 var(--edge-strong);
+}
+
+
+.skeet[hidden] { display: none; }
+
+.skeet__avatar {
+  grid-column: 1;
+  grid-row: 1;
+  width: 40px;
+  height: 40px;
+  /* square like the box it sits in */
+  object-fit: cover;
+  border: 2px solid var(--edge-strong);
+}
+
+.skeet__who {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+  line-height: 1.25;
+}
+
+.skeet__name {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: var(--fs-caption);
+}
+
+/* handle, a dot, then the date. one quiet line */
+.skeet__meta {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  margin: 0;
   font-family: var(--mono);
   font-size: var(--fs-micro);
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  color: var(--dim);
 }
 
-.hq i { font-size: 1.1rem; color: #5865f2; transition: color 0.2s; }
-.hq.is-quiet i { color: var(--dim); }
+.skeet__handle { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-.hq a {
+.skeet__dot { opacity: 0.6; }
+
+/* no underline. it is quiet until you go near it, then it picks up the
+   accent, which is enough of a signal next to a pointer */
+.skeet__when {
+  flex: none;
   color: inherit;
   text-decoration: none;
-  border-bottom: 2px solid var(--neon-pink);
+  border-bottom: 0;
 }
 
-.hq a:hover { color: var(--accent); }
+.skeet__when:hover,
+.skeet__when:focus-visible { color: var(--accent); text-decoration: underline; }
+
+/* the butterfly in the corner, like the bird on an old embed */
+.skeet__mark {
+  grid-column: 3;
+  grid-row: 1;
+  align-self: start;
+  font-size: 1rem;
+  color: #1185fe;
+}
+
+/* the post runs the full width under the face, level with the name */
+.skeet__text {
+  grid-column: 2 / 4;
+  grid-row: 2;
+  margin: 0.55rem 0 0;
+  font-family: var(--body-font);
+  font-size: var(--fs-body);
+  line-height: 1.45;
+  color: var(--fg);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 34rem) {
+  .skeet__text { font-size: var(--fs-caption); }
+  .skeet__avatar { width: 32px; height: 32px; }
+}
+
+/* on a wide screen the chips keep the top right corner and the post takes
+   exactly what is left, so the two never meet */
 
 /* ======================================================================
    brutalist pass: the links page's bones on the dev site. display face for
@@ -1574,11 +1698,8 @@ h1 {
   padding-bottom: 0.25rem;
 }
 
-/* the nav stays whole: if it can't sit beside the discord line it takes
-   its own row rather than leaving one chip stranded underneath */
+/* the nav stays whole rather than leaving one chip stranded underneath */
 .bar__right { flex: 0 0 auto; }
-
-.bar .hq { margin: 0; justify-content: flex-start; }
 
 /* the chips punch through the top edge of whatever they sit on */
 .chips {
@@ -1644,8 +1765,6 @@ h1 {
 .chip--home { background: var(--neon-cyan); }
 .chip--archive { background: var(--neon-pink); }
 .chip--jack { background: var(--neon-yellow); }
-/* the bright dracula green in both modes since the chip's text is ink */
-.chip--zen { background: #50fa7b; }
 
 /* the page you are on reads as pressed. the chip sits down into its own
    shadow so the marker is never colour alone */
@@ -1774,15 +1893,19 @@ pre code { border: 0; }
   /* room at the top for the mark which the banner then overlaps */
   padding-top: 4.4rem;
   /* a reader's own letter-spacing widens the wordmark. clip it rather than
-     let it push a scrollbar. the margin keeps the box shadows */
+     let it push a scrollbar. the clip margin only works when both axes
+     clip so the box is 12px wider each side instead: a card that lifts on
+     hover keeps its left edge and its shadow */
   overflow-x: clip;
-  overflow-clip-margin: 12px;
+  margin-inline: -12px;
+  padding-inline: 12px;
 }
 
 .home__mark {
   position: absolute;
   top: 0;
-  left: -0.02em;
+  /* 12px in to sit where it did before the box grew */
+  left: calc(12px - 0.02em);
   z-index: -1;
   margin: 0;
   font-family: var(--display);
@@ -2011,12 +2134,12 @@ pre code { border: 0; }
   color: var(--dim);
 }
 
-/* the footer's text nav. it rides in the second column of the socials
-   row rather than taking a ruled band of its own. */
+/* the footer's text nav. it sits under the socials and starts at the
+   left edge now that there are too many links for one corner. */
 .footer-nav ul {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: baseline;
   gap: 0.35rem 0;
   margin: 0;
@@ -2091,49 +2214,1149 @@ pre code { border: 0; }
   .footer-nav a:focus-visible { text-decoration: none; }
 }
 
-/* the two tip jars once in the footer. small on purpose: they are an
-   offer not an ask. */
-.footer-pay {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  margin: 2rem 0 0;
-}
 
-.pay-button {
+/* ======================================================================
+   the bar's plain links. jack-in is the
+   only chip left up top.
+   ====================================================================== */
+
+.bar__right { gap: 0.25rem 1.1rem; }
+
+.bar__link {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.45rem;
-  min-height: 26px;
-  padding: 2px 10px;
-  /* the two sit at the same width so the labels line up */
-  min-width: 10rem;
-  color: #0c0612;
-  border: 2px solid var(--edge-strong);
-  box-shadow: 2px 2px 0 var(--edge-strong);
+  min-height: 34px;
   font-family: var(--mono);
-  font-size: 0.62rem;
-  font-weight: 800;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.bar__link:hover,
+.bar__link:focus-visible {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+/* the page you are on is underlined so the marker is never colour alone */
+.bar__link[aria-current="page"] {
+  color: var(--fg);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+/* the discord line takes the slack so the links and the button sit right */
+.bar > .hq,
+.bar > span { margin-right: auto; }
+
+/* the chip is a flex box and would eat the space before in */
+.jack__rest { white-space: pre; }
+
+@media (max-width: 40rem) {
+  /* a thumb needs more to hit than a mouse does */
+  .bar__link { min-height: 44px; }
+  /* top row: the discord line and jack in at the far right. the links
+     take the row under them */
+  .bar > .chip { order: 2; }
+  .bar__right { order: 3; }
+  /* the discord line gives way so the button never drops a row */
+  .bar > .hq { flex: 1 1 0; min-width: 0; }
+  /* jack in keeps both words. the discord line drops "in githugs hq"
+     to make the room, the logo already says where. off the screen only:
+     a screen reader still gets the whole line */
+  .hq__where {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+/* who is in the discord right now. the logo goes blurple when anyone is on. */
+.hq {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  margin: 0;
+  font-family: var(--mono);
+  font-size: var(--fs-micro);
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+.hq i { font-size: 1.1rem; color: #5865f2; transition: color 0.2s; }
+.hq.is-quiet i { color: var(--dim); }
+
+.hq a {
+  color: inherit;
   text-decoration: none;
+  border-bottom: 2px solid var(--neon-pink);
+}
+
+.hq a:hover { color: var(--accent); }
+
+/* the link is a flex box and would eat the space before in */
+.hq__where { white-space: pre; }
+
+/* ======================================================================
+   the start here section on the home page: three doors and a short
+   list. the reading now strip up top and the transmit boxes on the about
+   page are in here too. one block delete it
+   whole and the section falls back to plain lists.
+   ====================================================================== */
+
+/* the bar links straight to this so it lands with a little air above it */
+.start { scroll-margin-top: 1.5rem; }
+
+/* the doors. each one wears the colours of the place it goes the way the
+   buttons on the links page do. stacked on a phone three across on a desk */
+.doors {
+  display: grid;
+  /* one to a row until there is room for all three. never two and one */
+  grid-template-columns: 1fr;
+  gap: 1.5rem 1.25rem;
+  margin: 1.75rem 0 2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.door {
+  --shadow: 6px 6px 0 var(--edge-strong);
+  --shadow-up: 9px 9px 0 var(--edge-strong);
+  --door-fg: #0c0612;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 1.1rem;
+  color: var(--door-fg);
+  border: 3px solid var(--edge-strong);
+  box-shadow: var(--shadow);
+  font-family: var(--mono);
+}
+
+@media (min-width: 44rem) {
+  .doors { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  /* side by side they want the same height so the links line up */
+  .door { min-height: 14rem; }
+}
+
+/* the book club: the moving rainbow off its button on the links page.
+   the gradient is twice as wide as the box and ends where it starts so
+   the slide loops without a seam */
+.door--read {
+  background: linear-gradient(90deg, #ff5555, #ffb86c, #f1fa8c, #50fa7b, #8be9fd, #bd93f9, #ff79c6, #ff5555) 0 0 / 200% 100%;
+}
+
+@keyframes rainbow {
+  to { background-position: -200% 0; }
+}
+
+/* it only moves for people who have not asked for less motion */
+@media (prefers-reduced-motion: no-preference) {
+  .door--read { animation: rainbow 6s linear infinite; }
+}
+
+/* the podcast: its pale blue on the yellow orange and rust stack */
+.door--listen {
+  --shadow: 3px 3px 0 #ffd84d, 6px 6px 0 #f4a23c, 9px 9px 0 #c0502f;
+  --shadow-up: 4px 4px 0 #ffd84d, 8px 8px 0 #f4a23c, 12px 12px 0 #c0502f;
+  background: #b8dcee;
+}
+
+.door--listen .door__icon { color: #1f3f9e; }
+
+/* the discord: its purple a shade deeper so white text clears 4.5:1 */
+.door--hang {
+  --door-fg: #ffffff;
+  background: #4752c4;
+}
+
+.door:hover,
+.door:focus-within {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-up);
+}
+
+.door:active {
+  transform: translate(3px, 3px);
+  box-shadow: 2px 2px 0 var(--edge-strong);
+}
+
+.door__icon { font-size: 1.9rem; line-height: 1; }
+
+.door__kicker {
+  margin: 0.35rem 0 0;
+  font-size: var(--fs-micro);
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.door__label {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: var(--fs-h2);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.door__text { flex: 1 1 auto; margin: 0; font-size: var(--fs-caption); }
+
+.door__go {
+  margin: 0;
+  font-size: var(--fs-caption);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.door__go::after { content: " \2197"; }
+.door__go a,
+.door__go a:hover { color: var(--door-fg); text-decoration: none; }
+/* the whole tile is clickable. the link keeps the semantics */
+.door__go a::after { content: ""; position: absolute; inset: 0; }
+/* the site's pink ring gets lost on a bright fill so this one matches the text */
+.door__go a:focus-visible { outline-color: var(--door-fg); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .door { transition: transform 0.12s ease, box-shadow 0.12s ease; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .door:hover,
+  .door:focus-within,
+  .door:active { transform: none; }
+}
+
+/* the reading now strip at the top of the home page where the redesign
+   notice used to be. the banner's shape with a link on the end. its own
+   class so it can change without touching the banner */
+.now-reading {
+  position: relative;
+  margin: 0.7rem 0 1.5rem;
+  /* room up top for the pill that sits on the border */
+  padding: 1.1rem 0.8rem 0.6rem;
+  background: var(--card-bg);
+  border: 3px solid var(--edge-strong);
+  box-shadow: 4px 4px 0 var(--edge-strong);
+}
+
+.now-reading p {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.8rem;
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+/* hung off the top left corner, half above the border, the way the
+   @githugs tag sits on the links page */
+.now-reading__tag {
+  position: absolute;
+  top: -0.65rem;
+  left: 0.6rem;
+  padding: 2px 8px;
+  background: #5ac8e8;
+  color: #0c0612;
+  border: 2px solid var(--edge-strong);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+}
+
+.now-reading__title { flex: 1 1 14rem; }
+
+/* the short list. the archive's rows with a number where the date goes */
+.watch { list-style: none; margin: 0; padding: 0; }
+
+.watch li {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr) auto;
+  gap: 0.25rem 0.75rem;
+  align-items: baseline;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.watch__num { font-family: var(--mono); font-weight: 800; color: var(--accent); }
+.watch a { color: var(--fg); font-weight: var(--head-weight); text-decoration: none; }
+.watch a:hover { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; }
+.watch__about { font-family: var(--mono); font-size: var(--fs-caption); color: var(--dim); }
+
+@media (max-width: 34rem) {
+  .watch li { grid-template-columns: 2.5rem minmax(0, 1fr); }
+  .watch__about { grid-column: 2; }
+}
+
+/* transmit. the two dashed boxes off the links page side by side once
+   there is room for both. they sit under the quick links on a phone */
+.transmit {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 40rem) {
+  .transmit { grid-template-columns: 1fr 1fr; }
+}
+
+.transmit__box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1rem 1.1rem;
+  background: var(--card-bg);
+  border: 3px dashed var(--edge-strong);
+  font-family: var(--mono);
+}
+
+.transmit__label {
+  flex: 1 0 100%;
+  margin: 0;
+  font-size: var(--fs-micro);
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+/* the same size as the labels on the rows above so the phone page is one
+   size of mono all the way down */
+.transmit__value { margin: 0; font-size: var(--fs-caption); font-style: normal; line-height: 1.5; }
+.transmit__value a { color: var(--fg); }
+
+/* no js no button. the address is still right there to select */
+.transmit__copy { display: none; }
+
+.js .transmit__copy {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 1rem;
+  background: #ffd6ea;
+  color: #0c0612;
+  border: 3px solid var(--edge-strong);
+  font: inherit;
+  font-size: var(--fs-micro);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.js .transmit__copy:hover { background: var(--neon-yellow); }
+
+/* on a phone the home page reads like the links page: rows not tiles and
+   less air between things */
+@media (max-width: 43.99rem) {
+  .doors { gap: 14px; margin: 1.1rem 0 1.5rem; }
+
+  /* the links page's slab: same height padding type and shadow */
+  .door {
+    --shadow: 5px 5px 0 var(--edge-strong);
+    --shadow-up: 8px 8px 0 var(--edge-strong);
+    display: grid;
+    grid-template-columns: 20px minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 14px;
+    row-gap: 0;
+    min-height: 58px;
+    padding: 12px 16px;
+  }
+
+  /* the row rule above would flatten the podcast's stack so it gets it back */
+  .door--listen {
+    --shadow: 3px 3px 0 #ffd84d, 6px 6px 0 #f4a23c, 9px 9px 0 #c0502f;
+    --shadow-up: 4px 4px 0 #ffd84d, 8px 8px 0 #f4a23c, 12px 12px 0 #c0502f;
+  }
+
+  .door__icon { grid-row: 1 / span 2; font-size: 18px; text-align: center; }
+  /* the number and the verb are for the tiles. a row says it in the label */
+  .door__kicker { display: none; }
+  .door__label { grid-column: 2; grid-row: 1; font-size: 14px; }
+  .door__text { grid-column: 2; grid-row: 2; font-size: 11.5px; letter-spacing: 0.02em; }
+
+  /* only the arrow shows. the link keeps its words for a screen reader
+     and stretches over the whole row */
+  .door__go { grid-column: 3; grid-row: 1 / span 2; }
+  .door__go a { position: absolute; inset: 0; overflow: hidden; text-indent: -999em; white-space: nowrap; }
+  .door__go a::after { content: none; }
+  .door__go a:focus-visible { outline-offset: -6px; }
+
+}
+
+@media (max-width: 40rem) {
+  /* the wordmark is small on a phone so it needs less room above the strip */
+  .home { padding-top: clamp(2.3rem, 11vw, 4.4rem); }
+  /* the reading strip slims right down on a phone: one line, thinner
+     frame, and the title carries the link so the third line goes away */
+  .now-reading {
+    margin: 0.6rem 0 1rem;
+    padding: 0.95rem 0.6rem 0.4rem;
+    border-width: 2px;
+    box-shadow: 2px 2px 0 var(--edge-strong);
+  }
+
+  .now-reading p {
+    flex-wrap: nowrap;
+    gap: 0 0.5rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+  }
+
+  .now-reading__tag {
+    top: -0.55rem;
+    left: 0.5rem;
+    padding: 1px 5px;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+  }
+
+  /* one line, cut rather than wrapped */
+  .now-reading__title {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* the title is the link now, so the spelled-out one is dead weight.
+     scoped to out-rank `.now-reading a`, which is a class plus a type
+     selector and would otherwise keep it on screen */
+  .now-reading .now-reading__cta { display: none; }
+
+  .now-reading__title a {
+    display: inline;
+    min-height: 0;
+    color: var(--fg);
+  }
+  .section-title { margin: 1.75rem 0 0.75rem; }
+  /* the featured post, trimmed for a phone: a letterbox picture, a
+     tighter frame, a smaller title and two lines of blurb instead of
+     three. the tags go, the blog page has them */
+  .feature {
+    padding: 0.8rem;
+    border-width: 2px;
+    box-shadow: 3px 3px 0 var(--edge-strong);
+  }
+
+  .feature .post-thumb {
+    aspect-ratio: 16 / 7;
+    border-width: 2px;
+    margin-bottom: 0.7rem;
+  }
+
+  .feature__title { font-size: var(--fs-caption); line-height: 1.2; }
+
+  .feature__excerpt {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+    margin: 0.4rem 0 0;
+    font-size: var(--fs-micro);
+    line-height: 1.4;
+  }
+
+  .feature .post-row__meta { margin: 0.45rem 0 0; font-size: var(--fs-micro); }
+  .feature .post-row__tags { display: none; }
+  .watch li { padding: 0.45rem 0; }
+}
+
+/* the socials on a phone: four across in big square tiles like the
+   connect row on the links page. the menu under them stays one column */
+@media (max-width: 36rem) {
+  .social-media-list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    margin-left: 0;
+  }
+
+  .social-media-list a.soc {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    border-width: 3px;
+    box-shadow: 4px 4px 0 var(--edge-strong);
+  }
+
+  .social-media-list a.soc i {
+    width: auto;
+    font-size: clamp(28px, 8vw, 36px);
+  }
+}
+
+/* ======================================================================
+   small targets. wcag 2.2 wants 24px to aim at (2.5.8)
+   ====================================================================== */
+
+.tag { padding-block: 0.15rem; }
+
+.hq a,
+.now-reading a,
+.skeet__when {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+}
+
+@media (min-width: 36.01rem) {
+  .footer-nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+  }
+}
+
+/* on a phone the whole row of a watch link takes the tap */
+@media (max-width: 43.99rem) {
+  .watch li { position: relative; }
+  .watch a::after { content: ""; position: absolute; inset: 0; }
+}
+
+/* ======================================================================
+   the home page on a phone: the doors come before the latest post. most
+   people on a phone come off instagram for the club
+   ====================================================================== */
+
+/* ======================================================================
+   the phone's home page. quick links where desktop puts start here, then
+   the latest post. the welcome copy, the doors and the videos are desktop
+   only: a phone wants the links, not the preamble.
+   ====================================================================== */
+
+/* desktop never sees the quick block */
+.quick { display: none; }
+
+@media (max-width: 43.99rem) {
+  #content:has(> .latest) { display: flex; flex-direction: column; }
+  #content > .quick  { order: 1; }
+  #content > .latest { order: 2; }
+
+  /* start here and the welcome paragraph step aside on a phone */
+  #content > .start { display: none; }
+  /* the latest post is a row in the quick list now */
+  #content > .latest { display: none; }
+  .home .intro { display: none; }
+
+  .quick { display: block; margin: 1.5rem 0 0; }
+}
+
+.quick__list { list-style: none; margin: 0; padding: 0; }
+
+/* the shadow eats 5px of this gap so it needs more than it looks like */
+.quick__row + .quick__row { margin-top: 1.15rem; }
+
+/* one tappable slab a row, the same hard edge every box on the site has */
+.quick__row a {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.85rem;
+  /* 44px of thumb, 1.4.11 and 2.5.5 */
+  min-height: 56px;
+  padding: 0.7rem 0.9rem;
+  background: var(--fill, var(--card-bg));
+  color: var(--row-fg, #0c0612);
+  border: 3px solid var(--edge-strong);
+  box-shadow: 5px 5px 0 var(--edge-strong);
+  text-decoration: none;
+}
+
+.quick__row a:active {
+  transform: translate(3px, 3px);
+  box-shadow: 2px 2px 0 var(--edge-strong);
+}
+
+.quick__icon { font-size: 1.3rem; color: var(--row-fg, #0c0612); }
+
+.quick__text { display: flex; flex-direction: column; min-width: 0; }
+
+.quick__label {
+  font-family: var(--mono);
+  font-weight: 800;
+  font-size: var(--fs-caption);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.25;
+}
+
+/* full strength, not faded: over the rainbow's red stop and the blurple a
+   72% ink or white sub line fell under 4.5:1 */
+.quick__sub {
+  font-family: var(--mono);
+  font-size: var(--fs-micro);
+  color: var(--row-fg, #0c0612);
+  opacity: 0.85;
+  line-height: 1.35;
+}
+
+.quick__go { font-size: 1rem; color: var(--row-fg, #0c0612); opacity: 0.85; }
+
+/* the fills, one per row, reusing the post card colours */
+/* the same colours the links page buttons use. the two dark fills take
+   white text, the rest keep ink */
+.quick__row--read a {
+  background: linear-gradient(90deg, #ff5555, #ffb86c, #f1fa8c, #50fa7b, #8be9fd, #bd93f9, #ff79c6, #ff5555) 0 0 / 200% 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .quick__row--read a { animation: rainbow 6s linear infinite; }
+}
+
+/* the podcast carries the links page stack: pale blue over yellow, orange
+   and rust, same values as .door--listen */
+.quick__row--listen { --fill: #b8dcee; }
+
+.quick__row--listen a {
+  box-shadow: 3px 3px 0 #ffd84d, 6px 6px 0 #f4a23c, 9px 9px 0 #c0502f;
+}
+
+.quick__row--listen a:active {
+  box-shadow: 1px 1px 0 #ffd84d, 2px 2px 0 #f4a23c, 3px 3px 0 #c0502f;
+}
+
+.quick__row--listen .quick__icon { color: #1f3f9e; }
+
+.quick__row--hang { --fill: #4752c4; --row-fg: #ffffff; }
+.quick__row--shop { --fill: #1185fe; }
+/* the same dracula purple the featured card wears on desktop */
+.quick__row--blog { --fill: #bd93f9; }
+
+/* the contact boxes sit under the rows. the dashed boxes already style
+   themselves, this just gives them air */
+.quick__transmit { margin-top: 1.9rem; }
+
+/* the book club strip under a post tagged books */
+.post-club { margin: 2.5rem 0 1.5rem; }
+
+/* the footer on a phone was two fifths of the page. same pieces closer
+   together */
+@media (max-width: 36rem) {
+  .site-footer { margin-top: 2.5rem; padding: 1rem 0 1.5rem; }
+  .footer-quote { margin-top: 0; padding: 2.1rem 1rem 0.9rem; }
+  .footer-quote p { font-size: 0.9rem; line-height: 1.45; }
+  .footer-cols { gap: 1.6rem; margin-top: 1.5rem; padding-top: 1.5rem; }
+  .footer-nav a { padding-block: 0.7rem; }
+  .site-footer .footer-built { margin-top: 1rem; }
+}
+
+/* ======================================================================
+   what i use folds. each group is a details and the title row is the
+   switch. closed to start so the page is short
+   ====================================================================== */
+
+.uses-group { margin-top: 0; }
+
+.uses-group > summary {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-height: 44px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.uses-group > summary::-webkit-details-marker { display: none; }
+
+.uses-group > summary .uses-group__title { flex: 1 1 auto; margin: 0; }
+
+/* a plus drawn from two bars so a screen reader has nothing to read. the
+   upright bar goes when the group is open and it reads as a minus */
+.uses-group > summary::after {
+  content: "";
+  flex: none;
+  width: 12px;
+  height: 12px;
+  background:
+    linear-gradient(var(--accent), var(--accent)) center / 100% 2px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) center / 2px 100% no-repeat;
+}
+
+.uses-group[open] > summary::after {
+  background: linear-gradient(var(--accent), var(--accent)) center / 100% 2px no-repeat;
+}
+
+.uses-group > summary:hover .uses-group__title { color: var(--fg); }
+
+.uses-group[open] > .uses-list { margin-bottom: 1rem; }
+
+/* ======================================================================
+   reading now and the book club are one row on a phone. the strip goes
+   and the book is the club row's second line
+   ====================================================================== */
+
+@media (max-width: 43.99rem) {
+  .home .now-reading { display: none; }
+}
+
+/* ======================================================================
+   now on the about page. four cards two across, each one leads with a
+   tag in its own colour the way reading now does
+   ====================================================================== */
+
+#now,
+#sites { scroll-margin-top: 1.5rem; }
+
+.now {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 40rem) {
+  .now { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.now__item {
+  --tag: #ff79c6;
+  margin: 0;
+  padding: 0.9rem 1rem 1rem;
+  background: var(--card-bg);
+  border: 3px solid var(--edge-strong);
+  box-shadow: 4px 4px 0 var(--edge-strong);
+}
+
+.now__item:nth-child(4n + 2) { --tag: #ffe14d; }
+.now__item:nth-child(4n + 3) { --tag: #8be9fd; }
+.now__item:nth-child(4n + 4) { --tag: #bd93f9; }
+
+/* ink on all four fills clears 4.5:1 in both themes */
+.now__label {
+  display: inline-block;
+  margin: 0 0 0.6rem;
+  padding: 2px 8px;
+  border: 2px solid var(--edge-strong);
+  background: var(--tag);
+  color: #0c0612;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.now__label::before { content: none; }
+
+.now__list {
+  margin: 0;
+  padding-left: 1.1rem;
+  list-style: disc;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+}
+
+.now__list li { margin-bottom: 0.3rem; }
+.now__list li::marker { color: var(--accent); }
+
+/* ======================================================================
+   sites i love and my 88x31s on the about page
+   ====================================================================== */
+
+/* the archive's rows: the site then what it is */
+.roll { list-style: none; margin: 0 0 1.25rem; padding: 0; }
+
+.roll li {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+  gap: 0.25rem 1rem;
+  align-items: baseline;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.roll a { color: var(--fg); font-weight: var(--head-weight); text-decoration: none; }
+.roll a:hover { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; }
+.roll__note { font-family: var(--mono); font-size: var(--fs-caption); color: var(--dim); text-align: right; }
+
+@media (max-width: 34rem) {
+  .roll li { grid-template-columns: 1fr; }
+  .roll__note { text-align: left; }
+}
+
+/* the buttons at their real size. pixelated so a retina screen doesn't
+   smear them */
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.buttons img {
+  display: block;
+  width: 88px;
+  height: 31px;
+  image-rendering: pixelated;
+  box-shadow: 3px 3px 0 var(--edge-strong);
   transition: transform 0.12s, box-shadow 0.12s;
 }
 
-.pay-button--coffee { background: var(--neon-yellow); }
-/* venmo's blue lightened enough to carry the ink text at 11.9:1 */
-.pay-button--venmo { background: #8ad0ff; }
+.buttons img:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--edge-strong);
+}
 
-.pay-button:hover,
-.pay-button:focus-visible {
-  transform: translate(-1px, -1px);
-  box-shadow: 3px 3px 0 var(--edge-strong);
+.buttons__note {
+  margin: 0 0 1.5rem;
+  font-family: var(--mono);
+  font-size: var(--fs-caption);
+  color: var(--dim);
+}
+
+/* ======================================================================
+   the 404 page. a big number and a little terminal with a way out
+   ====================================================================== */
+
+.page:has(.term) .page-title {
+  font-size: clamp(3.5rem, 16vw, 7rem);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+}
+
+/* dark in both themes. it is a terminal */
+.term {
+  position: relative;
+  margin: 2rem 0 1.75rem;
+  padding: 1.5rem 1.1rem 1rem;
+  background: light-dark(#0c0612, #120a1c);
+  color: #fbeaff;
+  border: 3px solid var(--edge-strong);
+  box-shadow: 6px 6px 0 light-dark(var(--neon-pink), var(--neon-cyan));
+  font-family: var(--mono);
+  font-size: var(--fs-body);
+  line-height: 1.7;
+}
+
+.term p { margin: 0; overflow-wrap: anywhere; }
+
+.term__tag {
+  position: absolute;
+  top: -0.65rem;
+  left: 0.6rem;
+  padding: 2px 8px;
+  background: #50fa7b;
   color: #0c0612;
+  border: 2px solid var(--edge-strong);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  line-height: 1.5;
+  text-transform: uppercase;
 }
 
-.pay-button:active {
-  transform: translate(1px, 1px);
-  box-shadow: 1px 1px 0 var(--edge-strong);
+.term__prompt { color: #ff79c6; font-weight: 800; }
+.term__out { color: #ff8585; }
+
+.term__ls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.4rem;
+  margin: 0 0 0.4rem;
+  padding: 0;
+  list-style: none;
 }
 
+/* bright cyan on the dark box in both themes, 13:1 */
+.term__ls a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  color: #8be9fd;
+  font-weight: 800;
+}
+
+.term__ls a:hover,
+.term__ls a:focus-visible { color: #f1fa8c; }
+
+.term__cursor {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.1em;
+  vertical-align: text-bottom;
+  background: #50fa7b;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .term__cursor { animation: blink 1s steps(1) infinite; }
+}
+
+/* ======================================================================
+   the fun stuff, all of it decoration. stickers in the margins of the
+   home page that you can drag, a wiggle, and what the code sets off.
+   fun.js does the dragging and the rain
+   ====================================================================== */
+
+/* a dragged sticker moves by these two. translate is its own property so
+   the tilt and the hover on transform keep working */
+.sticker { translate: var(--dx, 0) var(--dy, 0); }
+
+.sticker--loose { cursor: grab; touch-action: none; user-select: none; -webkit-user-drag: none; }
+
+.sticker--loose.is-held {
+  cursor: grabbing;
+  z-index: 20;
+  transform: rotate(0deg) scale(1.15);
+  transition: none;
+}
+
+/* only once the margins are wide enough to hold one */
+.scatter { display: none; }
+
+@media (min-width: 68rem) {
+  #content:has(> .scatter) { position: relative; }
+
+  .scatter { display: block; }
+  .scatter .sticker { position: absolute; margin: 0; }
+
+  .scatter__1 { top: 1rem; right: -8rem; }
+  .scatter__2 { top: 23%; left: -7rem; }
+  .scatter__3 { top: 47%; right: -8rem; }
+  .scatter__4 { top: 66%; left: -10rem; }
+  .scatter__5 { top: 88%; right: -8.5rem; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .scatter .sticker:hover:not(.is-held) { animation: wiggle 0.4s ease-in-out 2; }
+}
+
+@keyframes wiggle {
+  0%, 100% { rotate: 0deg; }
+  25% { rotate: -7deg; }
+  75% { rotate: 7deg; }
+}
+
+/* the code makes it rain stickers. fixed over everything and nothing in
+   it can be clicked */
+.rain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.rain img {
+  position: absolute;
+  top: -9rem;
+  height: auto;
+  filter: drop-shadow(3px 3px 0 var(--sticker-shadow));
+  animation: fall 3s linear both;
+}
+
+@keyframes fall {
+  to { transform: translateY(calc(100vh + 18rem)) rotate(var(--spin, 180deg)); }
+}
+
+/* and the page shudders once on the way in. no flash, just a shove and a
+   colour shift */
+html.glitch body { animation: glitch 0.6s steps(1) both; }
+
+@keyframes glitch {
+  0%   { transform: none; filter: none; }
+  15%  { transform: translate(-6px, 2px) skewX(-2deg); filter: hue-rotate(90deg) saturate(1.6); }
+  30%  { transform: translate(5px, -3px); filter: hue-rotate(-60deg); }
+  45%  { transform: translate(-3px, 1px) skewX(2deg); filter: hue-rotate(140deg) saturate(1.6); }
+  60%  { transform: translate(2px, 0); filter: none; }
+  100% { transform: none; filter: none; }
+}
+
+/* ======================================================================
+   small modern touches. each one is ignored by a browser that doesn't
+   know it
+   ====================================================================== */
+
+/* pages fade into each other instead of blinking */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+}
+
+/* headings break into even lines and a paragraph never ends on one word */
+h1, h2, h3 { text-wrap: balance; }
+p, li { text-wrap: pretty; }
+
+/* the video rows say they go somewhere */
+@media (min-width: 44rem) {
+  .watch__about::after {
+    content: " \2197";
+    content: " \2197" / "";
+    color: var(--accent);
+  }
+}
+
+/* ======================================================================
+   for people in a hurry. the short version on top of a post, how long it
+   takes, a bar that fills as you read, tag chips on the blog page and
+   tables that stack on a phone. post.js and filter.js do the moving parts
+   ====================================================================== */
+
+/* the short version. the reading now box again: a hard card with its tag
+   hung on the corner */
+.short {
+  position: relative;
+  margin: 0 0 2rem;
+  padding: 1.15rem 1rem 0.9rem;
+  background: var(--card-bg);
+  border: 3px solid var(--edge-strong);
+  box-shadow: 5px 5px 0 var(--edge-strong);
+}
+
+.short p { margin: 0; font-size: var(--fs-lead); line-height: 1.5; }
+
+.short__tag {
+  position: absolute;
+  top: -0.7rem;
+  left: 0.6rem;
+  padding: 2px 8px;
+  background: #ffe14d;
+  color: #0c0612;
+  border: 2px solid var(--edge-strong);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+/* the short version sits right under the date so the gap moves below it */
+.post-meta:has(+ .short) { margin-bottom: 1.6rem; }
+
+/* how long a post takes, after the date */
+.post-meta time { margin-right: 0; }
+.post-meta__read { margin-right: 0.4rem; }
+.post-meta__read::before { content: "\00b7"; margin-right: 0.5rem; }
+
+/* the reading bar. over everything and nothing in it can be clicked */
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  width: 100%;
+  height: 4px;
+  background: light-dark(var(--neon-pink), var(--neon-cyan));
+  transform: scaleX(var(--read, 0));
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
+
+/* the chips. tags, a size up so a thumb can hit one */
+.tag-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 1.4rem;
+  padding: 0;
+  list-style: none;
+}
+
+.tag-filter .tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0.15rem 0.7rem;
+  border-width: 2px;
+  font-size: var(--fs-caption);
+  font-weight: 700;
+}
+
+.tag-filter [data-filter=""]::before,
+.tag-filter__more::before { content: none; }
+
+/* more tags is a way out to the tags page so it is dashed, not a filter */
+.tag-filter__more { border-style: dashed; }
+
+/* on a phone the chips are one row that slides sideways so they never
+   push the posts down. it runs out to the right edge of the screen so the
+   cut-off chip says there is more. the padding is room for the shadow */
+@media (max-width: 40rem) {
+  .tag-filter {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-right: -1.25rem;
+    padding: 0 1.25rem 6px 0;
+    scrollbar-width: none;
+  }
+  .tag-filter::-webkit-scrollbar { display: none; }
+  .tag-filter li { flex: none; }
+  .tag-filter .tag { white-space: nowrap; }
+}
+
+/* the one that is on is filled in, the same as a hover, so it never leans
+   on colour alone */
+.tag-filter [aria-current="true"] {
+  background: var(--edge-strong);
+  color: light-dark(#ffffff, #07040c);
+  box-shadow: 3px 3px 0 var(--neon-pink);
+}
+
+/* .post-row sets display so hidden needs saying out loud */
+.post-row[hidden] { display: none; }
+
+/* a table on a phone. every row is its own small card and each cell
+   leads with the name of its column. post.js adds the class and the
+   labels, so with js off it is still an ordinary table */
+@media (max-width: 34rem) {
+  .post-content table.is-stacked,
+  .is-stacked tbody,
+  .is-stacked tr,
+  .is-stacked td { display: block; }
+
+  .is-stacked thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .is-stacked tr {
+    margin: 0 0 1rem;
+    padding: 0.75rem 0.9rem;
+    background: var(--card-bg);
+    border: 3px solid var(--edge-strong);
+    box-shadow: 4px 4px 0 var(--edge-strong);
+  }
+
+  .is-stacked td { padding: 0.2rem 0; border: 0; }
+  .is-stacked td + td { margin-top: 0.35rem; }
+
+  .is-stacked td::before {
+    content: attr(data-label);
+    display: block;
+    font-family: var(--mono);
+    font-size: var(--fs-micro);
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+}

@@ -6,11 +6,23 @@ layout: default
 
   <div class="post-meta">
     <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%-d %b %Y" }}</time>
+    <span class="post-meta__read">{% include read-time.html content=content %}</span>
     {%- assign topics = page.tags | concat: page.categories -%}
     {%- for t in topics -%}
       <a class="tag" href="{{ '/tags/' | relative_url }}#{{ t | slugify }}">{{ t }}</a>
     {%- endfor -%}
   </div>
+
+  {%- comment -%}
+    the whole post in one line for anyone in a hurry. `tldr:` in the front
+    matter if the post has one, otherwise the description does the job.
+  {%- endcomment -%}
+  {%- assign short = page.tldr | default: page.description -%}
+  {%- if short %}
+  <aside class="short" aria-label="TL;DR">
+    <p><span class="short__tag" aria-hidden="true">TL;DR</span>{{ short | escape }}</p>
+  </aside>
+  {%- endif %}
 
   {%- comment -%}
     `image:` is a path from the site root. `image_alt:` describes it for
@@ -27,6 +39,13 @@ layout: default
     {{ content }}
   </div>
 
+  {%- comment -%} a post tagged books ends with the way into the book club. the book and the link are in _data/start.yml {%- endcomment -%}
+  {%- if page.tags contains "books" %}
+  <aside class="now-reading post-club" aria-label="book club">
+    <p><span class="now-reading__tag">book club</span> <span class="now-reading__title">we're reading {{ site.data.start.reading }}</span> <a href="{{ site.data.start.reading_url }}">read it with us</a></p>
+  </aside>
+  {%- endif %}
+
   {%- if site.repo_url -%}
   <aside class="post-edit">
     <p>
@@ -38,14 +57,26 @@ layout: default
   </aside>
   {%- endif -%}
 
-  {%- if page.previous or page.next %}
-  <nav class="post-nav" aria-label="more posts">
-    {%- if page.previous %}
-    <a href="{{ page.previous.url | relative_url }}"><span class="post-nav__dir">older</span> {{ page.previous.title | escape }}</a>
-    {%- endif %}
-    {%- if page.next %}
-    <a href="{{ page.next.url | relative_url }}"><span class="post-nav__dir">newer</span> {{ page.next.title | escape }}</a>
+  {%- comment -%}
+    the end of a post is never a dead end: the next one to read is a whole
+    card in its own colour. that is the older post, or the newer one when
+    this is the oldest. `page.previous` is the older one in jekyll.
+  {%- endcomment -%}
+  {%- assign up = page.previous | default: page.next -%}
+  {%- if up %}
+  {%- assign up_index = 0 -%}
+  {%- for p in site.posts %}{% if p.url == up.url %}{% assign up_index = forloop.index0 %}{% endif %}{% endfor %}
+  <nav class="post-next" aria-labelledby="post-next-title">
+    <h2 class="section-title" id="post-next-title">Read next</h2>
+    <ul class="post-list">
+      {% include post-card.html post=up index=up_index %}
+    </ul>
+    {%- if page.previous and page.next %}
+    <p class="post-next__newer"><a href="{{ page.next.url | relative_url }}"><span class="post-next__dir">newer</span> {{ page.next.title | escape }}</a></p>
     {%- endif %}
   </nav>
   {%- endif %}
 </article>
+
+{%- comment -%} the reading bar and the tables that stack on a phone {%- endcomment %}
+<script src="{{ '/assets/js/post.js' | relative_url }}" defer></script>

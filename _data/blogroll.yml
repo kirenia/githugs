@@ -1,0 +1,14 @@
+# sites i love, the list on /about. in the order listed here. each one
+# needs name and url. note is optional and goes lowercase with no commas
+
+- name: info.cern.ch
+  url: https://info.cern.ch
+  note: the first website ever!!
+
+- name: samwho.dev
+  url: https://samwho.dev
+  note: programming explained with pictures
+
+- name: petracoding
+  url: https://petracoding.github.io
+  note: make your own site

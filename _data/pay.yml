@@ -1,9 +1,7 @@
-# the tip jars in the footer. in _data rather than _config.yml so jekyll
-# picks up an edit without a server restart. drop an entry to drop a button
-- label: buy me a coffee
+# the tip jar. it is the last square in the footer row. in _data rather than
+# _config.yml so jekyll picks up an edit without a server restart
+- label: tip jar
   url: https://buy.stripe.com/cNi6oHbql47h95Wb16efC00
-  class: pay-button--coffee
-
-- label: venmo me
-  url: https://account.venmo.com/u/githugs
-  class: pay-button--venmo
+  # a font awesome glyph so it is the same size as the other squares.
+  # `svg: cup` instead draws the outline cup in _includes/cup.svg
+  icon: fa-solid fa-heart

@@ -1,0 +1,19 @@
+{%- comment -%}
+  the two dashed boxes off the links page: email and snail mail each with
+  a copy button. the address is in _data/contact.yml. the page that uses
+  this needs `scripts: [copy]` in its front matter for the buttons.
+  both buttons say copy so each one carries a hidden word for what it
+  copies. copy.js only swaps the visible word.
+{%- endcomment -%}
+<div class="transmit">
+<div class="transmit__box">
+<p class="transmit__label">email</p>
+<p class="transmit__value" id="copy-email"><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+<button class="transmit__copy" type="button" data-copy="copy-email" aria-live="polite"><span data-copy-word>copy</span><span class="visually-hidden"> email address</span></button>
+</div>
+<div class="transmit__box">
+<p class="transmit__label">snail mail</p>
+<address class="transmit__value" id="copy-mail">{% for line in site.data.contact.snail_mail %}{{ line | escape }}{% unless forloop.last %}<br>{% endunless %}{% endfor %}</address>
+<button class="transmit__copy" type="button" data-copy="copy-mail" aria-live="polite"><span data-copy-word>copy</span><span class="visually-hidden"> mailing address</span></button>
+</div>
+</div>

@@ -1,6 +1,12 @@
-{%- comment -%} built from _data/social.yml; handles come from _config.yml {%- endcomment -%}
+{%- comment -%}
+  built from _data/social.yml; handles come from _config.yml. pass
+  `only: "bluesky,instagram"` to show just those titles in that order;
+  without it every entry shows and the tip jar rides along at the end.
+{%- endcomment -%}
+{%- if include.only -%}{%- assign allow = include.only | split: "," -%}{%- endif -%}
 <ul class="social-media-list">
   {%- for item in site.data.social -%}
+    {%- if allow -%}{%- unless allow contains item.title -%}{%- continue -%}{%- endunless -%}{%- endif -%}
     {%- assign handle = site[item.field] -%}
     {%- if item.field and handle == nil -%}{%- continue -%}{%- endif -%}
     {%- if item.href -%}
@@ -11,7 +17,8 @@
       {%- capture href -%}{{ item.url }}{{ handle | cgi_escape }}{{ item.suffix }}{%- endcapture -%}
     {%- endif -%}
   <li>
-    <a{% if item.class %} class="{{ item.class }}"{% endif %} href="{{ href | escape }}" title="{{ item.title }}"{% unless item.same_tab %} rel="me noopener noreferrer" target="_blank"{% endunless %}><i class="{{ item.icon }}" aria-hidden="true"></i><span class="username">{{ item.label | default: handle | escape }}</span></a>
+    <a{% if item.class %} class="{{ item.class }}"{% endif %} href="{{ href | escape }}" title="{{ item.title }}"{% unless item.same_tab %} rel="me noopener noreferrer" target="_blank"{% endunless %}><i class="{{ item.icon }}" aria-hidden="true"></i><span class="visually-hidden">{{ item.title }}: </span><span class="username">{{ item.label | default: handle | escape }}</span></a>
   </li>
   {%- endfor -%}
+  {%- unless include.only -%}{%- include pay.html -%}{%- endunless -%}
 </ul>

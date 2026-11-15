@@ -2,9 +2,29 @@
 permalink: /404.html
 layout: page
 title: 404
-sticker: petrock
+description: "This page flatlined."
+# fills in the path someone asked for
+scripts: [lost]
+sitemap: false
 ---
 
-<p><strong>page not found.</strong> the requested page could not be found - it may have moved, or it may never have existed.</p>
+<p class="subtitle">flatlined. this page moved or it was never here</p>
 
-<p><a href="{{ '/' | relative_url }}">back home</a></p>
+{%- comment -%}
+  a little terminal. the path is filled in by lost.js and with js off it
+  just says this page. the ls is real links so there is a way out.
+{%- endcomment %}
+<div class="term">
+  <p class="term__tag" aria-hidden="true">githugs.lol</p>
+  <p class="term__line"><span class="term__prompt" aria-hidden="true">&gt; </span>cd <span data-lost-path>this-page</span></p>
+  <p class="term__out">no such file or directory</p>
+  <p class="term__line"><span class="term__prompt" aria-hidden="true">&gt; </span>ls</p>
+  <ul class="term__ls">
+    <li><a href="{{ '/' | relative_url }}">home/</a></li>
+    <li><a href="{{ '/blog/' | relative_url }}">blog/</a></li>
+    <li><a href="{{ '/about/' | relative_url }}">about/</a></li>
+    <li><a href="{{ '/archive/' | relative_url }}">archive/</a></li>
+    <li><a href="{{ '/tags/' | relative_url }}">tags/</a></li>
+  </ul>
+  <p class="term__line"><span class="term__prompt" aria-hidden="true">&gt; </span><span class="term__cursor" aria-hidden="true"></span></p>
+</div>

@@ -1,0 +1,55 @@
+# the start here section on the home page. in _data so jekyll picks up an
+# edit without a server restart
+
+# the book in the reading now strip at the top of the home page. change
+# these two when the club picks the next one
+reading: "Do Androids Dream of Electric Sheep?"
+reading_url: https://joy.githugs.lol
+
+# the three doors in order. `kind` picks the colours (read listen hang) and
+# `icon` is a font awesome class. `discord: true` uses the invite in _config.yml
+doors:
+  - kind: read
+    icon: fa-brands fa-patreon
+    kicker: read
+    label: Free cyberpunk book club
+    text: we read the classics together
+    go: join the club
+    url: https://joy.githugs.lol
+  - kind: listen
+    icon: fa-solid fa-rss
+    kicker: listen
+    label: A (slightly) Better Tomorrow
+    text: my futures podcast
+    go: play an episode
+    url: https://aslightlybetterpod.com/
+  - kind: hang
+    icon: fa-brands fa-discord
+    kicker: hang out
+    label: GitHugs HQ
+    text: our awesome community
+    go: come say hi
+    discord: true
+
+# the rows a phone gets instead of the doors. the three doors above are
+# reused first, then these, then the social squares. desktop never shows
+# this block
+quick_extra:
+  - kind: shop
+    icon: fa-solid fa-book
+    label: My Bookshop.org
+    text: books i actually recommend
+    url: https://bookshop.org/shop/githugs
+
+# three videos for someone who has never seen one. `about` is the small
+# label on the right
+watch:
+  - title: The Butlerian Jihad and the Orange Catholic Bible
+    about: Dune
+    url: https://www.instagram.com/githugs_/reel/DecSJWtMhTb/
+  - title: Neuromancer is coming to Apple TV
+    about: Neuromancer
+    url: https://www.instagram.com/githugs_/reel/Dbc0-PusYT-/
+  - title: The book Blade Runner came from
+    about: Do Androids Dream
+    url: https://www.instagram.com/githugs_/reel/Dbg_J21htXA/

@@ -1,6 +1,5 @@
 {%- comment -%}
-  the strip across the top: who is in the discord on the left then the three
-  buttons on the right. same shape and size one colour each.
+  the strip across the top: who is in the discord on the left then plain links and the one button.
 {%- endcomment -%}
 <div class="bar wrap">
   {%- if site.discord_guild_id and site.discord_invite -%}
@@ -10,9 +9,11 @@
   {%- endif %}
 
   <nav class="bar__right" aria-label="main">
-    <a class="chip chip--home" href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>home</a>
-    <a class="chip chip--archive" href="{{ '/archive/' | relative_url }}"{% if page.url == '/archive/' %} aria-current="page"{% endif %}>archive</a>
-    <button class="chip chip--jack" type="button" data-theme-toggle>jack-in</button>
-    <button class="chip chip--zen" type="button" data-zen-toggle aria-pressed="false">zen</button>
+    <a class="bar__link" href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>home</a>
+    <a class="bar__link" href="{{ '/about/' | relative_url }}"{% if page.url == '/about/' %} aria-current="page"{% endif %}>about</a>
+    <a class="bar__link" href="{{ '/blog/' | relative_url }}"{% if page.url == '/blog/' %} aria-current="page"{% endif %}>blog</a>
   </nav>
+
+  {%- comment -%} after the links in the markup so tab order reads left to right. on a phone css lifts it to the top right beside the discord line, which shortens to make room {%- endcomment %}
+  <button class="chip chip--jack" type="button" data-theme-toggle aria-label="jack in">jack<span class="jack__rest"> in ⚡</span></button>
 </div>

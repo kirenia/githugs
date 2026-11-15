@@ -12,29 +12,18 @@
     <p>{{ site.description | escape }}</p>
     {%- endif -%}
 
-    {%- if site.data.pay -%}
-    <div class="footer-pay">
-      {%- for jar in site.data.pay %}
-      <a class="pay-button {{ jar.class }}" href="{{ jar.url }}"{% if jar.aria %} aria-label="{{ jar.aria | escape }}"{% endif %} rel="noopener noreferrer" target="_blank">
-        {%- if jar.svg %}{% include {{ jar.svg | append: '.svg' }} %}{% else %}<i class="{{ jar.icon }}" aria-hidden="true"></i>{% endif %}
-        {%- if jar.label != "" %}<span>{{ jar.label | escape }}</span>{% endif %}
-      </a>
-      {%- endfor %}
-    </div>
-    {%- endif -%}
-
     <div class="footer-cols">
       {%- comment -%} no visible heading the icons say it. the label is for screen readers {%- endcomment %}
       <nav aria-label="githugs on other sites">
         {% include social.html %}
       </nav>
 
-      {%- comment -%} the pages the four chips in the bar have no room for {%- endcomment %}
+      {%- comment -%} the pages the bar has no room for. stacked under the socials {%- endcomment %}
       <nav class="footer-nav" aria-label="more pages">
         <ul>
           <li><a href="{{ '/' | relative_url }}">home</a></li>
           <li><a href="{{ '/about/' | relative_url }}">about</a></li>
-          <li><a href="{{ '/now/' | relative_url }}">now</a></li>
+          <li><a href="{{ '/blog/' | relative_url }}">blog</a></li>
           <li><a href="{{ '/archive/' | relative_url }}">archive</a></li>
           <li><a href="{{ '/tags/' | relative_url }}">tags</a></li>
           <li><a href="{{ '/feed.xml' | relative_url }}">rss</a></li>

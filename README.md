@@ -36,6 +36,7 @@ A file in `_posts/`, named `YYYY-MM-DD-some-title.markdown`.
 title: "Title In Normal Casing"
 date: 2026-10-06 18:40:00 -0600
 description: "One sentence. Shows on the home page and in link previews."
+tldr: "The whole post in one line. Optional."
 tags: [cyberdecks, guides]
 image: /assets/img/posts/my-photo.jpg
 image_alt: "what the picture shows"
@@ -44,6 +45,8 @@ sticker: dune
 ```
 
 Only `title` and `date` are required.
+
+Every post opens with a TL;DR box. It shows `tldr` if the post has one and the `description` if it doesn't.
 
 Titles and headings get typed properly cased. The CSS lowercases them. That way the page looks the way I want and screen readers, search and anyone copying text still get real sentences.
 
@@ -93,6 +96,9 @@ A `field` entry drops out if that key isn't in `_config.yml`. `icon` is a Font A
 Barely any, and nothing breaks without it.
 
 - `site.js` sends off-site links to a new tab and says hi in the console
+- `fun.js` is the stickers you can drag and the cheat code
+- `post.js` is the reading bar on a post and the tables that stack on a phone
+- `filter.js` is the tag chips on the blog page
 - `jack.js` is the light/dark toggle. Half of it is inline in `_includes/head.html` because it has to run before the browser paints, or you get a white flash on the way into dark
 
 A script that only one page needs goes in `assets/js/` and that page asks for it in front matter, so it loads there and nowhere else:
@@ -103,7 +109,7 @@ scripts: [whatever]
 
 ## theme
 
-Dracula, two ways. Light is an old science page: Georgia on off-white, justified copy, hard square edges, a flat band across the top. Dark is a terminal: Fira Sans, a `>` in front of the headings, a cursor blinking after my name. Monospace carries the small stuff in both, the nav and the dates and the tags. The palette is custom properties at the top of `style.css` and `light-dark()` picks the side, so every color is written once. Georgia ships on every machine, so light mode loads no font at all. There's a post about it.
+Dracula, two ways. Light is an old science page: Georgia on off-white, hard square edges, a flat band across the top. Dark is a terminal: Fira Sans, a `>` in front of the headings, a cursor blinking after my name. Monospace carries the small stuff in both, the nav and the dates and the tags. The palette is custom properties at the top of `style.css` and `light-dark()` picks the side, so every color is written once. Georgia ships on every machine, so light mode loads no font at all. There's a post about it.
 
 ## deploying
 

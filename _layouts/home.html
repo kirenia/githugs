@@ -12,19 +12,23 @@ layout: default
 <div class="home">
 <h1 class="home__mark" aria-label="githugs.lol">githugs.lol</h1>
 
-{%- comment -%} the redesign notice. a slim strip meant to come down in a few weeks {%- endcomment -%}
-<aside class="banner">
-  <p class="banner__news"><span class="banner__tag">new</span> we&rsquo;ve gone neon brutalist, but there&rsquo;s a zen mode button too</p>
+{%- comment -%} what the book club is reading. the book and the link are in _data/start.yml. the title is plain words and read it with us is the one link {%- endcomment -%}
+<aside class="now-reading">
+  <p><span class="now-reading__tag">reading now</span> <span class="now-reading__title">{{ site.data.start.reading }}</span> <a class="now-reading__cta" href="{{ site.data.start.reading_url }}">read it with us</a></p>
 </aside>
 
 <div class="intro">{{ content }}</div>
+</div>
+
+{%- comment -%} phone only. css hides it on desktop, where start here does this job {%- endcomment -%}
+{% include quick.html %}
 
 {%- assign featured = site.posts.first -%}
-{%- comment -%} how many posts the list shows under the featured one {%- endcomment -%}
-{%- assign latest_count = 6 -%}
 
+{%- comment -%} its own section and outside .home. on a phone css moves it under the doors {%- endcomment %}
+<section class="latest" aria-labelledby="latest-title">
 {%- if featured %}
-<h2 class="section-title" id="latest-title">Latest</h2>
+<h2 class="section-title" id="latest-title">Latest blog</h2>
 
 <article class="feature c1">
   {% include post-thumb.html post=featured %}
@@ -32,7 +36,7 @@ layout: default
     <h3 class="feature__title"><a href="{{ featured.url | relative_url }}">{{ featured.title | escape }}</a></h3>
     {%- assign blurb = featured.description | default: featured.excerpt -%}
     {%- if blurb %}<p class="feature__excerpt">{{ blurb | strip_html | normalize_whitespace | truncatewords: 30 }}</p>{% endif -%}
-    <p class="post-row__meta"><time datetime="{{ featured.date | date_to_xmlschema }}">{{ featured.date | date: "%-d %b %Y" }}</time></p>
+    <p class="post-row__meta"><time datetime="{{ featured.date | date_to_xmlschema }}">{{ featured.date | date: "%-d %b %Y" }}</time> <span aria-hidden="true">·</span> {% include read-time.html content=featured.content %}</p>
     {%- assign topics = featured.tags | concat: featured.categories -%}
     {%- if topics.size > 0 %}
     <ul class="post-row__tags">
@@ -45,18 +49,11 @@ layout: default
 </article>
 {%- endif %}
 
-{%- if site.posts.size > 1 %}
-<h2 class="section-title" id="more-title">More</h2>
-
-<ul class="post-list">
-  {%- for post in site.posts offset: 1 limit: latest_count -%}
-    {%- comment -%} index starts at 1 so the list carries on from the featured post's colour {%- endcomment -%}
-    {% include post-card.html post=post index=forloop.index %}
-  {%- endfor -%}
-</ul>
-
-<p class="home-more"><a class="button button--quiet" href="{{ '/archive/' | relative_url }}">see all posts</a></p>
-{%- elsif site.posts.size == 0 -%}
+{%- comment -%} one post here. the rest are on the blog page which is in the bar {%- endcomment -%}
+{%- if site.posts.size == 0 %}
 <p>no posts yet. drop a markdown file in <code>_posts/</code>.</p>
 {%- endif %}
-</div>
+</section>
+
+{%- comment -%} outside .home on purpose. that box clips its sides for the wordmark and would shave the doors when they lift {%- endcomment %}
+{% include start.html %}

@@ -1,0 +1,49 @@
+{%- comment -%}
+  the phone's quick links. the three doors from _data/start.yml come first
+  so there is one source for them, then quick_extra, then the socials.
+  css hides this whole block on desktop, where the doors show instead.
+  the book club row doubles as the reading now strip on a phone: its
+  second line is the book, written the way the latest blog row is.
+{%- endcomment -%}
+{%- assign start = site.data.start -%}
+<nav class="quick" aria-label="Quick links">
+<ul class="quick__list">
+{%- for row in start.doors %}
+{%- assign sub = row.text -%}
+{%- if row.kind == "read" and start.reading %}{% assign sub = "reading now · " | append: start.reading %}{% endif %}
+<li class="quick__row quick__row--{{ row.kind }}">
+<a href="{% if row.discord %}{{ site.discord_invite }}{% else %}{{ row.url }}{% endif %}">
+<i class="quick__icon {{ row.icon }}" aria-hidden="true"></i>
+<span class="quick__text"><span class="quick__label">{{ row.label | escape }}</span><span class="quick__sub">{{ sub | escape }}</span></span>
+<span class="quick__go" aria-hidden="true">&#8599;</span>
+</a>
+</li>
+{%- endfor %}
+{%- for row in start.quick_extra %}
+<li class="quick__row quick__row--{{ row.kind }}">
+<a href="{{ row.url | relative_url }}">
+<i class="quick__icon {{ row.icon }}" aria-hidden="true"></i>
+<span class="quick__text"><span class="quick__label">{{ row.label | escape }}</span><span class="quick__sub">{{ row.text | escape }}</span></span>
+<span class="quick__go" aria-hidden="true">&#8599;</span>
+</a>
+</li>
+{%- endfor %}
+{%- assign featured = site.posts.first -%}
+{%- if featured %}
+<li class="quick__row quick__row--blog">
+<a href="{{ featured.url | relative_url }}">
+<i class="quick__icon fa-solid fa-file-lines" aria-hidden="true"></i>
+<span class="quick__text"><span class="quick__label">{{ featured.title | escape }}</span><span class="quick__sub">latest blog &middot; {{ featured.date | date: "%-d %b %Y" }}</span></span>
+<span class="quick__go" aria-hidden="true">&#8599;</span>
+</a>
+</li>
+{%- endif %}
+</ul>
+
+{%- comment -%}
+  the real contact boxes rather than a link to them. needs `scripts: [copy]`
+  in the home page front matter for the copy buttons. the socials are not
+  repeated here, the footer already carries them.
+{%- endcomment -%}
+<div class="quick__transmit">{% include transmit.html %}</div>
+</nav>

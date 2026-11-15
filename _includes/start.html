@@ -1,0 +1,31 @@
+{%- comment -%}
+  the start here section at the bottom of the home page: the doors and
+  the short list. everything in it comes from _data/start.yml. the bar and
+  the footer link to #start and /start/ redirects here.
+{%- endcomment -%}
+{%- assign start = site.data.start -%}
+<section class="start" id="start" aria-labelledby="start-title">
+<h2 class="section-title" id="start-title">Start here</h2>
+
+<p class="subtitle">read. listen. hang out. repeat.</p>
+
+<ul class="doors">
+{%- for door in start.doors %}
+<li class="door door--{{ door.kind }}">
+<i class="door__icon {{ door.icon }}" aria-hidden="true"></i>
+<p class="door__kicker">{{ door.kicker }}</p>
+<h3 class="door__label">{{ door.label }}</h3>
+<p class="door__text">{{ door.text }}</p>
+<p class="door__go"><a href="{% if door.discord %}{{ site.discord_invite }}{% else %}{{ door.url }}{% endif %}">{{ door.go }}</a></p>
+</li>
+{%- endfor %}
+</ul>
+
+<h3 class="section-title" id="watch">The videos that started it all</h3>
+
+<ol class="watch">
+{%- for video in start.watch %}
+<li><span class="watch__num" aria-hidden="true">0{{ forloop.index }}</span><a href="{{ video.url }}">{{ video.title | escape }}</a><span class="watch__about">{{ video.about | escape }}</span></li>
+{%- endfor %}
+</ol>
+</section>

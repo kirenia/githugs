@@ -1,0 +1,6 @@
+{%- comment -%} the tip jar as the last square in the footer row. the mug and the link are in _data/pay.yml {%- endcomment -%}
+{%- for jar in site.data.pay %}
+  <li>
+    <a class="soc soc--tip" href="{{ jar.url }}" title="{{ jar.label | escape }}" rel="payment noopener noreferrer" target="_blank">{% if jar.svg %}{% include {{ jar.svg | append: ".svg" }} %}{% else %}<i class="{{ jar.icon }}" aria-hidden="true"></i>{% endif %}<span class="username">{{ jar.label | escape }}</span></a>
+  </li>
+{%- endfor -%}

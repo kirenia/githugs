@@ -1,8 +1,9 @@
 ---
 layout: home
 title: githugs(lol)
+description: "githugs is Kire Góngora. A free cyberpunk book club, a podcast about futures worth wanting, and a blog about code and the open web."
+# the copy buttons in the transmit boxes on a phone
+scripts: [copy]
 ---
 
-Welcome to my dev site. I'm a software engineer, mostly known as githugs around socials, and this is where I keep code and notes and whatever else I'm breaking this week. [Get to know me better](/about/).
-
-Away from the keyboard I host [A (slightly) Better Tomorrow](https://aslightlybetterpod.com), a podcast about futures, and run a free cyberpunk book club. Want to build something together or just say hi? I'm [githugs@proton.me](mailto:githugs@proton.me).
+I'm Kire, a software engineer mostly known as githugs around socials. This is where I keep code and notes and whatever else I'm breaking this week. [Get to know me better](/about/).

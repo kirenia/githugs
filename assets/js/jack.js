@@ -11,7 +11,10 @@
     root.dataset.theme ? root.dataset.theme === "dark" : prefersDark.matches;
 
   const label = () => {
-    btn.textContent = isDark() ? "jack-out" : "jack-in";
+    const way = isDark() ? "out" : "in";
+    // the second half is a span so the chip's flex box keeps the space
+    btn.innerHTML = 'jack<span class="jack__rest"> ' + way + " ⚡</span>";
+    btn.setAttribute("aria-label", "jack " + way);
   };
 
   btn.addEventListener("click", () => {

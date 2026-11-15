@@ -1,0 +1,53 @@
+---
+layout: page
+title: Blog
+permalink: /blog/
+description: "Every post, newest first."
+# the tag chips filter the list in place
+scripts: [filter]
+---
+{%- comment -%}
+  every post newest first as the same coloured rows the home page uses.
+  the home page shows the latest few and sends people here. the plain
+  list by year is the archive which is linked from the footer.
+{%- endcomment -%}
+
+{%- if site.posts.size > 0 %}
+{%- comment -%} the rows are h3s so this keeps the outline from skipping a level {%- endcomment %}
+<h2 class="visually-hidden">all posts</h2>
+
+{%- comment -%}
+  tap a tag and the list narrows to it, tap it again for everything. with
+  js off each chip is a plain link to that tag on the tags page.
+  only the five most used tags get a chip so the row stays one row however
+  many tags there are. the rest are behind more tags. the count is padded
+  so the names sort as numbers, biggest first.
+{%- endcomment %}
+{%- assign counted = "" | split: "" -%}
+{%- for tag in site.tags -%}
+  {%- assign item = tag[1].size | plus: 1000 | append: "|" | append: tag[0] -%}
+  {%- assign counted = counted | push: item -%}
+{%- endfor -%}
+{%- assign counted = counted | sort | reverse %}
+<ul class="tag-filter" aria-label="filter posts by tag">
+  <li><a class="tag" href="{{ '/blog/' | relative_url }}" data-filter="" aria-current="true">all</a></li>
+  {%- for item in counted limit: 5 %}
+  {%- assign name = item | split: "|" | last %}
+  <li><a class="tag" href="{{ '/tags/' | relative_url }}#{{ name | slugify }}" data-filter="{{ name | slugify }}">{{ name }}</a></li>
+  {%- endfor %}
+  {%- if counted.size > 5 %}
+  <li><a class="tag tag-filter__more" href="{{ '/tags/' | relative_url }}">more tags</a></li>
+  {%- endif %}
+</ul>
+<p class="visually-hidden" role="status" data-filter-status></p>
+
+<ul class="post-list">
+  {%- for post in site.posts -%}
+    {% include post-card.html post=post index=forloop.index0 %}
+  {%- endfor -%}
+</ul>
+
+<p class="home-more"><a class="button button--quiet" href="{{ '/archive/' | relative_url }}">archive</a></p>
+{%- else %}
+<p>no posts yet.</p>
+{%- endif %}

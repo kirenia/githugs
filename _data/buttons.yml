@@ -1,0 +1,10 @@
+# my 88x31 buttons, the row on /about. the files are in
+# assets/img/buttons/. `alt` is what the button says. anyone is welcome to
+# save one and link it back here
+
+- file: githugs-88x31.gif
+  alt: githugs
+- file: cyberpunk-88x31.gif
+  alt: cyberpunk
+- file: read-more-sci-fi-88x31.gif
+  alt: read more sci-fi

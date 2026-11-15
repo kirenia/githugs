@@ -1,0 +1,7 @@
+{%- comment -%}
+  how long a post takes to read at 200 words a minute, rounded and never
+  less than one. pass it the post's content as `content`.
+{%- endcomment -%}
+{%- assign words = include.content | strip_html | number_of_words -%}
+{%- assign mins = words | plus: 100 | divided_by: 200 | at_least: 1 -%}
+{{- mins }} min read

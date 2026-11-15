@@ -6,7 +6,7 @@
      do the main work these cover tools that read the page instead -->
 <meta name="robots" content="noai, noimageai, noarchive">
 <meta name="tdm-reservation" content="1">
-<meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
+<meta name="description" content="{{ page.description | default: page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
 <link rel="canonical" href="{{ page.url | absolute_url }}">
 
 {%- comment -%}
@@ -26,22 +26,23 @@
 <meta property="og:title" content="{{ page.title | default: site.title | escape }}">
 <meta property="og:description" content="{{ page.description | default: page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 200 | escape }}">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
-{%- if page.image %}
-<meta property="og:image" content="{{ page.image | absolute_url }}">
-{%- if page.image_alt %}
-<meta property="og:image:alt" content="{{ page.image_alt | escape }}">
+{%- comment -%} no picture of its own means the site card from _config.yml {%- endcomment %}
+{%- assign _share = page.image | default: site.share_image -%}
+{%- assign _share_alt = page.image_alt -%}
+{%- unless page.image -%}{%- assign _share_alt = site.share_image_alt -%}{%- endunless -%}
+{%- if _share %}
+<meta property="og:image" content="{{ _share | absolute_url }}">
+{%- if _share_alt %}
+<meta property="og:image:alt" content="{{ _share_alt | escape }}">
 {%- endif %}
 <meta name="twitter:card" content="summary_large_image">
 {%- else %}
 <meta name="twitter:card" content="summary">
 {%- endif %}
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;900&family=Fira+Sans:ital,wght@0,400;0,500;0,700;1,400&family=JetBrains+Mono:ital,wght@0,400;0,600;0,800;1,400&family=Fira+Code:wght@400;500;700&display=swap">
-<link rel="stylesheet" id="icon-css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+{%- comment -%} the fonts and the icons are in assets/fonts. nothing is fetched from anyone else {%- endcomment %}
+<link rel="stylesheet" href="{{ '/assets/css/fonts.css' | relative_url }}">
 <link rel="stylesheet" id="theme-css" href="{{ '/assets/css/style.css' | relative_url }}">
-<link rel="stylesheet" href="{{ '/assets/css/zen.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 <link rel="icon" type="image/png" href="{{ '/assets/img/stickers/star.png' | relative_url }}">
 <link rel="apple-touch-icon" href="{{ '/assets/img/stickers/star.png' | relative_url }}">
 {% feed_meta %}
@@ -52,22 +53,6 @@
     try {
       var t = localStorage.getItem("theme");
       if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
-    } catch (e) {}
-
-    // zen mode: switch the whole theme off and leave plain html behind.
-    // done here, before paint, so the styled page never flashes first.
-    try {
-      if (localStorage.getItem("zen") !== "on") return;
-      document.documentElement.dataset.zen = "on";
-      document.write(
-        '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap">'
-      );
-      document.addEventListener("DOMContentLoaded", function () {
-        var theme = document.getElementById("theme-css");
-        var icons = document.getElementById("icon-css");
-        if (theme) theme.disabled = true;
-        if (icons) icons.disabled = true;
-      });
     } catch (e) {}
   })();
 </script>

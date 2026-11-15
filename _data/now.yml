@@ -1,6 +1,6 @@
-# what i'm doing now, the page at /now. each group is a block on the page in
+# what i'm doing now, the now section on /about. each group is a card in
 # the order listed here. an item needs name. url and note are both optional.
-# change the `updated` date in now.markdown when you change anything here
+# change `now_updated` in about.markdown when you change anything here
 
 - title: Reading
   items:
