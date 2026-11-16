@@ -12,7 +12,7 @@ now_updated: 2026-10-29
 
 <p class="subtitle">build. break. fix. repeat.</p>
 
-Hola! I'm Kire. I'm a software engineer and I've been building for the web professionally since 2015, with a few stops and restarts in between, which I think is the normal shape of a career and not a flaw in mine.
+Hola! I'm Kire, mostly known as [githugs](https://instagram.com/githugs_) on the 'gram. I'm a software engineer and I've been building for the web professionally since 2015, with a few stops and restarts in between, which I think is the normal shape of a career and not a flaw in mine.
 
 I write React and TypeScript and a lot of plain JavaScript, and I'm just as happy in a WordPress theme as in a framework. I care about things loading fast and being usable by everyone, which is why I've spent years deep in WCAG. Right now I'm a contract developer in a newsroom. Before that I spent two years as a dev at a national lab, and before that I was a helicopter mechanic in the Marine Corps, which explains more about how I debug than any of the rest of it.
 

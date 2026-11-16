@@ -39,11 +39,12 @@ mastodon_username: githugs
 patreon_username: githugs
 github_username: kirenia
 tiktok_username: githugs
+tumblr_username: cyberpunkmami
 # snapchat_username: cyberpunkmami  # off the footer for now
 # full links used as is
 discord_invite: https://discord.gg/NtZcphhA3
 discord_guild_id: 1562965460541112380
-# upscrolled_url: https://upscrolled.com/@githugs  # off the footer for now
+upscrolled_url: https://upscrolled.com/@githugs
 
 # the omg.lol square in the footer links to this address
 omg_address: kire

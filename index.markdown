@@ -6,4 +6,4 @@ description: "githugs is Kire Góngora. A free cyberpunk book club, a podcast ab
 scripts: [copy]
 ---
 
-I'm Kire, a software engineer mostly known as githugs around socials. This is where I keep code and notes and whatever else I'm breaking this week. [Get to know me better](/about/).
+I'm Kire, a software engineer mostly known as [githugs](https://instagram.com/githugs_) around socials. This is where I keep code and notes and whatever else I'm breaking this week. [Get to know me better](/about/).

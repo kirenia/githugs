@@ -1,52 +1,66 @@
 # the footer row in order. `field` names the _config.yml key with the handle
 # so dropping the key either place drops the link. `icon` is a font awesome
 # class. `full: true` means the config value is a whole link used as is.
-# three plus the tip jar. email and rss are left off on purpose: email is in the hello
-# and rss is in the bar. everything else is parked at the bottom of this
-# file ready to switch back on
+# six plus the tip jar: the places i would rather you find me. instagram
+# and tiktok are for finding people so they are parked, this site is home.
+# email and rss are left off on purpose: email is in the hello and rss is
+# in the bar. everything else is parked at the bottom of this file ready
+# to switch back on
 - field: bluesky_username
   title: bluesky
   class: soc soc--bs
   icon: fa-brands fa-bluesky
   url: https://bsky.app/profile/
-- field: instagram_username
-  title: instagram
-  class: soc soc--ig
-  icon: fa-brands fa-instagram
-  url: https://instagram.com/
-- field: tiktok_username
-  title: tiktok
-  class: soc soc--tt
-  icon: fa-brands fa-tiktok
-  url: https://tiktok.com/@
+- field: mastodon_username
+  title: mastodon
+  class: soc soc--mast
+  icon: fa-brands fa-mastodon
+  url: https://mastodon.social/@
+# no upscrolled glyph in the icon font so it borrows the film strip. it is
+# where the videos go
+- field: upscrolled_url
+  title: upscrolled
+  class: soc soc--up
+  icon: fa-solid fa-film
+  full: true
+  label: upscrolled
+- field: tumblr_username
+  title: tumblr
+  class: soc soc--tb
+  icon: fa-brands fa-tumblr
+  url: https://www.tumblr.com/
+- field: patreon_username
+  title: patreon
+  class: soc soc--pat
+  icon: fa-brands fa-patreon
+  url: https://www.patreon.com/
+- field: discord_invite
+  title: discord
+  class: soc soc--dc
+  icon: fa-brands fa-discord
+  full: true
+  label: discord
 
 # ---------------------------------------------------------------------
 # parked. uncomment a block to put it back in the footer row
 #
-# - field: discord_invite
-#   title: discord
-#   class: soc soc--dc
-#   icon: fa-brands fa-discord
-#   full: true
-#   label: discord
+# - field: instagram_username
+#   title: instagram
+#   class: soc soc--ig
+#   icon: fa-brands fa-instagram
+#   url: https://instagram.com/
 #
-# - field: mastodon_username
-#   title: mastodon
-#   class: soc soc--mast
-#   icon: fa-brands fa-mastodon
-#   url: https://mastodon.social/@
+# - field: tiktok_username
+#   title: tiktok
+#   class: soc soc--tt
+#   icon: fa-brands fa-tiktok
+#   url: https://tiktok.com/@
 #
 # - field: github_username
 #   title: github
 #   class: soc soc--gh
 #   icon: fa-brands fa-github
 #   url: https://github.com/
-#
-# - field: patreon_username
-#   title: patreon
-#   class: soc soc--pat
-#   icon: fa-brands fa-patreon
-#   url: https://www.patreon.com/
 #
 # - field: omg_address
 #   title: omg.lol
