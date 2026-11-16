@@ -4,7 +4,7 @@
 # the book in the reading now strip at the top of the home page. change
 # these two when the club picks the next one
 reading: "Do Androids Dream of Electric Sheep?"
-reading_url: https://joy.githugs.lol
+reading_url: https://www.patreon.com/githugs
 
 # the three doors in order. `kind` picks the colours (read listen hang) and
 # `icon` is a font awesome class. `discord: true` uses the invite in _config.yml
@@ -15,7 +15,7 @@ doors:
     label: Free cyberpunk book club
     text: we read the classics together
     go: join the club
-    url: https://joy.githugs.lol
+    url: https://www.patreon.com/githugs
   - kind: listen
     icon: fa-solid fa-rss
     kicker: listen

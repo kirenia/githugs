@@ -85,5 +85,5 @@ You have a working computer on your wifi. What it becomes next is up to the soft
 **The case.** Swap in your own colors, print or build something, make it ugly in a way you like. It's your deck now.
 
 <div class="note" markdown="1">
-Every deck I build throws something new at me, and I write all of it down: the troubleshooting I've collected, the stuff no tutorial warns you about, and the full build for each deck as I finish it. That goes to the [book club and the cyberdeck folks on Patreon](https://joy.githugs.lol), which is free to join. Come hang out, and show me what you built.
+Every deck I build throws something new at me, and I write all of it down: the troubleshooting I've collected, the stuff no tutorial warns you about, and the full build for each deck as I finish it. That goes to the [book club and the cyberdeck folks on Patreon](https://www.patreon.com/githugs), which is free to join. Come hang out, and show me what you built.
 </div>
