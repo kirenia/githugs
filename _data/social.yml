@@ -1,34 +1,14 @@
 # the footer row in order. `field` names the _config.yml key with the handle
 # so dropping the key either place drops the link. `icon` is a font awesome
 # class. `full: true` means the config value is a whole link used as is.
-# six plus the tip jar: the places i would rather you find me. instagram
-# and tiktok are for finding people so they are parked, this site is home.
+# seven plus the tip jar, so a phone gets two rows of four: the places i
+# would rather you find me. instagram and tiktok are for finding people so
+# they are parked, this site is home.
 # email and rss are left off on purpose: email is in the hello and rss is
 # in the bar. everything else is parked at the bottom of this file ready
 # to switch back on
-- field: bluesky_username
-  title: bluesky
-  class: soc soc--bs
-  icon: fa-brands fa-bluesky
-  url: https://bsky.app/profile/
-- field: mastodon_username
-  title: mastodon
-  class: soc soc--mast
-  icon: fa-brands fa-mastodon
-  url: https://mastodon.social/@
-# no upscrolled glyph in the icon font so it borrows the film strip. it is
-# where the videos go
-- field: upscrolled_url
-  title: upscrolled
-  class: soc soc--up
-  icon: fa-solid fa-film
-  full: true
-  label: upscrolled
-- field: tumblr_username
-  title: tumblr
-  class: soc soc--tb
-  icon: fa-brands fa-tumblr
-  url: https://www.tumblr.com/
+# in order of what matters most: the hub, where we talk, all of me, the
+# code, the books, then the mirrors
 - field: patreon_username
   title: patreon
   class: soc soc--pat
@@ -40,6 +20,31 @@
   icon: fa-brands fa-discord
   full: true
   label: discord
+- field: bluesky_username
+  title: bluesky
+  class: soc soc--bs
+  icon: fa-brands fa-bluesky
+  url: https://bsky.app/profile/
+- field: github_username
+  title: github
+  class: soc soc--gh
+  icon: fa-brands fa-github
+  url: https://github.com/
+- title: bookshop
+  class: soc soc--shop
+  icon: fa-solid fa-book
+  href: https://bookshop.org/shop/githugs
+  label: bookshop
+- field: mastodon_username
+  title: mastodon
+  class: soc soc--mast
+  icon: fa-brands fa-mastodon
+  url: https://mastodon.social/@
+- field: tumblr_username
+  title: tumblr
+  class: soc soc--tb
+  icon: fa-brands fa-tumblr
+  url: https://www.tumblr.com/
 
 # ---------------------------------------------------------------------
 # parked. uncomment a block to put it back in the footer row
@@ -56,11 +61,13 @@
 #   icon: fa-brands fa-tiktok
 #   url: https://tiktok.com/@
 #
-# - field: github_username
-#   title: github
-#   class: soc soc--gh
-#   icon: fa-brands fa-github
-#   url: https://github.com/
+# no upscrolled glyph in the icon font so this one borrows the film strip
+# - field: upscrolled_url
+#   title: upscrolled
+#   class: soc soc--up
+#   icon: fa-solid fa-film
+#   full: true
+#   label: upscrolled
 #
 # - field: omg_address
 #   title: omg.lol

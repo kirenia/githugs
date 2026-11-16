@@ -1513,8 +1513,59 @@ main:focus { outline: none; }
 .social-media-list a.soc--mast { color: #6364ff; }
 .social-media-list a.soc--gh { color: var(--fg); }
 .social-media-list a.soc--pat { color: var(--fg); }
-.social-media-list a.soc--up { color: var(--fg); }
-.social-media-list a.soc--tb { color: var(--fg); }
+.social-media-list a.soc--shop { color: var(--fg); }
+/* upscrolled and tumblr wear their own colours on the same tile as
+   everyone else: paper in the light, dark in the dark. the rainbow and the
+   pink are too pale for a white tile by themselves (an icon needs 3:1,
+   1.4.11) so they get the ink outline the heart has. the glyph is drawn
+   twice: once in ink with the outline, then the colours laid over the top */
+.social-media-list a.soc--up i,
+.social-media-list a.soc--tb i {
+  position: relative;
+  color: var(--ink);
+  -webkit-text-stroke: 3px var(--ink);
+}
+
+.social-media-list a.soc--up i::after,
+.social-media-list a.soc--tb i::after {
+  content: var(--fa);
+  position: absolute;
+  inset: 0;
+  -webkit-text-stroke: 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@supports (content: "x" / "") {
+  .social-media-list a.soc--up i::after,
+  .social-media-list a.soc--tb i::after { content: var(--fa) / ""; }
+}
+
+.social-media-list a.soc--up i::after { background-image: linear-gradient(135deg, #d82860 50%, #4078b8 50%); }
+.social-media-list a.soc--tb i::after { background-image: linear-gradient(90deg, #f3791e, #eba730 22%, #c4cd46 42%, #51c443 58%, #3db4c2 78%, #39abfb); }
+
+/* the flood on hover: one white glyph like the rest */
+.social-media-list a.soc--up:hover i,
+.social-media-list a.soc--up:focus-visible i,
+.social-media-list a.soc--tb:hover i,
+.social-media-list a.soc--tb:focus-visible i {
+  color: #ffffff;
+  -webkit-text-stroke: 0;
+}
+
+.social-media-list a.soc--up:hover i::after,
+.social-media-list a.soc--up:focus-visible i::after,
+.social-media-list a.soc--tb:hover i::after,
+.social-media-list a.soc--tb:focus-visible i::after { content: none; }
+
+/* a clipped gradient disappears when the system forces its own colours */
+@media (forced-colors: active) {
+  .social-media-list a.soc--up i::after,
+  .social-media-list a.soc--tb i::after { content: none; }
+  .social-media-list a.soc--up i,
+  .social-media-list a.soc--tb i { color: CanvasText; -webkit-text-stroke: 0; }
+}
 .social-media-list a.soc--sc { color: #b9a800; }
 .social-media-list a.soc--rss { color: #f26522; }
 .social-media-list a.soc--mail { color: var(--neon-pink); }
@@ -1530,7 +1581,8 @@ main:focus { outline: none; }
 .social-media-list a.soc--mast:hover, .social-media-list a.soc--mast:focus-visible { background: #6364ff; }
 .social-media-list a.soc--gh:hover, .social-media-list a.soc--gh:focus-visible { background: #0c0612; }
 .social-media-list a.soc--pat:hover, .social-media-list a.soc--pat:focus-visible { background: #0c0612; }
-.social-media-list a.soc--up:hover, .social-media-list a.soc--up:focus-visible { background: #0c0612; }
+.social-media-list a.soc--shop:hover, .social-media-list a.soc--shop:focus-visible { background: #0c0612; }
+.social-media-list a.soc--up:hover, .social-media-list a.soc--up:focus-visible { background: #081927; }
 .social-media-list a.soc--tb:hover, .social-media-list a.soc--tb:focus-visible { background: #001935; }
 .social-media-list a.soc--sc:hover, .social-media-list a.soc--sc:focus-visible { background: #fffc00; color: #0c0612; }
 .social-media-list a.soc--rss:hover, .social-media-list a.soc--rss:focus-visible { background: #f26522; }
@@ -2689,14 +2741,14 @@ pre code { border: 0; }
   .watch li { padding: 0.45rem 0; }
 }
 
-/* the socials on a phone: one row of big square tiles like the connect
-   row on the links page, however many there are (seven right now). the
-   menu under them stays one column */
+/* the socials on a phone: four across in big square tiles like the
+   connect row on the links page. eight tiles with the tip jar so it is
+   two full rows. the menu under them stays one column */
 @media (max-width: 36rem) {
   .social-media-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(1.75rem, 1fr));
-    gap: 0.6rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
     margin-left: 0;
   }
 
@@ -2710,7 +2762,7 @@ pre code { border: 0; }
 
   .social-media-list a.soc i {
     width: auto;
-    font-size: clamp(16px, 5.6vw, 30px);
+    font-size: clamp(28px, 8vw, 36px);
   }
 }
 
