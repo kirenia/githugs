@@ -1,15 +1,14 @@
 {%- comment -%}
-  the picture beside a post on the home page. takes `image:` if the post
-  has one (cropped to fit) then `thumb:` then `sticker:` then the star.
-  decorative so it's hidden from screen readers. the title is the link.
+  the picture on a post's card. `image:` from the front matter, washed in
+  the topic's colour by css until the card is hovered. a post with no image
+  gets a tile with the first two letters of its topic, like an element on
+  the periodic table. the lead card with no image gets nothing and goes
+  full colour instead. decorative so it's hidden from screen readers.
 
-  usage: {% include post-thumb.html post=post %}
+  usage: {% include post-thumb.html post=post topic=topic lead=false %}
 {%- endcomment -%}
-{%- assign _thumb = include.post.thumb | default: include.post.sticker | default: "star" -%}
-<span class="post-thumb{% if include.post.image %} post-thumb--image{% endif %}" aria-hidden="true">
-  {%- if include.post.image -%}
-  <img class="post-thumb__img" src="{{ include.post.image | relative_url }}" alt="" loading="lazy">
-  {%- else -%}
-  {% include sticker.html name=_thumb %}
-  {%- endif -%}
-</span>
+{%- if include.post.image -%}
+<span class="post-thumb" aria-hidden="true"><img class="post-thumb__img" src="{{ include.post.image | relative_url }}" alt="" loading="lazy"></span>
+{%- elsif include.lead != true -%}
+<span class="post-thumb post-thumb--type" aria-hidden="true"><span class="post-thumb__type">{{ include.topic | default: "hi" | slice: 0, 2 }}</span></span>
+{%- endif -%}

@@ -3,7 +3,7 @@ layout: post
 title: "Simple Theme Toggle With Vanilla JS"
 date: 2026-08-22 14:00:00 -0600
 description: "My simple light/dark switch that survives with JavaScript turned off. It's less than 30 lines of vanilla JS. CSS is where the magic happens."
-tags: [javascript, css, indieweb]
+tags: [code, indieweb]
 sticker: hollywood
 image: /assets/img/posts/theme-toggle.jpg
 image_alt: "A night vision camera shot of a cat glowing bright white against a dark grey room, staring wide eyed at the lens."

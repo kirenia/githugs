@@ -3,7 +3,7 @@ layout: post
 title: "Cyberdeck Build Guide"
 date: 2026-08-18 10:00:00 -0600
 description: "The base build every cyberdeck here starts from. What to buy, how to flash it, and common troubleshooting steps."
-tags: [cyberdecks, guides]
+tags: [cyberdecks]
 sticker: lucky
 redirect_from:
   - /cyberdecks/guide.html

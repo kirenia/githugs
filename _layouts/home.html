@@ -2,58 +2,38 @@
 layout: default
 ---
 {%- comment -%}
-  the about in plain words. the nav is in the bar now and the h1 is
-  here for the outline only.
-{%- endcomment -%}
-{%- comment -%}
-  the wordmark is the page's real h1 ghosted in behind the top of the
-  page so the heading is there without a hidden one.
+  the dev site home: the wordmark hero, a line about me, then the blog
+  front and centre. the book club, podcast and the rest live on the links
+  page now, not here. the nav is in the bar; the h1 is here for the outline.
 {%- endcomment -%}
 <div class="home">
 <h1 class="home__mark" aria-label="githugs.lol">githugs.lol</h1>
 
-{%- comment -%} what the book club is reading. the book and the link are in _data/start.yml. the title is plain words and read it with us is the one link {%- endcomment -%}
-<aside class="now-reading">
-  <p><span class="now-reading__tag">reading now</span> <span class="now-reading__title">{{ site.data.start.reading }}</span> <a class="now-reading__cta" href="{{ site.data.start.reading_url }}">read it with us</a></p>
-</aside>
-
 <div class="intro">{{ content }}</div>
 </div>
 
-{%- comment -%} phone only. css hides it on desktop, where start here does this job {%- endcomment -%}
-{% include quick.html %}
-
-{%- assign featured = site.posts.first -%}
-
-{%- comment -%} its own section and outside .home. on a phone css moves it under the doors {%- endcomment %}
 <section class="latest" aria-labelledby="latest-title">
-{%- if featured %}
-<h2 class="section-title" id="latest-title">Latest blog</h2>
+{%- if site.posts.size > 0 %}
+{%- comment -%} nothing to read here, the newest post speaks for itself. the heading stays for the outline and for a screen reader {%- endcomment %}
+<h2 class="visually-hidden" id="latest-title">Latest</h2>
 
-<article class="feature c1">
-  {% include post-thumb.html post=featured %}
-  <div class="feature__text">
-    <h3 class="feature__title"><a href="{{ featured.url | relative_url }}">{{ featured.title | escape }}</a></h3>
-    {%- assign blurb = featured.description | default: featured.excerpt -%}
-    {%- if blurb %}<p class="feature__excerpt">{{ blurb | strip_html | normalize_whitespace | truncatewords: 30 }}</p>{% endif -%}
-    <p class="post-row__meta"><time datetime="{{ featured.date | date_to_xmlschema }}">{{ featured.date | date: "%-d %b %Y" }}</time> <span aria-hidden="true">·</span> {% include read-time.html content=featured.content %}</p>
-    {%- assign topics = featured.tags | concat: featured.categories -%}
-    {%- if topics.size > 0 %}
-    <ul class="post-row__tags">
-      {%- for t in topics -%}
-        <li><a class="tag" href="{{ '/tags/' | relative_url }}#{{ t | slugify }}">{{ t }}</a></li>
-      {%- endfor -%}
-    </ul>
-    {%- endif %}
-  </div>
-</article>
+<ul class="post-list post-list--lead">
+  {% include post-card.html post=site.posts.first lead=true %}
+</ul>
+
+{%- if site.posts.size > 1 %}
+<h2 class="section-title">Recent</h2>
+
+{%- comment -%} the topics sit over the list they sort so you can jump straight to the kind of post you came for {%- endcomment %}
+{% include topic-chips.html %}
+
+<ul class="post-list post-list--rest">
+  {%- for post in site.posts offset: 1 -%}
+    {% include post-card.html post=post %}
+  {%- endfor -%}
+</ul>
 {%- endif %}
-
-{%- comment -%} one post here. the rest are on the blog page which is in the bar {%- endcomment -%}
-{%- if site.posts.size == 0 %}
+{%- else %}
 <p>no posts yet. drop a markdown file in <code>_posts/</code>.</p>
 {%- endif %}
 </section>
-
-{%- comment -%} outside .home on purpose. that box clips its sides for the wordmark and would shave the doors when they lift {%- endcomment %}
-{% include start.html %}

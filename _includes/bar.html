@@ -11,7 +11,6 @@
   <nav class="bar__right" aria-label="main">
     <a class="bar__link" href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>home</a>
     <a class="bar__link" href="{{ '/about/' | relative_url }}"{% if page.url == '/about/' %} aria-current="page"{% endif %}>about</a>
-    <a class="bar__link" href="{{ '/blog/' | relative_url }}"{% if page.url == '/blog/' %} aria-current="page"{% endif %}>blog</a>
   </nav>
 
   {%- comment -%} after the links in the markup so tab order reads left to right. on a phone css lifts it to the top right beside the discord line, which shortens to make room {%- endcomment %}

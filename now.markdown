@@ -1,5 +1,5 @@
 ---
 permalink: /now/
-redirect_to: /about/#now
+redirect_to: /about/
 sitemap: false
 ---

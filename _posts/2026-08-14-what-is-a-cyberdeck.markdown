@@ -3,7 +3,7 @@ layout: post
 title: "What Is a Cyberdeck"
 date: 2026-08-14 10:00:00 -0600
 description: "Tiny handmade computers that do one thing well. Here's what they are, the kinds people build, and how to build your own."
-tags: [cyberdecks, sci-fi, books]
+tags: [cyberdecks, sci-fi]
 sticker: neuromancer
 redirect_from:
   - /cyberdecks/

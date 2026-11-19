@@ -125,48 +125,6 @@
       .catch(() => {});
   }
 
-  // the scan line. built here rather than in the markup so a page with
-  // js off is exactly as it was, and so reduced-motion skips it entirely.
-  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    var scan = document.createElement("div");
-    scan.className = "scan";
-    scan.setAttribute("aria-hidden", "true");
-    document.body.appendChild(scan);
-  }
-
-  // the wordmark decodes on arrival, like a terminal resolving it. the
-  // aria-label on the h1 is the accessible name, so the noise it flickers
-  // through is never announced. reduced motion gets the finished word.
-  const markEl = document.querySelector(".home__mark");
-  const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (markEl && !still) {
-    const final = markEl.textContent;
-    const pool = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/\\<>[]{}=+*#%$@!?";
-    let frame = 0;
-    markEl.dataset.decoding = "";
-
-    const tick = () => {
-      let out = "";
-      let settled = 0;
-      for (let i = 0; i < final.length; i++) {
-        if (final[i] === "." || final[i] === " ") { out += final[i]; settled++; continue; }
-        // each character locks in turn, left to right
-        if (frame > i * 2 + 6) { out += final[i]; settled++; }
-        else if (frame > i * 2) { out += pool[Math.floor(Math.random() * pool.length)]; }
-        else { out += " "; }
-      }
-      markEl.textContent = out;
-      frame++;
-      if (settled === final.length) {
-        markEl.textContent = final;
-        delete markEl.dataset.decoding;
-        return;
-      }
-      setTimeout(tick, 45);
-    };
-    tick();
-  }
-
   // for whoever opens the console
   const mono = "font-family: 'Fira Code', ui-monospace, monospace;";
   console.log(

@@ -4,7 +4,7 @@ title: "Moving Away From Big Tech"
 date: 2026-11-06 15:30:00 -0700
 description: "I deleted Spotify recently and people asked what else I've dropped. Here's the whole list: email, passwords, music, cloud, and the rule I use to decide what stays."
 tldr: "How I've been de-Googling my life since 2024 and some app recs to help you get started."
-tags: [privacy, indieweb, degoogle]
+tags: [privacy, indieweb]
 sticker:
 image:
 image_alt: ""

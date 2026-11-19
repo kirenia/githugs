@@ -1,0 +1,9 @@
+# the colour each tag wears on the post board and the topic chips. tags stay
+# broad on purpose: a handful of subjects, not one per post. the names are
+# the classes in style.css (.hue-pink and friends). a tag that isn't here
+# gets pink.
+cyberdecks: green
+sci-fi: pink
+code: cyan
+indieweb: purple
+privacy: yellow

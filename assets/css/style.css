@@ -1,8 +1,9 @@
 /* ==========================================================================
    kire.css: an old lab page in the light terminal in the dark.
    light: Georgia on off-white paper. one column ragged right hard edges.
-   dark:  Fira Sans Dracula a prompt on every heading.
-   colour is the Dracula palette throughout: the purple bar up top links 
+   dark:  the same type on Dracula PRO.
+   colour is the Dracula palette throughout (classic deepened for the
+   light PRO in the dark where it's softer on the eyes): the purple bar up top links 
    tags and one accent per post.
    ========================================================================== */
 
@@ -14,58 +15,64 @@
 :root {
   color-scheme: light dark;
 
-  --drac-bg:      light-dark(#fbf7fb, #07040c);
-  --drac-fg:      light-dark(#0c0612, #fbeaff);
-  --drac-comment: light-dark(#6070a1, #6272a4);
-  /* dracula's comment blue is 3.03:1 on the dark bg. fine for an edge
+  --drac-bg:      light-dark(#fbf7fb, #22212c);
+  --drac-fg:      light-dark(#0c0612, #f8f8f2);
+  --drac-comment: light-dark(#6070a1, #7970a9);
+  /* PRO's comment purple is 3.5:1 on the dark bg. fine for an edge
      short of AA for text. so text gets a lifted or deepened one */
-  --drac-comment-text: light-dark(#586693, #afb7d1);
-  --drac-orange:  light-dark(#935b13, #ffb86c);
-  --drac-yellow:  light-dark(#746903, #f1fa8c);
-  --drac-green:   light-dark(#197729, #50fa7b);
-  --drac-purple:  light-dark(#7c4dbd, #bd93f9);
-  --drac-cyan:    light-dark(#137186, #8be9fd);
-  --drac-pink:    light-dark(#a7437a, #ff79c6);
-  --drac-red:     light-dark(#c33027, #ff5555);
+  --drac-comment-text: light-dark(#586693, #aaa3cd);
+  --drac-orange:  light-dark(#935b13, #ffca80);
+  --drac-yellow:  light-dark(#746903, #ffff80);
+  --drac-green:   light-dark(#197729, #8aff80);
+  --drac-purple:  light-dark(#7c4dbd, #9580ff);
+  --drac-cyan:    light-dark(#137186, #80ffea);
+  --drac-pink:    light-dark(#a7437a, #ff80bf);
+  --drac-red:     light-dark(#c33027, #ff9580);
 
   /* the hard ink edge a card gets in light mode */
   --ink: #0c0612;
 
-  /* one edge colour per theme on every box. black in the light
-     hot pink in the dark */
-  --edge-strong: light-dark(#0c0612, #ff2e97);
-  --neon-pink: #ff2e97;
-  --neon-cyan: light-dark(#00b8e6, #00e5ff);
+  /* one edge colour per theme on every box. black in the light. in the
+     dark a quiet lifted comment purple, the way dracula keeps borders
+     subtle and saves the brights for things you can act on. 4.5:1 on the
+     page and under the dark text a hovered tag puts on it */
+  --edge-strong: light-dark(#0c0612, #8a82b8);
+  /* hot pink in the light. in the dark the accent is PRO purple, so the
+     name only tells the truth in the light */
+  --neon-pink: light-dark(#ff2e97, #9580ff);
+  --neon-cyan: light-dark(#00b8e6, #80ffea);
   --neon-yellow: #ffe14d;
   /* the graph paper behind everything */
-  --grid: light-dark(rgba(255, 46, 151, 0.055), rgba(0, 229, 255, 0.06));
-  /* the glow only exists in the dark where there is something to glow on */
-  --glow: light-dark(transparent, rgba(255, 46, 151, 0.22));
+  --grid: light-dark(rgba(255, 46, 151, 0.055), rgba(128, 255, 234, 0.045));
+  /* there was a neon haze in the dark once. off now so nothing shimmers
+     behind the words. give the dark side a colour to bring it back */
+  --glow: light-dark(transparent, transparent);
 
   --bg: var(--drac-bg);
   --fg: var(--drac-fg);
   --dim: var(--drac-comment-text);
-  --line: light-dark(#e6d8ea, #2b1a3a);
+  --line: light-dark(#e6d8ea, #343145);
   /* the flat band the nav sits on and the fill behind code and table heads */
-  --band: light-dark(#fdeef7, #0c0714);
+  --band: light-dark(#fdeef7, #17161d);
   /* the pink is only 3.25:1 as small text on the pale page. --accent is
      the text-safe pair. --neon-pink stays the fill */
   --accent: light-dark(#c8006a, var(--neon-pink));
   --link: light-dark(#c8006a, var(--neon-cyan));
   --link-hover: light-dark(#0c0612, var(--neon-pink));
 
-  --card-bg: light-dark(#ffffff, #120a1c);
+  /* in the dark a card is a step lighter than the page, not a hole in it */
+  --card-bg: light-dark(#ffffff, #2a2836);
   --card-fg: var(--drac-fg);
   --card-edge: light-dark(var(--ink), var(--drac-comment));
 
-  --code-bg: light-dark(#f2e2f0, #241b3e);
+  --code-bg: light-dark(#f2e2f0, #383549);
   /* the red the old science pages used for code dark enough to clear 4.5:1
      on its own tinted background */
   --code-fg: light-dark(#a01b2e, var(--drac-green));
-  --pre-bg: light-dark(#f2e2f0, #201838);
+  --pre-bg: light-dark(#f2e2f0, #17161d);
   --pre-fg: light-dark(var(--drac-fg), var(--drac-yellow));
 
-  --sticker-shadow: light-dark(rgba(0, 0, 0, 0.25), #191a21);
+  --sticker-shadow: light-dark(rgba(0, 0, 0, 0.25), #17161d);
 
   /* the bar across the top: dracula purple with ink on it the same in both
      themes (5.9:1) so it is the one fixed point when you jack in or out */
@@ -74,7 +81,7 @@
 
   /* a control's edge is how you find it so this clears 3:1 (1.4.11).
      hairlines are decoration and can stay faint */
-  --edge: light-dark(#7d7a99, #7b81a0);
+  --edge: light-dark(#7d7a99, #8d86b5);
 
   /* corners. square like a table cell in 2003 */
   --radius: 0;
@@ -106,25 +113,33 @@
   --fs-caption: 0.8125rem; /* 13px: meta tags footer captions */
   --fs-body: 0.9375rem;    /* 15px: body copy and notes */
   --fs-lead: 1.0625rem;    /* 17px: subtitles lead-ins */
-  --fs-h3: 0.9375rem;      /* 15px: body size bold */
-  --fs-h2: 1.125rem;       /* 18px */
-  --fs-h1: 1.5rem;         /* 24px: a page's title and nothing else */
+  /* headings. one size each everywhere: a page title, a section, a
+     sub-section. h1 and h2 wear the display face. h3 and h4 are the
+     body face in bold */
+  --fs-h3: 1.1875rem;      /* 19px */
+  --fs-h2: 1.5rem;         /* 24px. 21px on a phone, set under the tokens */
+  --fs-h1: clamp(1.75rem, 6vw, 2.25rem); /* 28 to 36px: a page's title and nothing else */
 
   /* one column for everything: header lists running text and footer all
      share the same two edges centred on the page. 48rem is 768px. */
   --measure: 48rem;
 }
 
-/* dark drops the serif for Fira Sans and keeps the terminal touches: a
-   prompt on every heading and the blinking cursor */
+/* a phone has less room for a section heading */
+@media (max-width: 39.99rem) {
+  :root { --fs-h2: 1.3125rem; }
+}
+
+/* dark keeps one terminal touch, the blinking cursor. the type is the
+   same in both themes: same faces, same case, nothing in front of a
+   heading. --prompt is still wired up if a heading ever wants one back */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --card-tint: 18%;
     --body-font: var(--reading);
     --head-font: var(--display);
-    --prompt: "> ";
     --cursor: inline;
-    --drac-fg: #fbeaff;
+    --drac-fg: #f8f8f2;
   }
 }
 
@@ -133,13 +148,13 @@
   --card-tint: 18%;
   --body-font: var(--reading);
   --head-font: var(--display);
-  --prompt: "> ";
   --cursor: inline;
-  --drac-fg: #fbeaff;
+  --drac-fg: #f8f8f2;
 }
 
 /* a picked theme beats the system one */
 :root[data-theme="light"] { color-scheme: light; }
+
 
 /* light-dark() is the whole palette. an engine that cannot parse it
    gets the light theme spelled out instead */
@@ -186,11 +201,7 @@ body {
   /* a sticker may hang past a card edge without widening the page */
   overflow-x: hidden;
   background-color: var(--bg);
-  /* graph paper: pink lines in the light cyan in the dark */
-  background-image:
-    linear-gradient(var(--grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-  background-size: 42px 42px;
+  /* plain background: the cards carry the colour, nothing behind them */
   color: var(--fg);
   font-family: var(--body-font);
   font-size: var(--fs-body);
@@ -211,7 +222,7 @@ body {
 
 /* headings show as typed properly cased. to go back to all lowercase put
    this back:
-   h1 h2 h3 h4 .post-row__title .feature__title { text-transform: lowercase; } */
+   h1 h2 h3 h4 .post-card__title { text-transform: lowercase; } */
 
 h1, h2, h3, h4 {
   /* a heading always starts on a clean line never beside a sticker */
@@ -225,6 +236,10 @@ h1, h2, h3, h4 {
 h1 { font-size: var(--fs-h1); }
 h2 { font-size: var(--fs-h2); }
 h3 { font-size: var(--fs-h3); }
+
+/* the display face stops at h2 */
+h3, h4 { font-family: var(--body-font); font-weight: 700; }
+h4 { font-size: 1.0625rem; }
 
 a {
   color: var(--link);
@@ -291,7 +306,7 @@ table { width: 100%; border-collapse: collapse; }
 table.plain { width: auto; margin: 1.5rem auto; font-size: var(--fs-caption); }
 table.plain th,
 table.plain td { border: 1px solid var(--line); padding: 0.35rem 0.8rem; text-align: center; }
-table.plain th { background: var(--band); font-family: var(--head-font); }
+table.plain th { background: var(--band); font-family: var(--body-font); font-weight: 700; }
 table.plain td.l { text-align: left; }
 th, td { border-bottom: 1px solid var(--line); padding: 0.5rem 0.6rem; text-align: left; }
 
@@ -355,14 +370,15 @@ main.wrap { padding-top: clamp(1.5rem, 4vw, 2.5rem); flex: 1 0 auto; }
 @keyframes blink { 50% { opacity: 0; } }
 
 /* ----------------------------------------------------------------------
-   two future bits. both are decoration: they sit behind the words, carry
-   no meaning, and switch themselves off when the machine asks for less
+   one future bit. it is decoration: it sits behind the words, carries
+   no meaning, and switches itself off when the machine asks for less
    motion. nothing here changes a contrast ratio.
    ---------------------------------------------------------------------- */
 
-/* 1. a scan line drifting down the graph paper, the way a screen that is
-      still warming up does. fixed so it keeps going as you scroll. */
+/* a scan line drifting down the page, the way a screen that is still
+   warming up does. fixed so it keeps going as you scroll. */
 .scan {
+  display: none;
   position: fixed;
   inset: 0;
   z-index: -1;
@@ -379,7 +395,7 @@ main.wrap { padding-top: clamp(1.5rem, 4vw, 2.5rem); flex: 1 0 auto; }
   background: linear-gradient(
     to bottom,
     transparent,
-    light-dark(rgba(200, 0, 106, 0.05), rgba(0, 229, 255, 0.07)),
+    light-dark(rgba(200, 0, 106, 0.05), rgba(128, 255, 234, 0.05)),
     transparent
   );
   animation: scan-drift 9s linear infinite;
@@ -389,11 +405,6 @@ main.wrap { padding-top: clamp(1.5rem, 4vw, 2.5rem); flex: 1 0 auto; }
   from { transform: translateY(-30vh); }
   to   { transform: translateY(130vh); }
 }
-
-/* 2. the wordmark decodes on arrival. the glyphs it flickers through are
-      written into the element, so the aria-label is what gets announced
-      and a reader never hears the noise. */
-.home__mark[data-decoding] { opacity: 0.4; }
 
 @media (prefers-reduced-motion: reduce) {
   .scan { display: none; }
@@ -436,148 +447,6 @@ hr.rule { border: 0; border-top: 1px solid var(--line); }
   background: var(--edge-strong);
 }
 
-/* the home page --------------------------------------------------------
-   the newest post big across the top then two columns: the next few
-   posts on the left and a small panel about the site on the right. */
-
-/* the colour per post: the six dracula accents cycled */
-.c1 { --c: var(--drac-purple); }
-.c2 { --c: var(--drac-pink); }
-.c3 { --c: var(--drac-cyan); }
-.c4 { --c: var(--drac-green); }
-.c5 { --c: var(--drac-orange); }
-.c6 { --c: var(--drac-yellow); }
-
-/* a block in the post's colour with its sticker on it. the see-through
-   border becomes a real outline in forced-colour modes */
-.post-thumb {
-  position: relative;
-  display: block;
-  overflow: hidden;
-  background: color-mix(in srgb, var(--c, var(--accent)) 24%, var(--card-bg));
-  border: 2px solid var(--edge-strong);
-  border-radius: var(--radius);
-}
-
-/* the sticker sizes itself on a page. here the block decides so a tall
-   one shrinks to fit instead of being cropped */
-.post-thumb .sticker {
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  width: auto;
-  height: auto;
-  max-width: 66%;
-  max-height: 76%;
-}
-
-/* a featured image fills the block instead cropped to its shape */
-.post-thumb__img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* hovering a post with a photo nudges the photo the way a sticker
-   straightens up */
-
-/* the featured post ---------------------------------------------------- */
-
-.feature {
-  --c: var(--drac-purple);
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(1.25rem, 4vw, 2.5rem);
-  align-items: center;
-  padding: clamp(1.1rem, 3vw, 1.5rem);
-  margin-bottom: clamp(1.5rem, 4vw, 2.25rem);
-}
-
-/* every post is a box in its own colour: a tint an ink edge and a hard
-   shadow that lifts on hover. dark mode wears the colour on the edge too. */
-.feature,
-.post-row {
-  background: color-mix(in srgb, var(--c) var(--card-tint), var(--card-bg));
-  color: var(--card-fg);
-  border: 2px solid var(--edge-strong);
-  box-shadow: 5px 5px 0 var(--edge-strong), 0 0 26px var(--glow);
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
-}
-
-.feature:hover,
-.feature:focus-within,
-.post-row:hover,
-.post-row:focus-within {
-  transform: translate(-2px, -2px);
-  box-shadow: 7px 7px 0 var(--edge-strong), 0 0 34px var(--glow);
-}
-
-.feature .post-thumb { aspect-ratio: 3 / 2; }
-
-.feature__title {
-  margin: 0 0 0.5rem;
-  font-size: var(--fs-h1);
-  line-height: 1.2;
-}
-
-.feature__title::before {
-  content: var(--prompt);
-  color: var(--c);
-}
-
-.feature__title a { color: var(--fg); text-decoration: none; }
-
-/* the whole block is clickable; the link keeps the semantics */
-.feature__title a::after { content: ""; position: absolute; inset: 0; }
-
-.feature:hover .feature__title a,
-.post-row:hover .post-row__title a {
-  text-decoration: underline;
-  text-decoration-color: var(--c);
-  text-decoration-thickness: 2px;
-}
-
-/* excerpts are reading text so they get the full body colour. only the
-   small meta line under them is dimmed. */
-.feature__excerpt {
-  margin: 0 0 0.6rem;
-  font-size: var(--fs-lead);
-  line-height: 1.5;
-  color: var(--card-fg);
-}
-
-/* hovering a post straightens its sticker and brings it forward a touch */
-.feature:hover .sticker,
-.post-row:hover .sticker { transform: rotate(0deg) scale(1.08); }
-
-/* the block's link is a bare inline anchor stretched over the whole block 
-   so focusing it would ring a sliver of text. ring the block instead. */
-.feature:focus-within,
-.post-row:focus-within {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-}
-
-/* a tag inside a box rings in ink. the accent pink is 1.4:1 on these
-   fills and ink clears 4.5:1 on all six */
-.feature :focus-visible,
-.post-row :focus-visible {
-  outline: 3px solid #0c0612;
-  outline-offset: 2px;
-}
-
-/* the stretched title link is the exception. the block ring already
-   traces it */
-.feature__title a:focus-visible,
-.post-row__title a:focus-visible { outline: none; }
-
-@media (max-width: 40rem) {
-  .feature { grid-template-columns: 1fr; }
-}
-
 /* a button: the bar's purple with ink on it in both themes (5.9:1). on
    hover it lifts onto a tiny hard shadow like the tags do. */
 .button {
@@ -612,77 +481,6 @@ hr.rule { border: 0; border-top: 1px solid var(--line); }
 .button--quiet:hover { color: var(--fg); border-color: var(--fg); box-shadow: 2px 2px 0 var(--accent); }
 
 .home-more { margin: 1.5rem 0 0; }
-
-/* the post list ------------------------------------------------------
-   plain ruled rows: title blurb date and tags on the left the post's
-   picture on the right. they were tinted cards with hard shadows once. */
-
-.post-list {
-  clear: both;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 1.1rem;
-}
-
-.post-row {
-  --c: var(--drac-purple);
-  position: relative;
-  display: block;
-  padding: 1.05rem 1.25rem;
-}
-
-/* after .post-row on purpose: same specificity so the later rule has to be
-   the one that overrides the default above */
-.post-row.c1 { --c: var(--drac-purple); }
-.post-row.c2 { --c: var(--drac-pink); }
-.post-row.c3 { --c: var(--drac-cyan); }
-.post-row.c4 { --c: var(--drac-green); }
-.post-row.c5 { --c: var(--drac-orange); }
-.post-row.c6 { --c: var(--drac-yellow); }
-
-.post-row .post-thumb { aspect-ratio: 3 / 2; }
-
-.post-row__title {
-  margin: 0;
-  font-size: var(--fs-lead);
-  font-weight: var(--head-weight);
-  line-height: 1.35;
-}
-
-/* dark mode gives every title a prompt in the post's colour */
-.post-row__title::before {
-  content: var(--prompt);
-  color: var(--c);
-}
-
-.post-row__title a { color: var(--fg); text-decoration: none; }
-
-/* the whole row is clickable; the link keeps the semantics */
-.post-row__title a::after { content: ""; position: absolute; inset: 0; }
-
-.post-row__excerpt {
-  margin: 0.2rem 0 0;
-  color: var(--card-fg);
-}
-
-.post-row__excerpt p { margin: 0; }
-
-.post-row__meta {
-  margin: 0.35rem 0 0;
-  font-size: var(--fs-caption);
-  color: var(--dim);
-}
-
-.post-row__tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-  margin: 0.55rem 0 0;
-  padding: 0;
-  list-style: none;
-}
 
 /* the archive: every post a date and a title per row */
 .archive-year { margin-bottom: 2.5rem; }
@@ -739,7 +537,7 @@ hr.rule { border: 0; border-top: 1px solid var(--line); }
 /* hover inverts so it never leans on colour alone (1.4.1) */
 .tag:hover {
   background: var(--edge-strong);
-  color: light-dark(#ffffff, #07040c);
+  color: light-dark(#ffffff, #17161d);
 }
 
 /* dark mode gives a page title a prompt */
@@ -750,7 +548,7 @@ hr.rule { border: 0; border-top: 1px solid var(--line); }
 
 @media (max-width: 34rem) {
   /* the #tag headings run long; one step down keeps them off two lines */
-  .tag-group h2 { font-size: var(--fs-h3); }
+  .tag-group h2 { font-size: var(--fs-h2); }
 }
 
 /* an update that already happened: still here to read dimmed and the tag
@@ -972,7 +770,7 @@ hr.rule { border: 0; border-top: 1px solid var(--line); }
   margin-top: 0;
   margin-bottom: 0.75rem;
   /* the offset copy behind the letters pink in the light cyan in the dark */
-  text-shadow: 3px 3px 0 light-dark(rgba(255, 46, 151, 0.5), rgba(0, 229, 255, 0.6));
+  text-shadow: 3px 3px 0 light-dark(rgba(255, 46, 151, 0.5), rgba(128, 255, 234, 0.45));
 }
 
 .subtitle {
@@ -1045,16 +843,7 @@ hr.rule { border: 0; border-top: 1px solid var(--line); }
   .button { transition: none; }
   .tag:hover,
   .tag-cloud a:hover,
-  .button:hover,
-  .feature:hover .sticker,
-  .post-row:hover .sticker,
-  .post-thumb,
-  .feature,
-  .post-row { transition: none; }
-  .feature:hover,
-  .feature:focus-within,
-  .post-row:hover,
-  .post-row:focus-within { transform: none; }
+  .button:hover { transition: none; }
 }
 
 .visually-hidden {
@@ -1373,90 +1162,10 @@ main:focus { outline: none; }
    whole to go back. fonts are untouched on purpose.
    ====================================================================== */
 
-/* saturated fill with ink on it the same in both themes. every dracula
-   bright clears 4.5:1 against that ink */
-.c1 { --fill: #bd93f9; }
-.c2 { --fill: #ff79c6; }
-.c3 { --fill: #8be9fd; }
-.c4 { --fill: #50fa7b; }
-.c5 { --fill: #ffb86c; }
-.c6 { --fill: #f1fa8c; }
-
-.post-row.c1 { --fill: #bd93f9; }
-.post-row.c2 { --fill: #ff79c6; }
-.post-row.c3 { --fill: #8be9fd; }
-.post-row.c4 { --fill: #50fa7b; }
-.post-row.c5 { --fill: #ffb86c; }
-.post-row.c6 { --fill: #f1fa8c; }
-
-.feature,
-.post-row {
-  background: var(--fill, #bd93f9);
-  color: #0c0612;
-  border: 3px solid var(--edge-strong);
-  box-shadow: 6px 6px 0 var(--edge-strong), 0 0 26px var(--glow);
-}
-
-.feature:hover,
-.feature:focus-within,
-.post-row:hover,
-.post-row:focus-within {
-  box-shadow: 9px 9px 0 var(--edge-strong), 0 0 34px var(--glow);
-}
-
-/* everything inside a row is ink whichever theme is on */
-.feature__title a,
-.post-row__title a,
-.feature a,
-.post-row a { color: #0c0612; }
-
-.feature__excerpt,
-.post-row__excerpt,
-.post-row__meta { color: rgba(12, 6, 18, 0.72); }
-
-.feature__title::before,
-.post-row__title::before { color: rgba(12, 6, 18, 0.72); }
-
-/* the tag sits on a bright fill now so it gets a pale plate under it */
-.post-row .tag,
-.feature .tag {
-  border-color: #0c0612;
-  color: #0c0612;
-  background: rgba(255, 255, 255, 0.6);
-}
-
-.post-row .tag:hover,
-.feature .tag:hover {
-  background: #0c0612;
-  color: #ffffff;
-}
-
-/* the arrow every link row has pointing out */
-.post-row { padding-right: 2.6rem; }
-
-.post-row::after {
-  content: "\2197";
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 1rem;
-  color: rgba(12, 6, 18, 0.8);
-}
-
-/* the picture keeps the heavy frame */
-.post-thumb { border-width: 3px; }
-
 /* the band and the switch heavier to match */
 
 /* section rules thicken up */
-.section-title::after { height: 3px; }
-
-/* the boxes press down too */
-.feature:active,
-.post-row:active {
-  transform: translate(3px, 3px);
-  box-shadow: 2px 2px 0 var(--edge-strong);
-}
+.section-title::after { height: 2px; }
 
 /* the socials: each one in its own brand colour flooding on hover.
    square tiles with a hard edge like the connect row on the links page. */
@@ -1477,7 +1186,7 @@ main:focus { outline: none; }
 .social-media-list a.soc:hover,
 .social-media-list a.soc:focus-visible {
   color: #ffffff !important;
-  transform: translate(-2px, -2px) rotate(-3deg);
+  transform: translate(-2px, -2px);
   box-shadow: 5px 5px 0 var(--edge-strong);
 }
 
@@ -1604,7 +1313,7 @@ main:focus { outline: none; }
      card like a real embed and it looked like it came from another site */
   padding: 0.9rem 1.1rem;
   background: var(--card-bg);
-  border: 3px solid var(--edge-strong);
+  border: 2px solid var(--edge-strong);
   box-shadow: 4px 4px 0 var(--edge-strong);
 }
 
@@ -1632,7 +1341,7 @@ main:focus { outline: none; }
 }
 
 .skeet__name {
-  font-family: var(--display);
+  font-family: var(--body-font);
   font-weight: 700;
   font-size: var(--fs-caption);
 }
@@ -1723,23 +1432,6 @@ h1 {
   text-transform: uppercase;
 }
 
-/* the rows become slabs: uppercase bold the sub-line underneath quiet */
-.post-row__title,
-.feature__title {
-  font-family: var(--mono);
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  line-height: 1.25;
-}
-
-.post-row__excerpt,
-.feature__excerpt {
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  text-transform: none;
-}
-
 /* ======================================================================
    no header any more. a bar across the top and the chips do the nav.
    ====================================================================== */
@@ -1792,7 +1484,7 @@ h1 {
   justify-content: center;
   min-height: 34px;
   padding: 4px 11px;
-  border: 3px solid var(--edge-strong);
+  border: 2px solid var(--edge-strong);
   box-shadow: 4px 4px 0 var(--edge-strong);
   color: #0c0612;
   font: inherit;
@@ -1841,14 +1533,14 @@ h1 {
   .bar__right { width: 100%; justify-content: flex-start; }
 }
 
-/* a dashed box like the links page. mono is tiring over a sentence so the
+/* a plain ruled box. mono is tiring over a sentence so the
    words go in the display face and the attribution stays mono */
 .footer-quote {
   position: relative;
   margin: 1.75rem 0 0;
   padding: 2.4rem 1.25rem 1.1rem;
   background: var(--card-bg);
-  border: 3px dashed var(--edge-strong);
+  border: 2px solid var(--edge-strong);
   box-shadow: none;
   text-align: left;
 }
@@ -1947,7 +1639,7 @@ pre code { border: 0; }
   position: relative;
   isolation: isolate;
   /* room at the top for the mark which the banner then overlaps */
-  padding-top: 4.4rem;
+  padding-top: 6.6rem;
   /* a reader's own letter-spacing widens the wordmark. clip it rather than
      let it push a scrollbar. the clip margin only works when both axes
      clip so the box is 12px wider each side instead: a card that lifts on
@@ -1985,7 +1677,7 @@ pre code { border: 0; }
   margin: 0 0 1.5rem;
   padding: 0.6rem 0.8rem;
   background: var(--card-bg);
-  border: 3px solid var(--edge-strong);
+  border: 2px solid var(--edge-strong);
   box-shadow: 4px 4px 0 var(--edge-strong);
 }
 
@@ -2073,7 +1765,7 @@ pre code { border: 0; }
 /* a field you type into so it sinks rather than sitting on a shadow */
 .sorter__search {
   padding: 0.5rem 0.65rem;
-  border: 3px solid var(--edge-strong);
+  border: 2px solid var(--edge-strong);
   border-radius: 0;
   box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.3);
   font-family: var(--mono);
@@ -2092,7 +1784,7 @@ pre code { border: 0; }
 
   min-height: 34px;
   padding: 4px 11px;
-  border: 3px solid var(--edge-strong);
+  border: 2px solid var(--edge-strong);
   border-radius: 0;
   box-shadow: 4px 4px 0 var(--edge-strong);
   background: var(--card-bg);
@@ -2124,7 +1816,7 @@ pre code { border: 0; }
 
 /* the sign-off box at the end of the list */
 .note {
-  border: 3px solid var(--edge-strong);
+  border: 2px solid var(--edge-strong);
   border-radius: 0;
   box-shadow: 5px 5px 0 var(--edge-strong);
   padding: 1rem 1.15rem;
@@ -2176,14 +1868,6 @@ pre code { border: 0; }
 
 /* the note rides on the same line quieter than the name */
 .uses-item__note { color: var(--dim); }
-
-/* the date line under the /now subtitle. quiet but still body size so it
-   stays over 4.5:1 */
-.now-updated {
-  margin: 0 0 1.5rem;
-  color: var(--dim);
-  font-size: var(--fs-caption);
-}
 
 .uses-item__note::before {
   content: "- ";
@@ -2396,7 +2080,7 @@ pre code { border: 0; }
   gap: 0.45rem;
   padding: 1.1rem;
   color: var(--door-fg);
-  border: 3px solid var(--edge-strong);
+  border: 2px solid var(--edge-strong);
   box-shadow: var(--shadow);
   font-family: var(--mono);
 }
@@ -2462,7 +2146,7 @@ pre code { border: 0; }
 .door__label {
   margin: 0;
   font-family: var(--mono);
-  font-size: var(--fs-h2);
+  font-size: 1.125rem;
   font-weight: 800;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -2506,7 +2190,7 @@ pre code { border: 0; }
   /* room up top for the pill that sits on the border */
   padding: 1.1rem 0.8rem 0.6rem;
   background: var(--card-bg);
-  border: 3px solid var(--edge-strong);
+  border: 2px solid var(--edge-strong);
   box-shadow: 4px 4px 0 var(--edge-strong);
 }
 
@@ -2582,7 +2266,7 @@ pre code { border: 0; }
   gap: 0.75rem;
   padding: 1rem 1.1rem;
   background: var(--card-bg);
-  border: 3px dashed var(--edge-strong);
+  border: 2px dashed var(--edge-strong);
   font-family: var(--mono);
 }
 
@@ -2611,7 +2295,7 @@ pre code { border: 0; }
   padding: 0 1rem;
   background: #ffd6ea;
   color: #0c0612;
-  border: 3px solid var(--edge-strong);
+  border: 2px solid var(--edge-strong);
   font: inherit;
   font-size: var(--fs-micro);
   font-weight: 800;
@@ -2663,7 +2347,7 @@ pre code { border: 0; }
 
 @media (max-width: 40rem) {
   /* the wordmark is small on a phone so it needs less room above the strip */
-  .home { padding-top: clamp(2.3rem, 11vw, 4.4rem); }
+  .home { padding-top: clamp(3.2rem, 13vw, 5.2rem); }
   /* the reading strip slims right down on a phone: one line, thinner
      frame, and the title carries the link so the third line goes away */
   .now-reading {
@@ -2708,36 +2392,6 @@ pre code { border: 0; }
     color: var(--fg);
   }
   .section-title { margin: 1.75rem 0 0.75rem; }
-  /* the featured post, trimmed for a phone: a letterbox picture, a
-     tighter frame, a smaller title and two lines of blurb instead of
-     three. the tags go, the blog page has them */
-  .feature {
-    padding: 0.8rem;
-    border-width: 2px;
-    box-shadow: 3px 3px 0 var(--edge-strong);
-  }
-
-  .feature .post-thumb {
-    aspect-ratio: 16 / 7;
-    border-width: 2px;
-    margin-bottom: 0.7rem;
-  }
-
-  .feature__title { font-size: var(--fs-caption); line-height: 1.2; }
-
-  .feature__excerpt {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    overflow: hidden;
-    margin: 0.4rem 0 0;
-    font-size: var(--fs-micro);
-    line-height: 1.4;
-  }
-
-  .feature .post-row__meta { margin: 0.45rem 0 0; font-size: var(--fs-micro); }
-  .feature .post-row__tags { display: none; }
   .watch li { padding: 0.45rem 0; }
 }
 
@@ -2808,19 +2462,6 @@ pre code { border: 0; }
 /* desktop never sees the quick block */
 .quick { display: none; }
 
-@media (max-width: 43.99rem) {
-  #content:has(> .latest) { display: flex; flex-direction: column; }
-  #content > .quick  { order: 1; }
-  #content > .latest { order: 2; }
-
-  /* start here and the welcome paragraph step aside on a phone */
-  #content > .start { display: none; }
-  /* the latest post is a row in the quick list now */
-  #content > .latest { display: none; }
-  .home .intro { display: none; }
-
-  .quick { display: block; margin: 1.5rem 0 0; }
-}
 
 .quick__list { list-style: none; margin: 0; padding: 0; }
 
@@ -2838,7 +2479,7 @@ pre code { border: 0; }
   padding: 0.7rem 0.9rem;
   background: var(--fill, var(--card-bg));
   color: var(--row-fg, #0c0612);
-  border: 3px solid var(--edge-strong);
+  border: 2px solid var(--edge-strong);
   box-shadow: 5px 5px 0 var(--edge-strong);
   text-decoration: none;
 }
@@ -2900,7 +2541,7 @@ pre code { border: 0; }
 
 .quick__row--hang { --fill: #4752c4; --row-fg: #ffffff; }
 .quick__row--shop { --fill: #1185fe; }
-/* the same dracula purple the featured card wears on desktop */
+/* the bar's dracula purple */
 .quick__row--blog { --fill: #bd93f9; }
 
 /* the contact boxes sit under the rows. the dashed boxes already style
@@ -2970,68 +2611,7 @@ pre code { border: 0; }
   .home .now-reading { display: none; }
 }
 
-/* ======================================================================
-   now on the about page. four cards two across, each one leads with a
-   tag in its own colour the way reading now does
-   ====================================================================== */
-
-#now,
 #sites { scroll-margin-top: 1.5rem; }
-
-.now {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-  margin: 0 0 1.5rem;
-  padding: 0;
-  list-style: none;
-}
-
-@media (min-width: 40rem) {
-  .now { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-.now__item {
-  --tag: #ff79c6;
-  margin: 0;
-  padding: 0.9rem 1rem 1rem;
-  background: var(--card-bg);
-  border: 3px solid var(--edge-strong);
-  box-shadow: 4px 4px 0 var(--edge-strong);
-}
-
-.now__item:nth-child(4n + 2) { --tag: #ffe14d; }
-.now__item:nth-child(4n + 3) { --tag: #8be9fd; }
-.now__item:nth-child(4n + 4) { --tag: #bd93f9; }
-
-/* ink on all four fills clears 4.5:1 in both themes */
-.now__label {
-  display: inline-block;
-  margin: 0 0 0.6rem;
-  padding: 2px 8px;
-  border: 2px solid var(--edge-strong);
-  background: var(--tag);
-  color: #0c0612;
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  line-height: 1.5;
-  text-transform: uppercase;
-}
-
-.now__label::before { content: none; }
-
-.now__list {
-  margin: 0;
-  padding-left: 1.1rem;
-  list-style: disc;
-  font-size: var(--fs-body);
-  line-height: 1.5;
-}
-
-.now__list li { margin-bottom: 0.3rem; }
-.now__list li::marker { color: var(--accent); }
 
 /* ======================================================================
    sites i love and my 88x31s on the about page
@@ -3103,9 +2683,9 @@ pre code { border: 0; }
   position: relative;
   margin: 2rem 0 1.75rem;
   padding: 1.5rem 1.1rem 1rem;
-  background: light-dark(#0c0612, #120a1c);
-  color: #fbeaff;
-  border: 3px solid var(--edge-strong);
+  background: light-dark(#0c0612, #1b1a23);
+  color: #f8f8f2;
+  border: 2px solid var(--edge-strong);
   box-shadow: 6px 6px 0 light-dark(var(--neon-pink), var(--neon-cyan));
   font-family: var(--mono);
   font-size: var(--fs-body);
@@ -3281,7 +2861,7 @@ p, li { text-wrap: pretty; }
   margin: 0 0 2rem;
   padding: 1.15rem 1rem 0.9rem;
   background: var(--card-bg);
-  border: 3px solid var(--edge-strong);
+  border: 2px solid var(--edge-strong);
   box-shadow: 5px 5px 0 var(--edge-strong);
 }
 
@@ -3371,12 +2951,9 @@ p, li { text-wrap: pretty; }
    on colour alone */
 .tag-filter [aria-current="true"] {
   background: var(--edge-strong);
-  color: light-dark(#ffffff, #07040c);
+  color: light-dark(#ffffff, #17161d);
   box-shadow: 3px 3px 0 var(--neon-pink);
 }
-
-/* .post-row sets display so hidden needs saying out loud */
-.post-row[hidden] { display: none; }
 
 /* a table on a phone. every row is its own small card and each cell
    leads with the name of its column. post.js adds the class and the
@@ -3399,7 +2976,7 @@ p, li { text-wrap: pretty; }
     margin: 0 0 1rem;
     padding: 0.75rem 0.9rem;
     background: var(--card-bg);
-    border: 3px solid var(--edge-strong);
+    border: 2px solid var(--edge-strong);
     box-shadow: 4px 4px 0 var(--edge-strong);
   }
 
@@ -3417,3 +2994,378 @@ p, li { text-wrap: pretty; }
     color: var(--dim);
   }
 }
+
+/* ======================================================================
+   the posts. one board with every post a cell on it, like frames on a
+   contact sheet. the cells are plain paper so the words lead. colour
+   follows the topic: its tag, the wash over the picture and
+   the flood when a cell is under the pointer. _data/topics.yml says which
+   tag wears which.
+   ====================================================================== */
+
+/* dracula's brights in the light and PRO's softer ones in the dark. ink
+   sits on all twelve at 4.5:1 or better */
+.hue-purple { --hue: light-dark(#bd93f9, #9580ff); }
+.hue-pink   { --hue: light-dark(#ff79c6, #ff80bf); }
+.hue-cyan   { --hue: light-dark(#8be9fd, #80ffea); }
+.hue-green  { --hue: light-dark(#50fa7b, #8aff80); }
+.hue-orange { --hue: light-dark(#ffb86c, #ffca80); }
+.hue-yellow { --hue: light-dark(#f1fa8c, #ffff80); }
+
+/* the rules between cells are each cell's own outline meeting its
+   neighbour's in the gap. an outline, so it survives forced colours. the
+   hard shadow is a filter so it follows the board's real shape when the
+   last row is one short */
+.post-list {
+  --rule: 2px;
+  clear: both;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--rule);
+  margin: 0;
+  padding: var(--rule);
+  list-style: none;
+  filter: drop-shadow(6px 6px 0 var(--edge-strong)) drop-shadow(0 0 12px var(--glow));
+}
+
+/* one column on a phone. a card on its own on a wider screen (read next)
+   is the words then a small square picture */
+.post-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  background: var(--card-bg);
+  color: var(--card-fg);
+  outline: var(--rule) solid var(--edge-strong);
+  transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+/* .post-card sets display so hidden needs saying out loud */
+.post-card[hidden] { display: none; }
+
+.post-card__text { min-width: 0; padding: 0.9rem 1rem 1rem; }
+
+.post-card a,
+.post-card a:hover { color: inherit; text-decoration: none; }
+
+/* a topic's tag wears its colour: filled in the light, coloured words and
+   edge in the dark where a fill would glare. the chips up top and the tag
+   over each title share this */
+.tag-filter .tag[class*="hue-"],
+.post-card .post-card__topic .tag {
+  background: light-dark(var(--hue, var(--neon-pink)), transparent);
+  border-color: light-dark(#0c0612, var(--hue, var(--neon-pink)));
+  color: light-dark(#0c0612, var(--hue, var(--neon-pink)));
+}
+
+.tag-filter .tag[class*="hue-"]:hover,
+.post-card .post-card__topic .tag:hover {
+  background: light-dark(#0c0612, var(--hue, var(--neon-pink)));
+  color: light-dark(#ffffff, #0c0612);
+}
+
+/* the topic over the title. 24px tall so a thumb can hit it (2.5.8) */
+.post-card__topic { margin: 0 0 0.35rem; line-height: 1; }
+
+.post-card .post-card__topic .tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  font-weight: 700;
+}
+
+.post-card .post-card__topic .tag:focus-visible { outline: 3px solid currentColor; outline-offset: 2px; }
+
+.post-card__title {
+  margin: 0;
+  /* the display face in sentence case like the h2s in a post. it was
+     mono in capitals, which is slower to read over two or three lines */
+  font-family: var(--display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  text-wrap: balance;
+}
+
+/* nothing in front unless --prompt is set */
+.post-card__title::before { content: var(--prompt); color: var(--accent); }
+
+/* the whole cell is clickable. the link keeps the semantics */
+.post-card__title a::after { content: ""; position: absolute; inset: 0; }
+
+/* two lines of blurb on a phone so a row stays a row */
+.post-card__excerpt {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  margin: 0.35rem 0 0;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+}
+
+.post-card__meta {
+  margin: 0.55rem 0 0;
+  font-family: var(--mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+/* the picture: a block of the topic's colour with the photo multiplied
+   onto it in greyscale so every thumbnail is the same two inks whatever
+   the photo was. hover gives the real photo back */
+.post-thumb {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  isolation: isolate;
+  flex: none;
+  width: 84px;
+  height: 84px;
+  margin: 1rem 1rem 1rem 0;
+  background-color: var(--hue, var(--neon-pink));
+  border: var(--rule, 2px) solid var(--ink);
+}
+
+.post-thumb__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.2);
+  mix-blend-mode: multiply;
+  transition: filter 0.2s ease;
+}
+
+/* scanlines over the wash. they clear off with it */
+.post-thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(to bottom, rgba(12, 6, 18, 0.16) 0 1px, transparent 1px 3px);
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+/* no photo: two letters of the topic on graph paper. the tile is a
+   container so the letters scale with it */
+.post-thumb--type {
+  container-type: inline-size;
+  background-image:
+    linear-gradient(rgba(12, 6, 18, 0.13) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(12, 6, 18, 0.13) 1px, transparent 1px);
+  background-size: 12px 12px;
+}
+
+.post-thumb--type::after { content: none; }
+
+.post-thumb__type {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: clamp(1.75rem, 30cqi, 7rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  text-transform: capitalize;
+  color: #0c0612;
+}
+
+/* under the pointer or the keyboard the cell floods with its topic's
+   colour, ink on top, and the photo comes back. the fill and the weight
+   of the ring carry it so it never leans on colour alone (1.4.1) */
+.post-card:hover,
+.post-card:has(.post-card__title a:focus-visible) {
+  background: var(--hue, var(--neon-pink));
+  color: #0c0612;
+}
+
+:is(.post-card:hover, .post-card:has(.post-card__title a:focus-visible)) .post-card__meta { color: rgba(12, 6, 18, 0.78); }
+:is(.post-card:hover, .post-card:has(.post-card__title a:focus-visible)) .post-card__title::before { color: inherit; }
+:is(.post-card:hover, .post-card:has(.post-card__title a:focus-visible)) .post-card__topic .tag:not(:hover) { border-color: #0c0612; color: #0c0612; }
+:is(.post-card:hover, .post-card:has(.post-card__title a:focus-visible)) .post-thumb__img { filter: none; mix-blend-mode: normal; }
+:is(.post-card:hover, .post-card:has(.post-card__title a:focus-visible)) .post-thumb::after { opacity: 0; }
+:is(.post-card:hover, .post-card:has(.post-card__title a:focus-visible)) .post-thumb--type { background-color: #0c0612; }
+:is(.post-card:hover, .post-card:has(.post-card__title a:focus-visible)) .post-thumb__type { color: var(--hue, var(--neon-pink)); }
+
+/* the title link is stretched over the cell so the cell wears its ring */
+.post-card__title a:focus-visible { outline: none; }
+
+.post-card:has(.post-card__title a:focus-visible) {
+  z-index: 2;
+  outline: 4px solid var(--fg);
+}
+
+/* the lead: the newest post across the top with its picture over the
+   words and a bigger title */
+.post-card--lead { display: flex; flex-direction: column; align-items: stretch; }
+
+.post-card--lead .post-thumb {
+  order: -1;
+  width: auto;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  margin: 0;
+  border: 0;
+  border-bottom: var(--rule) solid var(--edge-strong);
+}
+
+.post-card--lead .post-card__title { font-size: clamp(1.25rem, 5vw, 1.625rem); line-height: 1.2; }
+
+.post-card--lead .post-card__excerpt {
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  font-size: var(--fs-lead);
+}
+
+/* a lead with no picture. in the light it's the one cell that's always in
+   colour and hover turns it inside out. in the dark a slab that size
+   glares so it stays a card with a band of its colour across the top and
+   floods on hover like the rest */
+.post-card--lead.post-card--bare {
+  border-top: 6px solid var(--hue, var(--neon-pink));
+  background: light-dark(var(--hue, var(--neon-pink)), var(--card-bg));
+  color: light-dark(#0c0612, var(--card-fg));
+}
+
+.post-card--lead.post-card--bare .post-card__text { padding-block: 1.4rem 1.5rem; }
+.post-card--lead.post-card--bare .post-card__meta { color: light-dark(rgba(12, 6, 18, 0.78), var(--dim)); }
+.post-card--lead.post-card--bare .post-card__title::before { color: light-dark(currentColor, var(--accent)); }
+
+.post-card--lead.post-card--bare:hover,
+.post-card--lead.post-card--bare:has(.post-card__title a:focus-visible) {
+  background: light-dark(#0c0612, var(--hue, var(--neon-pink)));
+  color: light-dark(var(--hue, var(--neon-pink)), #0c0612);
+}
+
+:is(.post-card--lead.post-card--bare:hover, .post-card--lead.post-card--bare:has(.post-card__title a:focus-visible)) .post-card__meta,
+:is(.post-card--lead.post-card--bare:hover, .post-card--lead.post-card--bare:has(.post-card__title a:focus-visible)) .post-card__title::before { color: inherit; }
+
+/* room for two across: every cell stacks like the lead with the picture
+   on top. a card on its own (read next under a post) stays a row */
+@media (min-width: 40rem) {
+  .post-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .post-card--lead,
+  .post-card:only-child { grid-column: 1 / -1; }
+
+  .post-card:not(:only-child) { display: flex; flex-direction: column; align-items: stretch; }
+
+  .post-card:not(:only-child) .post-thumb {
+    order: -1;
+    width: auto;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    margin: 0;
+    border: 0;
+    border-bottom: var(--rule) solid var(--edge-strong);
+  }
+
+  .post-list .post-card--lead .post-thumb { aspect-ratio: 21 / 9; }
+
+  .post-card__excerpt { -webkit-line-clamp: 3; line-clamp: 3; }
+
+  .post-card:only-child:not(.post-card--lead) .post-thumb { width: 108px; height: 108px; }
+}
+
+/* the chip that's on fills in and throws its own topic's colour */
+.tag-filter .tag[aria-current="true"] {
+  background: var(--edge-strong);
+  border-color: var(--edge-strong);
+  color: light-dark(#ffffff, #17161d);
+  box-shadow: 3px 3px 0 var(--hue, var(--neon-pink));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .post-card,
+  .post-thumb__img,
+  .post-thumb::after { transition: none; }
+}
+
+/* on a phone a row is its tag, its title and the date, nothing else. the
+   pictures were too small to read at that size and the blurb stays on the
+   lead only, so the list is quick to take in */
+@media (max-width: 39.99rem) {
+  .post-thumb { display: none; }
+
+  .post-card { grid-template-columns: minmax(0, 1fr); }
+
+  .post-card:not(.post-card--lead) .post-card__excerpt { display: none; }
+
+  /* the latest post is the one big thing on the screen: more room and a
+     title a clear step above the rows under it */
+  .post-card--lead .post-card__text { padding: 1.3rem 1.1rem 1.35rem; }
+  .post-card--lead .post-card__title { font-size: 1.5rem; line-height: 1.15; }
+  .post-card--lead .post-card__excerpt { margin-top: 0.6rem; }
+}
+
+/* reading a post ------------------------------------------------------
+   a narrower column and bigger type than the rest of the site: about 75
+   characters a line at 18px, inside the 80 that 1.4.8 asks for, with
+   room between the lines. */
+.post { max-width: 42rem; margin-inline: auto; }
+
+.page-title { line-height: 1.1; margin-bottom: 1rem; }
+
+.post-content { font-size: 1.125rem; line-height: 1.7; }
+
+.post-content :is(p, ul, ol, dl, blockquote, pre, table, figure) { margin-block: 0 1.35em; }
+.post-content li { margin-block: 0.35em; }
+.post-content li > :is(ul, ol) { margin-block: 0.35em 0; }
+
+/* headings a clear step up from the copy with more air above than below
+   so each one belongs to what follows */
+.post-content h2 { margin: 2.6em 0 0.6em; line-height: 1.2; }
+.post-content h3 { margin: 2.1em 0 0.5em; line-height: 1.25; }
+.post-content h4 { margin: 1.8em 0 0.4em; }
+
+/* a quote is still reading text so it keeps the body colour */
+.post-content blockquote { color: var(--fg); border-left-width: 3px; }
+
+.post-content pre code { font-size: 0.875rem; line-height: 1.6; }
+
+.short p { font-size: 1.125rem; line-height: 1.55; }
+
+@media (max-width: 39.99rem) {
+  .post-content { font-size: 1.0625rem; line-height: 1.65; }
+  .short p { font-size: 1.0625rem; }
+}
+
+/* a section heading inside a page (about) is a real h2: the display face
+   at the h2 size with the rule still running off it. on the home page and
+   under a post the same class stays a small mono label */
+.page .section-title {
+  margin: 3rem 0 1.1rem;
+  font-family: var(--head-font);
+  font-size: var(--fs-h2);
+  font-weight: var(--head-weight);
+  letter-spacing: normal;
+  line-height: 1.2;
+  text-transform: none;
+}
+
+/* running text on a page keeps to the same line length as a post */
+.page .post-content > p { max-width: 42rem; }
+
+/* ======================================================================
+   trying it: a hard shadow only on the things that want pressing or
+   reading first. the jack button, the socials and the tl;dr keep theirs.
+   every other box sits flat on its border. hover lifts are untouched.
+   one block, delete it whole to put the shadows back.
+   ====================================================================== */
+.post-list { filter: none; }
+
+.skeet,
+.note,
+.banner,
+.now-reading,
+.is-stacked tr,
+.tag-filter .tag[aria-current="true"] { box-shadow: none; }

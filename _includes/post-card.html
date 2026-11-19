@@ -1,24 +1,27 @@
 {%- comment -%}
-  one box in the post list. no picture here: only the featured post gets one.
-  `index` picks one of the six accents which colours the box and its tags.
-  data-tags is the post's tags as slugs for the filter on the blog page.
+  one post on the board: its topic, the title, a line of blurb, the date,
+  then the picture. the first tag is the topic and picks the colour from
+  _data/topics.yml. `lead=true` is the big one across the top.
+  data-tags carries the post's tags as slugs for the filter on the blog page.
 {%- endcomment -%}
-{%- assign color_index = include.index | default: 0 | modulo: 6 | plus: 1 -%}
 {%- assign topics = include.post.tags | concat: include.post.categories -%}
+{%- assign topic = topics | first -%}
+{%- assign hue = site.data.topics[topic] | default: "pink" -%}
 {%- capture slugs %}{% for t in topics %}{{ t | slugify }} {% endfor %}{% endcapture -%}
-<li class="post-row c{{ color_index }}" data-tags="{{ slugs | strip }}">
-  <h3 class="post-row__title"><a href="{{ include.post.url | relative_url }}">{{ include.post.title | escape }}</a></h3>
+<li class="post-card hue-{{ hue }}{% if include.lead %} post-card--lead{% endif %}{% unless include.post.image %} post-card--bare{% endunless %}" data-tags="{{ slugs | strip }}">
+  <div class="post-card__text">
+    {%- if topic %}
+    <p class="post-card__topic"><a class="tag" href="{{ '/tags/' | relative_url }}#{{ topic | slugify }}">{{ topic }}</a></p>
+    {%- endif %}
+    <h3 class="post-card__title"><a href="{{ include.post.url | relative_url }}">{{ include.post.title | escape }}</a></h3>
 
-  {%- assign blurb = include.post.description | default: include.post.excerpt -%}
-  {%- if blurb %}<div class="post-row__excerpt">{{ blurb | strip_html | normalize_whitespace | truncatewords: 26 }}</div>{% endif -%}
+    {%- assign blurb = include.post.description | default: include.post.excerpt -%}
+    {%- if blurb %}
+    <p class="post-card__excerpt">{{ blurb | strip_html | normalize_whitespace | truncatewords: 30 }}</p>
+    {%- endif %}
 
-  <p class="post-row__meta"><time datetime="{{ include.post.date | date_to_xmlschema }}">{{ include.post.date | date: "%-d %b %Y" }}</time> <span aria-hidden="true">·</span> {% include read-time.html content=include.post.content %}</p>
+    <p class="post-card__meta"><time datetime="{{ include.post.date | date_to_xmlschema }}">{{ include.post.date | date: "%-d %b %Y" }}</time> <span aria-hidden="true">·</span> {% include read-time.html content=include.post.content %}</p>
+  </div>
 
-  {%- if topics.size > 0 %}
-  <ul class="post-row__tags">
-    {%- for t in topics -%}
-      <li><a class="tag" href="{{ '/tags/' | relative_url }}#{{ t | slugify }}">{{ t }}</a></li>
-    {%- endfor -%}
-  </ul>
-  {%- endif %}
+  {% include post-thumb.html post=include.post topic=topic lead=include.lead %}
 </li>

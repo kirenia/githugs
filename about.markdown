@@ -2,12 +2,10 @@
 layout: page
 title: About
 permalink: /about/
-description: "Kire Góngora, software engineer, podcast host and book club runner. What I do, what I'm up to now, and what I use to do it."
+description: "Kire Góngora, software engineer, podcast host and book club runner. What I do and what I use to do it."
 sticker: overalls
 redirect_from:
   - /uses/
-# the date on the now section. change it when _data/now.yml changes
-now_updated: 2026-10-29
 ---
 
 <p class="subtitle">build. break. fix. repeat.</p>
@@ -29,27 +27,6 @@ Away from the keyboard I host [A (slightly) Better Tomorrow](https://aslightlybe
 <section class="skeet" hidden data-skeet data-skeet-actor="{{ site.bluesky_username }}" aria-label="My latest post on Bluesky"></section>
 
 {% endif %}
-
-{% comment %}
-  the now page moved in here. the groups are in _data/now.yml and /now/
-  still redirects to this heading.
-{% endcomment %}
-<h2 class="section-title" id="now">Now</h2>
-
-<p class="now-updated">what I'm up to lately. last updated <time datetime="{{ page.now_updated | date_to_xmlschema }}">{{ page.now_updated | date: "%-d %B %Y" }}</time></p>
-
-<ul class="now">
-  {%- for group in site.data.now %}
-  <li class="now__item">
-    <h3 class="now__label">{{ group.title }}</h3>
-    <ul class="now__list">
-      {%- for item in group.items %}
-      <li>{% if item.url %}<a href="{{ item.url }}">{{ item.name | escape }}</a>{% else %}{{ item.name | escape }}{% endif %}{% if item.note %} <span class="uses-item__note">{{ item.note | markdownify | remove: "<p>" | remove: "</p>" | strip }}</span>{% endif %}</li>
-      {%- endfor %}
-    </ul>
-  </li>
-  {%- endfor %}
-</ul>
 
 <h2 class="section-title" id="uses">What I use</h2>
 

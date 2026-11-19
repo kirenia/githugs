@@ -3,7 +3,7 @@ layout: post
 title: "Where to Find Cyberdeck Parts"
 date: 2026-08-16 10:00:00 -0600
 description: "Everything that goes into a cyberdeck build, what it costs, and the shop that ships to you."
-tags: [cyberdecks, parts]
+tags: [cyberdecks]
 sticker: pi
 redirect_from:
   - /cyberdecks/parts.html

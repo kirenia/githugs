@@ -39,8 +39,8 @@ layout: default
     {{ content }}
   </div>
 
-  {%- comment -%} a post tagged books ends with the way into the book club. the book and the link are in _data/start.yml {%- endcomment -%}
-  {%- if page.tags contains "books" %}
+  {%- comment -%} a sci-fi post ends with the way into the book club. the book and the link are in _data/start.yml {%- endcomment -%}
+  {%- if page.tags contains "sci-fi" %}
   <aside class="now-reading post-club" aria-label="book club">
     <p><span class="now-reading__tag">book club</span> <span class="now-reading__title">we're reading {{ site.data.start.reading }}</span> <a href="{{ site.data.start.reading_url }}">read it with us</a></p>
   </aside>
@@ -59,17 +59,15 @@ layout: default
 
   {%- comment -%}
     the end of a post is never a dead end: the next one to read is a whole
-    card in its own colour. that is the older post, or the newer one when
+    card in its topic's colour. that is the older post, or the newer one when
     this is the oldest. `page.previous` is the older one in jekyll.
   {%- endcomment -%}
   {%- assign up = page.previous | default: page.next -%}
   {%- if up %}
-  {%- assign up_index = 0 -%}
-  {%- for p in site.posts %}{% if p.url == up.url %}{% assign up_index = forloop.index0 %}{% endif %}{% endfor %}
   <nav class="post-next" aria-labelledby="post-next-title">
     <h2 class="section-title" id="post-next-title">Read next</h2>
     <ul class="post-list">
-      {% include post-card.html post=up index=up_index %}
+      {% include post-card.html post=up %}
     </ul>
     {%- if page.previous and page.next %}
     <p class="post-next__newer"><a href="{{ page.next.url | relative_url }}"><span class="post-next__dir">newer</span> {{ page.next.title | escape }}</a></p>
