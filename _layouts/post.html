@@ -77,4 +77,4 @@ layout: default
 </article>
 
 {%- comment -%} the reading bar and the tables that stack on a phone {%- endcomment %}
-<script src="{{ '/assets/js/post.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/post.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>

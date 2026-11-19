@@ -41,8 +41,13 @@
 {%- endif %}
 
 {%- comment -%} the fonts and the icons are in assets/fonts. nothing is fetched from anyone else {%- endcomment %}
-<link rel="stylesheet" href="{{ '/assets/css/fonts.css' | relative_url }}">
-<link rel="stylesheet" id="theme-css" href="{{ '/assets/css/style.css' | relative_url }}">
+{%- comment -%}
+  the ?v= is the time of the build so every deploy gets a fresh address.
+  without it cloudflare and browsers keep serving the old css for hours.
+{%- endcomment %}
+{%- assign v = site.time | date: "%s" %}
+<link rel="stylesheet" href="{{ '/assets/css/fonts.css' | relative_url }}?v={{ v }}">
+<link rel="stylesheet" id="theme-css" href="{{ '/assets/css/style.css' | relative_url }}?v={{ v }}">
 <link rel="icon" type="image/png" href="{{ '/assets/img/stickers/star.png' | relative_url }}">
 <link rel="apple-touch-icon" href="{{ '/assets/img/stickers/star.png' | relative_url }}">
 {% feed_meta %}
